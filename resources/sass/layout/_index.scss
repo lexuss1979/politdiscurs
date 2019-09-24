@@ -1,0 +1,29 @@
+.main-wrapper{
+    width:100%;
+    display: flex;
+    .bg-wrapper-left{
+        background-image: url('/img/layout/kollage-1600-int.jpg');
+        width: 50%;
+        height: 2758px;
+        opacity: 0.76;
+    }
+    .bg-wrapper-right{
+        background-image: url('/img/layout/kollage-1600-rus.jpg');
+        width: 50%;
+        height: 2758px;
+        opacity: 0.76;
+    }
+    .page-wrapper{
+        display: block;
+        min-width: 1200px;
+        min-height: 2758px;
+        background: lightgoldenrodyellow;
+        position: absolute;
+        left:50%;
+        margin-left: -600px;
+    }
+}
+
+@import "header";
+@import "footer";
+@import "content";
