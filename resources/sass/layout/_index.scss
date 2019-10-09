@@ -17,6 +17,14 @@
         height: 2758px;
         opacity: 0.76;
     }
+    .bg-wrapper-overlay{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0.25;
+        height: 2758px;
+    }
     .page-wrapper{
         display: block;
         min-width: 1200px;

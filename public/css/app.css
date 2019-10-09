@@ -10529,6 +10529,15 @@ label {
   opacity: 0.76;
 }
 
+.main-wrapper .bg-wrapper-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0.25;
+  height: 2758px;
+}
+
 .main-wrapper .page-wrapper {
   display: block;
   min-width: 1200px;
