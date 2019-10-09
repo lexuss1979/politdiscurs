@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="BrsvyJXZ3aT7jJwtluoEavbJEucKN5RBkJS0ilZm">
+    <base href="/">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Document</title>
+    <link href="/css/app.css" rel="stylesheet">
+
+</head>
+<body>
+@yield('page-wrapper')
+</body>
+@include('layouts.scripts')
+</html>

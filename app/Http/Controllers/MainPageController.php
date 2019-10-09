@@ -8,6 +8,10 @@ class MainPageController extends Controller
 {
     public function index()
     {
-        return ['page' => 'main-page'];
+        $data = [
+            'page' => 'main-page',
+        ];
+        $bgcolor = 'ddffdd';
+        return view('pages.main',compact('data','bgcolor'));
     }
 }
