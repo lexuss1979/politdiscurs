@@ -14,19 +14,17 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integerIncrements('id')->unsigned();
             $table->string('title');
             $table->tinyInteger('format');
             $table->integer('topic_id');
             $table->text('annotation');
-            $table->integer('author_id');
             $table->integer('source_id');
-            $table->integer('organisation_id');
             $table->string('link')->default('');
             $table->year('year');
-            $table->integer('region_id');
             $table->integer('file_id')->nullable()->default(null);
-            $table->string('img');
+            $table->string('img')->nullable();
+            $table->mediumText('html')->nullable();
             $table->integer('content_type_id');
             $table->timestamps();
         });

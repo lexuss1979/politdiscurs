@@ -14,9 +14,9 @@ class CreateAuthorsTable extends Migration
     public function up()
     {
         Schema::create('authors', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integerIncrements('id')->unsigned();
             $table->string('fio');
-            $table->text('annotation');
+            $table->text('annotation')->nullable();
             $table->timestamps();
         });
     }

@@ -20,20 +20,11 @@ $factory->define(Article::class, function (Faker $faker) {
             return factory(Topic::class)->create()->id;
         },
         'annotation' => $faker->text(),
-        'author_id' => function () {
-            return factory(Author::class)->create()->id;
-        },
         'source_id' => function () {
             return factory(Source::class)->create()->id;
         },
-        'organisation_id' => function () {
-            return factory(Organisation::class)->create()->id;
-        },
         'link' => $faker->url,
         'year' => rand(1980,2019),
-        'region_id' => function () {
-            return factory(Region::class)->create()->id;
-        },
         'file_id' => function () {
             return factory(File::class)->create()->id;
         },

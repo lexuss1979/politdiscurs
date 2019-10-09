@@ -6,9 +6,11 @@ use App\Article;
 use App\Author;
 use App\ContentType;
 use App\File;
+use App\Organisation;
 use App\Region;
 use App\Source;
 use App\Topic;
+use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -25,6 +27,10 @@ class ArticleTest extends TestCase
             $this->article = factory(Article::class)->create(
                 ['title'=>'This is a test article']
             );
+            $this->article->authors()->attach(factory(Author::class)->create());
+            $this->article->regions()->attach(factory(Region::class)->create());
+            $this->article->organisations()->attach(factory(Organisation::class)->create());
+
         }
     }
 
@@ -44,8 +50,8 @@ class ArticleTest extends TestCase
     /** @test */
     public function article_has_author()
     {
-        $this->assertInstanceOf(Author::class, $this->article->author);
-        $this->assertGreaterThan(0,$this->article->author->id);
+        $this->assertInstanceOf(Collection::class, $this->article->authors);
+        $this->assertGreaterThan(0,$this->article->authors[0]->id);
     }
 
     /** @test */
@@ -65,8 +71,8 @@ class ArticleTest extends TestCase
     /** @test */
     public function it_has_region()
     {
-        $this->assertInstanceOf(Region::class, $this->article->region);
-        $this->assertGreaterThan(0,$this->article->region->id);
+        $this->assertInstanceOf(Region::class, $this->article->regions()->first());
+        $this->assertGreaterThan(0,$this->article->regions()->first()->id);
     }
 
     /** @test */
@@ -111,15 +117,37 @@ class ArticleTest extends TestCase
     {
         $vasya = factory(Author::class)->create();
         $petya = factory(Author::class)->create();
-        factory(Article::class,3)->create([
-            'author_id' => $vasya->id
-        ]);
-        factory(Article::class,2)->create([
-            'author_id' => $petya->id
-        ]);
+        $art1 = factory(Article::class,3)->create();
+        foreach ($art1 as $item){
+            $item->authors()->attach($vasya);
+        }
 
-        $vasyaArticles = Article::getFilteredList(['author_id' => $vasya->id]);
+        $art2 = factory(Article::class,2)->create();
+        foreach ($art2 as $item){
+            $item->authors()->attach($petya);
+        }
+
+
+        $vasyaArticles = Article::getFilteredList(['author' => $vasya->id]);
         $this->assertCount(3,$vasyaArticles);
 
+    }
+
+    /** @test */
+    public function article_can_attach_file()
+    {
+        $art = factory(Article::class)->create(['file_id' => null]);
+        $this->assertInstanceOf(Article::class, $art);
+        $this->assertNull($art->file);
+        $fileName = 'example.pdf';
+        $filePath = ENV('FIXTURES_DIR') .'/'.$fileName;
+        file_put_contents($filePath, '');
+        $art->attachFile($filePath);
+        $art->refresh();
+        $file  = $art->file;
+        $this->assertNotNull($file);
+        $this->assertInstanceOf(File::class, $file);
+        $this->assertEquals($fileName, $file->filename);
+        $file->delete();
     }
 }
