@@ -1,3 +1,17 @@
 header{
-
+    background-image: url('/img/layout/head-banner.jpg');
+    height: 300px;
+    text-align: center;
+    padding: 96px 140px 80px 140px;
+    color: white;
+    h1{
+        font-size: 36px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+    h2{
+        padding-top: 10px;
+        font-size: 24px;
+        font-weight: 500;
+    }
 }

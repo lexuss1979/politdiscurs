@@ -1,0 +1,27 @@
+input[type='text']{
+    border: solid 1px #979797;
+    background-color: #f8f8f8;
+    height: 37px;
+    line-height: 37px;
+    padding: 0 15px;
+    width:200px;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.59);
+    vertical-align: middle;
+
+}
+
+input[type='radio']{
+    width: 24px;
+    height: 18px;
+    border: solid 1px #979797;
+    background-color: #f1f1f1;
+}
+
+input[type='checkbox']{
+    width: 24px;
+    height: 18px;
+    border: solid 1px #979797;
+    background-color: #f1f1f1;
+    vertical-align: baseline;
+}

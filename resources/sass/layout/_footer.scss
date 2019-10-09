@@ -1,3 +1,41 @@
 footer{
+    height: 376px;
+    background-color: #d8d8d8;
+    padding: 40px 24px 31px 24px;
 
+
+    .footer-menu {
+        margin-top: 15px;
+        li{
+            font-size: 17px;
+            font-weight: 500;
+            line-height: 1.59;
+            letter-spacing: normal;
+            color: rgba(0, 0, 0, 0.88);
+            list-style: none;
+            a {
+                color: rgba(0, 0, 0, 0.88);
+            }
+        }
+    }
+    .partners{
+        div{
+            text-align: center;
+            p{
+                font-size: 16px;
+                line-height: 1.25;
+                text-align: center;
+                color: rgba(0, 0, 0, 0.56);
+            }
+        }
+
+    }
+    .copyrights{
+        padding: 0 56px;
+        p{
+            font-size: 13px;
+            line-height: 1.54;
+            color: rgba(0, 0, 0, 0.56);
+        }
+    }
 }
