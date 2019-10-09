@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/articles','ArticleController@index');
+//Route::get('/articles','ArticleController@index');
 //Route::get('/filters/update','ServiceController@updateFilters');
 //Route::get('/filters/topics','ServiceController@createTopics');
 //Route::get('/content/import','ServiceController@importContent');
@@ -55,7 +55,7 @@ Route::get('/magazines/{magazine}','MagazineController@show');
  * TopicController
  * /topic/id -рубрика + фильтры и страницы - ?filter&page
  */
-Route::get('/topic/{topic}','TopicController@show');
+Route::get('/topics/{topic}','TopicController@show');
 
 
 
@@ -65,14 +65,14 @@ Route::get('/topic/{topic}','TopicController@show');
  * /article/id - материал из каталога
  */
 
-Route::get('/article/{article}','ArticleController@show');
+Route::get('/articles/{article}','ArticleController@show');
 
 /**
  * FileController
  * /file/id - для pdf
  */
 
-Route::get('/file/{file}','FileController@show');
+Route::get('/files/{file}','FileController@show');
 
 
 /**
