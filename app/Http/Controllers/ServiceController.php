@@ -15,6 +15,7 @@ use App\Source;
 use App\Topic;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use PhpOffice\PhpWord\Reader\ODText\Content;
 
 class ServiceController extends Controller
 {
@@ -34,7 +35,12 @@ class ServiceController extends Controller
         Organisation::refreshFilterData($filters['organizations']);
         Region::refreshFilterData($filters['regions']);
         Source::refreshFilterData($filters['sources']);
-        ContentType::refreshFilterData(['Книги', 'Статьи', 'Документы', 'Инфографика']);
+
+        ContentType::truncate();
+        ContentType::create(['code' => ContentType::ARTICLE, 'name' => 'Статьи']);
+        ContentType::create(['code' => ContentType::BOOK, 'name' => 'Книги']);
+        ContentType::create(['code' => ContentType::DOCUMENT, 'name' => 'Документы']);
+        ContentType::create(['code' => ContentType::INFOGRAPHICS, 'name' => 'Инфографика']);
 
 
         return Response(['result' => $filters['authors']]);
@@ -89,6 +95,8 @@ class ServiceController extends Controller
 
     public function importContent()
     {
+        $this->updateFilters();
+        $this->createTopics();
         $path = "/Users/aleksejafanasev/Documents/Projects/Politics";
         $file = "serialized-data.txt";
         $dispatcher = new ImportDispatcher($path);

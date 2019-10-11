@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+
+class Book extends Article
 {
     //
 }

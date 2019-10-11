@@ -58,9 +58,13 @@ class ImportItem
         return $this->data[1];
     }
 
-    public function type()
+    public function fileType()
     {
         return $this->data[2];
+    }
+
+    public function contentType(){
+        return $this->isBook() ? ContentType::BOOK : ContentType::ARTICLE;
     }
 
 
@@ -157,7 +161,7 @@ class ImportItem
         return $this->file() != '';
     }
     protected function fileExtension(){
-        return $this->type() == 'doc' ? 'docx': $this->type();
+        return $this->fileType() == 'doc' ? 'docx': $this->fileType();
     }
 
     public function storeToDB($rootTopicId, $contentPath, WordReader $reader = null){
@@ -167,7 +171,7 @@ class ImportItem
         $html = '';
         $fileID = null;
         $fullFilePath = $contentPath . '/'. $this->getFullFileName();
-        if($this->type() == 'doc'){
+        if($this->fileType() == 'doc'){
             $reader = $reader ??  new WordReader();
             try {
                 $html = $reader->read($fullFilePath);
@@ -175,24 +179,25 @@ class ImportItem
                 throw new \Exception('error open file '. $fullFilePath . '. '. $e->getMessage());
             }
 
-        } elseif ($this->type() == 'pdf'){
+        } elseif ($this->fileType() == 'pdf'){
             $fileID = (File::add($fullFilePath))->id;
         }
         $source = Source::getOrCreate($this->source());
-        $contentType = ContentType::getOrCreate($this->type());
         $article = Article::create([
             'title' => $this->name(),
-            'format' => (int)$this->type(),
+            'format' => (int)$this->fileType(),
             'annotation' => $this->annotation(),
             'source_id' => $source->id,
             'link' => $this->link(),
             'year' => $this->year(),
             'img' => $this->cover(),
-            'content_type_id' => $contentType->id,
+            'authors_string' => implode(', ', $this->authors()),
+            'content_type_id' => ContentType::getId($this->contentType()),
             'topic_id' => $articleTopic->id,
             'file_id' => $fileID,
             'html' => $html
             ]);
+
 
         foreach ($this->authors() as $authorName){
             $author = Author::getOrCreate($authorName);

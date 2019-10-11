@@ -21,6 +21,7 @@ class CreateArticlesTable extends Migration
             $table->text('annotation');
             $table->integer('source_id');
             $table->string('link')->default('');
+            $table->string('authors_string')->default('');
             $table->year('year');
             $table->integer('file_id')->nullable()->default(null);
             $table->string('img')->nullable();

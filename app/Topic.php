@@ -12,7 +12,9 @@ class Topic extends Model
 
     public static function getOrCreate($topicName, $parentTopic){
         $parenTopicID = self::getTopicId($parentTopic);
-        $topic = self::where('title',$topicName)->where('parent_topic_id',$parenTopicID)->find(1);
+        $topic = self::where('title',$topicName)
+            ->where('parent_topic_id',$parenTopicID)
+            ->get()->first();
         if($topic) return $topic;
 
         $topic = self::create([
@@ -28,7 +30,7 @@ class Topic extends Model
 
         //$topic is string
         if(is_string($topic) && $topic != ''){
-            $test = self::where('title',$topic);
+            $test = self::where('title',$topic)->get()->first();
             return !is_null($test) ? $test->id : null;
         }
 
@@ -37,5 +39,16 @@ class Topic extends Model
 
     public function parent(){
         return is_null($this->parent_topic_id) ? null : Topic::find($this->parent_topic_id);
+    }
+    public function children(){
+        return Topic::where('parent_topic_id',$this->id)->get();
+    }
+
+    public function hasChildren(){
+        return Topic::where('parent_topic_id',$this->id)->exists();
+    }
+
+    public function getChildrenIdArray(){
+        return $this->children()->pluck('id')->toArray();
     }
 }

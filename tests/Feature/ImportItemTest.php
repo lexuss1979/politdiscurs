@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Article;
+use App\ContentType;
 use App\Import\ImportItem;
 use App\Topic;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,6 +16,7 @@ class ImportItemTest extends TestCase
     /** @test */
     public function it_can_store_to_db_and_generate_html()
     {
+        ContentType::create(['code' => ContentType::ARTICLE, 'name' => 'Статьи']);
         $rootTopic = Topic::create(['title'=>'RootTopic','parent_topic_id'=>null]);
         $data = ['1','II_Title','doc','Topic3Level','Annotation','Ivanov, Sidorov ','SourceName','www.link.com',
             'PostOffice','','2019','Europe, America','test','',false, false, '','','MainTopic'];
@@ -50,6 +52,7 @@ class ImportItemTest extends TestCase
     /** @test */
     public function it_can_store_to_db_and_link_file()
     {
+        ContentType::create(['code' => ContentType::ARTICLE, 'name' => 'Статьи']);
         $rootTopic = Topic::create(['title'=>'RootTopic','parent_topic_id'=>null]);
         $data = ['1','II_Title','pdf','Topic3Level','Annotation','Ivanov, Sidorov ','SourceName','www.link.com',
             'PostOffice','','2019','Europe, America','article','',false, false, '','','MainTopic'];

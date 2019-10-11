@@ -118,7 +118,7 @@ class ImportDispatcher
         ];
         $it = $this->getIterator();
         foreach ($it as $item){
-            $this->addUnique($filters['types'], $item->type());
+            $this->addUnique($filters['types'], $item->fileType());
             $this->addUnique($filters['sources'], $item->source());
             $this->addUnique($filters['organizations'], $item->organizations());
             $this->addUnique($filters['authors'], $item->authors());
@@ -183,7 +183,7 @@ class ImportDispatcher
             if($item->hasFile() && $item->fileNotFoundInPath($this->basePath .'/files') ){
                 $errors[] = [
                     'topic' => $item->parent_topic(),
-                    'type' => $item->type(),
+                    'type' => $item->fileType(),
                     'number' => $item->number(),
                     'name' => $item->name(),
                     'file' => $item->getFullFileName()

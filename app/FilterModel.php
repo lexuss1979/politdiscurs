@@ -17,7 +17,7 @@ abstract class FilterModel extends Model
         }
     }
     public static function getOrCreate($value){
-        $obj = static::where(static::keyField(),$value)->find(1);
+        $obj = static::where(static::keyField(),$value)->get()->first();
         if($obj) return $obj;
 
         $obj = static::create([
