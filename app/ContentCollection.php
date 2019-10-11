@@ -6,16 +6,18 @@ namespace App;
 
 
 
+use App\Helpers\PaginatedCollection;
+
 class ContentCollection
 {
     protected $content = null;
     protected $paging = [];
     protected $filters = [];
 
-    public function __construct($content, $filters)
+    public function __construct(PaginatedCollection $collection, $filters)
     {
-        $this->content = $content['data'];
-        $this->paging = $content['paging'];
+        $this->content = $collection->data();
+        $this->paging = $collection->paging();
         $this->filters = $filters;
     }
 

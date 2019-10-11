@@ -4,6 +4,7 @@
 namespace App;
 
 
+use App\Helpers\PaginatedCollection;
 use Illuminate\Database\Eloquent\Collection;
 
 class ArticleFilter
@@ -41,24 +42,8 @@ class ArticleFilter
         return new ContentCollection($this->content(), $this->getFiltersSets());
     }
 
-    protected function content(): array{
-        $content = $this->content ?  $this->content : new Collection([]);
-        $itemsCount = $content->count();
-        $perPage = $this->itemsPerPage > 0 ? $this->itemsPerPage : $itemsCount;
-        $total = $itemsCount > 0 ? ceil($itemsCount/$perPage) : 0;
-
-        $paging = [
-            'per_page' => $perPage,
-            'current' => $this->currentPage,
-            'total' => $total,
-            'items_count' => $itemsCount
-        ];
-        if($perPage < $itemsCount) {
-            $chunks = $content->chunk($perPage);
-            $content =$chunks[$this->currentPage-1];
-        }
-
-        return  ['data' => $content, 'paging' => $paging];
+    protected function content(): PaginatedCollection{
+        return new PaginatedCollection($this->content, $this->itemsPerPage, $this->currentPage);
     }
 
     protected function applyFilters(){
