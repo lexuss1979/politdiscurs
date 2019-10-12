@@ -27,6 +27,7 @@ class CreateArticlesTable extends Migration
             $table->string('img')->nullable();
             $table->mediumText('html')->nullable();
             $table->integer('content_type_id');
+            $table->integer('magazine_id')->nullable();
             $table->timestamps();
         });
     }

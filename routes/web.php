@@ -20,6 +20,7 @@ Route::get('/', function () {
 //Route::get('/filters/update','ServiceController@updateFilters');
 //Route::get('/filters/topics','ServiceController@createTopics');
 Route::get('/content/import','ServiceController@importContent');
+//Route::get('/magazine/import','ServiceController@importMagazines');
 
 
 /**

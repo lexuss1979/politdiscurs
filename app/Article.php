@@ -43,6 +43,11 @@ class Article extends Model
         return $this->belongsTo(File::class);
     }
 
+    public function magazine()
+    {
+        return $this->belongsTo(Magazine::class);
+    }
+
     public static function getFilteredList($filters = []){
         $query = DB::table('articles');
 

@@ -9,6 +9,7 @@ use App\Author;
 use App\ContentType;
 use App\File;
 use App\Helpers\WordReader;
+use App\Magazine;
 use App\Organisation;
 use App\Region;
 use App\Source;
@@ -123,7 +124,7 @@ class ImportItem
         return $this->data[13];
     }
 
-    public function isMagazine()
+    public function magazineLink()
     {
         return $this->data[14];
     }
@@ -182,6 +183,13 @@ class ImportItem
         } elseif ($this->fileType() == 'pdf'){
             $fileID = (File::add($fullFilePath))->id;
         }
+
+        $magazineId = null;
+        if($this->magazineLink() !== ''){
+            $magazine = Magazine::where('slug', $this->magazineLink())->first();
+            if(isset($magazine->id))  $magazineId = $magazine->id;
+        }
+
         $source = Source::getOrCreate($this->source());
         $article = Article::create([
             'title' => $this->name(),
@@ -193,6 +201,7 @@ class ImportItem
             'img' => $this->cover(),
             'authors_string' => implode(', ', $this->authors()),
             'content_type_id' => ContentType::getId($this->contentType()),
+            'magazine_id' => $magazineId,
             'topic_id' => $articleTopic->id,
             'file_id' => $fileID,
             'html' => $html
@@ -213,6 +222,8 @@ class ImportItem
             $region = Region::getOrCreate($regName);
             $article->regions()->attach($region);
         }
+
+
 
 
 

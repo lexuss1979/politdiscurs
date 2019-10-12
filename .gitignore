@@ -13,3 +13,4 @@ yarn-error.log
 /.idea/
 !/notes.txt
 /notes.txt
+!/storage/app/public/img/

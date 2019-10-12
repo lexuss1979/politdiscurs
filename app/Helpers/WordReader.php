@@ -6,6 +6,8 @@ namespace App\Helpers;
 
 use c;
 use PhpOffice\PhpWord\Element\Image;
+use PhpOffice\PhpWord\Element\ListItem;
+use PhpOffice\PhpWord\Element\Section;
 use PhpOffice\PhpWord\Element\TextBreak;
 use PhpOffice\PhpWord\Element\TextRun;
 use PhpOffice\PhpWord\IOFactory;
@@ -33,21 +35,20 @@ class WordReader
 
     private function toHTML(PhpWord $doc){
         $body = '';
+        $listBuffer = '';
         foreach($doc->getSections() as $section) {
             $arrays = $section->getElements();
-
             foreach($arrays as $e) {
-                $para = '';
                 $paraStyle = 'p';
                 $paraArray = [];
                 if(get_class($e) === 'PhpOffice\PhpWord\Element\TextRun') {
+
                     foreach($e->getElements() as $text) {
 
                         if($text instanceof TextBreak){
                             $paraArray[] = ['', '<br/>'];
                             continue;
                         }
-
                         if($text instanceof Image){
                             continue;
                         }
@@ -67,16 +68,29 @@ class WordReader
                             }
                         }
 
-
-//                        var_dump(compact(['size','bold','color','isItalic']));
-
                         $class = implode("-",$classArray);
                         $paraArray[] = [$class, $text->getText()];
 
                     }
+
+                } else if(get_class($e) === 'PhpOffice\PhpWord\Element\ListItemRun'){
+                    $paraStyle = 'li';
+                    foreach($e->getElements() as $text) {
+                        $paraArray[] = ['', $text->getText()];
+                    }
                 }
                 $para = $this->generateHTMLfromArray($paraArray);
-                $body .= $para!== '' ? '<'.$paraStyle.'>' . $para . '</' . $paraStyle . ">\n" : '';
+                if($paraStyle == 'li'){
+                    $listBuffer .= $para!== '' ? '<'.$paraStyle.'>' . $para . '</' . $paraStyle . ">\n" : '';;
+                } else {
+                    if($listBuffer !== ''){
+                        $body .= "<ul>\n".$listBuffer."</ul>\n";
+                        $listBuffer ='';
+                    }
+                    $body .= $para!== '' ? '<'.$paraStyle.'>' . $para . '</' . $paraStyle . ">\n" : '';
+                }
+
+
 
             }
         }

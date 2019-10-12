@@ -14,7 +14,12 @@ class CreateMagazinesTable extends Migration
     public function up()
     {
         Schema::create('magazines', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integerIncrements('id')->unsigned();
+            $table->string('name');
+            $table->string('link')->nullable();
+            $table->text('description')->nullable();
+            $table->string('img')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

@@ -28,7 +28,7 @@ class ImportDispatcher
 
     public function loadDataFromFile($filename){
         $this->indexFile = $filename;
-        $spreadsheet = $this->getReader()->load($this->basePath . "/".$this->indexFile);
+        $spreadsheet = $this->getReader()->load($this->basePath . "/" . $this->indexFile);
         $this->processSpreadsheet($spreadsheet);
 
     }

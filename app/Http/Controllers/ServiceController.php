@@ -9,6 +9,7 @@ use App\Author;
 use App\ContentType;
 use App\Import\ImportDispatcher;
 use App\Import\ImportItem;
+use App\Import\MagazineImporter;
 use App\Organisation;
 use App\Region;
 use App\Source;
@@ -19,6 +20,7 @@ use PhpOffice\PhpWord\Reader\ODText\Content;
 
 class ServiceController extends Controller
 {
+    protected $log;
     /**
      * Display a listing of the resource.
      *
@@ -93,32 +95,59 @@ class ServiceController extends Controller
         }
     }
 
-    public function importContent()
-    {
-        $this->updateFilters();
-        $this->createTopics();
-        $path = "/Users/aleksejafanasev/Documents/Projects/Politics";
-        $file = "serialized-data.txt";
+    protected function importInnerPolitics(){
+        $INNER_TOPIC_ID = 1;
+        $path = "/Users/aleksejafanasev/Documents/Projects/Politics/Inner/";
+        $file = "01_Внутренняя политика.xlsx";
         $dispatcher = new ImportDispatcher($path);
-        $dispatcher->loadFromSerializedData($file);
-        $filters = $dispatcher->generateFilters();
-        $items = $dispatcher->getIterator();
+        $dispatcher->loadDataFromFile($file);
+        $dispatcher->saveAsTxt('inner-politics-data.txt');
+        $this->processItems($dispatcher->getIterator(),$INNER_TOPIC_ID, $path);
+    }
 
-        $log = new Logger('import');
-        $log->pushHandler(new StreamHandler($path.'/import.log', Logger::ERROR));
+    protected function importOuterPolitics(){
+        $OUTER_TOPIC_ID = 2;
+        $path = "/Users/aleksejafanasev/Documents/Projects/Politics/Outer/";
+        $file = "02_Международная политика.xlsx";
+        $dispatcher = new ImportDispatcher($path);
+        $dispatcher->loadDataFromFile($file);
+        $dispatcher->saveAsTxt('outer-politics-data.txt');
+        $this->processItems($dispatcher->getIterator(),$OUTER_TOPIC_ID, $path);
+    }
 
+    protected function processItems($items, $rootTopicId, $path){
         $counter = 0;
         foreach ($items as $item){
             $counter ++;
             try{
-                $item->storeToDB(1,$path.'/files');
-                $log->info('['.$counter.'] Import success [title='.$item->name().']');
-            } catch (\Exception $e){
-                $log->error('['.$counter.'] Import failed [title='.$item->name().']',['error'=>substr($e->getMessage(),0,500).'...'] );
+                $item->storeToDB($rootTopicId,$path.'/files');
+                $this->log->info('['.$counter.'] Import success [title='.$item->name().']');
+            } catch (\Exception $e) {
+                $this->log->error('[' . $counter . '] Import failed [title=' . $item->name() . ']', ['error' => substr($e->getMessage(), 0, 500) . '...']);
             }
-//            die();
 
         }
+    }
+
+    public function importContent()
+    {
+        $path = "/Users/aleksejafanasev/Documents/Projects/Politics";
+        $this->importMagazines();
+        $this->updateFilters();
+        $this->createTopics();
+
+        $this->log = new Logger('import');
+        $this->log->pushHandler(new StreamHandler($path.'/import.log', Logger::ERROR));
+        $this->importInnerPolitics();
+        $this->importOuterPolitics();
+
+    }
+
+
+    public function importMagazines()
+    {
+        $importer = new MagazineImporter("/Users/aleksejafanasev/Documents/Projects/Politics/Журналы","Список журналов.xlsx");
+        $importer->do();
     }
 
 
