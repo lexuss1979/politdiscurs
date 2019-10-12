@@ -1,5 +1,5 @@
 input[type='text']{
-    border: solid 1px #979797;
+    border: solid 1px #979797 !important;
     background-color: #f8f8f8;
     height: 37px;
     line-height: 37px;
@@ -8,6 +8,9 @@ input[type='text']{
     font-size: 15px;
     color: rgba(0, 0, 0, 0.59);
     vertical-align: middle;
+    input:focus{
+        border: inherit !important;
+    }
 
 }
 
