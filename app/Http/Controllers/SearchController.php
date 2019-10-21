@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Helpers\PaginatedCollection;
+use App\Search;
 use Illuminate\Http\Request;
 
 class SearchController extends BaseController
@@ -11,9 +12,10 @@ class SearchController extends BaseController
     /**
      * @route /search
      * @param Request $request
+     * @param Search $search
      * @return array
      */
-    public function search(Request $request)
+    public function search(Request $request, Search $search)
     {
 
         $query = request('q') ?? '';
@@ -25,13 +27,13 @@ class SearchController extends BaseController
             'results' => []
         ];
         if(!empty($query)){
-            $collection = new PaginatedCollection(Article::where('title','like','%'.$query.'%')->orWhere('annotation','like','%'.$query.'%')->get()
-                ,config('content.search-results-per-page')
-                ,$currPage, $baseUrl);
-
-            if( count(  $collection->data() ) > 0 ) {
-                $pageData['results'] = $collection->data();
+            $collection =  $search->withPaging(config('content.search-results-per-page'),$currPage)
+                ->withLinks($baseUrl)
+                ->do($query);
+            if( count(  $collection->content() ) > 0 ) {
+                $pageData['results'] = $collection->content();
                 $pageData['paging'] = $collection->paging();
+
             }
         }
         return view('pages.search-results',$pageData);

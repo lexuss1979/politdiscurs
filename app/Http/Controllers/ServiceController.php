@@ -12,6 +12,7 @@ use App\Import\ImportItem;
 use App\Import\MagazineImporter;
 use App\Organisation;
 use App\Region;
+use App\Search;
 use App\Source;
 use App\Topic;
 use Monolog\Handler\StreamHandler;
@@ -186,5 +187,14 @@ class ServiceController extends Controller
             $data[] = $td;
         }
         return $data;
+    }
+
+    public function addArticlesToIndex()
+    {
+        $search = new Search();
+        $articles = Article::all();
+        foreach ($articles as $article){
+            $search->addToIndex($article);
+        }
     }
 }

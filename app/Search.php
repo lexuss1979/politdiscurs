@@ -10,6 +10,9 @@ class Search extends Model
     protected $table = 'search';
     protected $fillable = ['text','article_id'];
 
+
+
+    private $baseUrl = '';
     protected $perPage = null;
     protected $currentPage = 1;
 
@@ -27,13 +30,19 @@ class Search extends Model
         return $this;
     }
 
+    public function withLinks($url){
+        $this->baseUrl = $url;
+        return $this;
+    }
+
     public function do($searhStr)
     {
-        $results = Search::whereRaw('text like ?', ["%{$searhStr}%"])
-            ->join('articles','articles.id','=','search.article_id')
+        $results = Article::join('search','articles.id','=','search.article_id')
+            ->where('search.text','like', "%{$searhStr}%")
             ->select('articles.*')
             ->get();
         $data = new PaginatedCollection($results,$this->perPage, $this->currentPage);
         return new ContentCollection($data,[]);
     }
+
 }

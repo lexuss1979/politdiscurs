@@ -4,6 +4,7 @@ namespace Tests\Acceptance;
 
 use App\Article;
 use App\Magazine;
+use App\Search;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SearchResultPageTest extends \Tests\TestCase
@@ -11,6 +12,7 @@ class SearchResultPageTest extends \Tests\TestCase
     use RefreshDatabase;
 
     protected $query;
+    protected $search;
     private $articles;
 
 
@@ -21,6 +23,7 @@ class SearchResultPageTest extends \Tests\TestCase
         $this->query = 'ABSOLUTELYUNIQUE WORDSEQUENCE';
         $this->url = route('search-results',['q' => $this->query]);
         $this->response = $this->get($this->url);
+        $this->search = new Search();
     }
 
     /** @test */
@@ -35,7 +38,7 @@ class SearchResultPageTest extends \Tests\TestCase
         $this->response->assertSee('<main-menu></main-menu>');
         $this->response->assertSee('<div class="breadcrumbs">');
         $this->response->assertDontSee('<div class="pagination">'); //empty results
-        $this->response->assertSee('<section class="search-panel">');
+        $this->response->assertSee('<section class="search-panel');
         $this->response->assertSee('<p class="nothing-found">');
         $this->response->assertSee('value="'.$this->query.'"');
 
@@ -46,6 +49,8 @@ class SearchResultPageTest extends \Tests\TestCase
     {
         $wanted = factory(Article::class)->create(['title' => 'My UNIQ_MARK with '.$this->query.' in title.']);
         $unwanted = factory(Article::class)->create(['title' => 'My UNIQ_MARK.']);
+        $this->search->addToIndex($wanted);
+        $this->search->addToIndex($unwanted);
         $response = $this->get(route('search-results',['q' => $this->query]));
         $response->assertDontSee('<p class="nothing-found">');
         $response->assertSee('<div class="item" data-id="'.$wanted->id.'">');
@@ -63,6 +68,8 @@ class SearchResultPageTest extends \Tests\TestCase
     {
         $wanted = factory(Article::class)->create(['annotation' => 'My UNIQ_MARK with '.$this->query.' in title.']);
         $unwanted = factory(Article::class)->create(['annotation' => 'My UNIQ_MARK.']);
+        $this->search->addToIndex($wanted);
+        $this->search->addToIndex($unwanted);
         $response = $this->get(route('search-results',['q' => $this->query]));
         $response->assertSee('<div class="item" data-id="'.$wanted->id.'">');
         $response->assertDontSee('<div class="item" data-id="'.$unwanted->id.'">');

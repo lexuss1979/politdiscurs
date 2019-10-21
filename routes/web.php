@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::get('/content/import','ServiceController@importContent');
 Route::get('/content/out','ServiceController@importOut');
 Route::get('/content/tt','ServiceController@tt');
+Route::get('/content/search','ServiceController@addArticlesToIndex');
 //Route::get('/magazine/import','ServiceController@importMagazines');
 
 
