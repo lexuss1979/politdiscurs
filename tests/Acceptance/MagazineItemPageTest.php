@@ -12,8 +12,6 @@ use Tests\TestCase;
 class MagazineItemPageTest extends TestCase
 {
     private $magazine;
-    private $response;
-    private $url;
 
     use RefreshDatabase;
 
@@ -86,8 +84,4 @@ class MagazineItemPageTest extends TestCase
 
     }
 
-    protected function refreshResponse()
-    {
-        $this->response = $this->get($this->url);
-    }
 }

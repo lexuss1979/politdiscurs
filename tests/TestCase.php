@@ -10,6 +10,9 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
+    protected $url;
+    protected $response;
+
     protected function setUp():void
     {
         parent::setUp();
@@ -31,5 +34,10 @@ abstract class TestCase extends BaseTestCase
     {
         $this->app->instance(ExceptionHandler::class, $this->oldExceptionHandler);
         return $this;
+    }
+
+    protected function refreshResponse()
+    {
+        $this->response = $this->get($this->url);
     }
 }

@@ -1,4 +1,4 @@
-<div class="item">
+<div class="item" data-id="{{$article->id}}">
     <div class="item__img">
         <a @if(!is_null($article->file))target="_blank"@endif href="{{$article->route()}}"><img src="{{$article->imgSrc()}}" alt="{{$article->title}}"><span class="letter style-@php echo RAND(1,8) @endphp"><span>{{$article->letter()}}</span></span></a>
     </div>

@@ -15,7 +15,9 @@ return [
 
     'articles-per-page' => 10,
     'magazines-per-page' => 12,
-    'magazines-in-more-block' => 8,
+    'magazines-in-more-block' => 100,
+
+    'search-results-per-page' => 20,
 
     'article-default-img' => '/img/layout/item-placeholder.svg',
     'show-letter-placeholder' => ENV('LETTER_PLACEHOLDER',false)

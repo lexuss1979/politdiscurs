@@ -10,7 +10,6 @@ class MagazinesPageTest extends \Tests\TestCase
 {
     use RefreshDatabase;
 
-    private $response;
     private $magazines;
     private $articles;
 

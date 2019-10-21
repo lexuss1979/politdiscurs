@@ -13,7 +13,6 @@ class ArticlePageTest extends TestCase
 {
     use RefreshDatabase;
 
-    private $response;
     private $article;
     private $topic;
     private $author;

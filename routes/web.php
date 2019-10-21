@@ -82,7 +82,7 @@ Route::get('/files/{file}','FileController@show');
  * SearchController
  * /search - поиск ?q=
  */
-Route::get('/search','SearchController@search');
+Route::get('/search','SearchController@search')->name('search-results');
 
 /**
  * StaticContentController

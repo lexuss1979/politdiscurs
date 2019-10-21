@@ -29,7 +29,7 @@
         <section>
             <label class="bold">Авторы:</label>
             <advanced-select resetable v-model="authors" filterable @input="change"></advanced-select>
-        </section>e
+        </section>
         <section>
             <label class="bold">Организация:</label>
             <advanced-select resetable search-type="contains" filterable  v-model="organisations" @input="change"></advanced-select>

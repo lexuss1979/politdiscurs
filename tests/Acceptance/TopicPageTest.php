@@ -11,12 +11,10 @@ class TopicPageTest extends \Tests\TestCase
 {
     use RefreshDatabase;
 
-    private $response;
     private $rootTopic;
     private $targetTopic;
     private $childTopics;
     private $articles;
-    private $url;
     private $pageCount;
     private $articlesCount;
 
