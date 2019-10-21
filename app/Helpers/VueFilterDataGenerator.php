@@ -63,7 +63,7 @@ class VueFilterDataGenerator
     {
         if (isset($this->filters['authors'])) {
             $selectedAuthorId = $this->request->get('author') ?? null;
-            $authors = Author::select('id', 'fio as title')->find($this->filters['authors'])->toArray();
+            $authors = Author::select('id', 'fio as title')->orderBy('fio')->find($this->filters['authors'])->toArray();
             foreach ($authors as $key => $author) {
                 $authors[$key]['on'] = $author['id'] == $selectedAuthorId;
             }
@@ -80,7 +80,7 @@ class VueFilterDataGenerator
     {
         if (isset($this->filters['topics'])) {
             $selectedTopics = !$this->request->get('topics') ? [] :  array_map(function($item){return (int)$item;},$this->request->input('topics'));
-            $topics = Topic::select('id', 'title')->find($this->filters['topics'])->toArray();
+            $topics = Topic::select('id', 'title')->orderBy('title')->find($this->filters['topics'])->toArray();
             foreach ($topics as $key => $topic) {
                 $topics[$key]['on'] = in_array($topic['id'], $selectedTopics);
             }
@@ -97,7 +97,7 @@ class VueFilterDataGenerator
     {
         if (isset($this->filters['regions'])) {
             $selectedRegions = $this->request->get('reg') ?? [];
-            $regions = Region::select('id', 'name as title')->find($this->filters['regions'])->toArray();
+            $regions = Region::select('id', 'name as title')->orderBy('name')->find($this->filters['regions'])->toArray();
             foreach ($regions as $key => $region) {
                 $regions[$key]['on'] = $region['id'] == $selectedRegions;
             }
@@ -134,7 +134,7 @@ class VueFilterDataGenerator
     {
         if (isset($this->filters['organisations'])) {
             $selected = $this->request->get('org') ?? null;
-            $organisations = Organisation::select('id', 'name as title')->find($this->filters['organisations'])->toArray();
+            $organisations = Organisation::select('id', 'name as title')->orderBy('name')->find($this->filters['organisations'])->toArray();
             foreach ($organisations as $key => $organisation) {
                 $organisations[$key]['on'] = $organisation['id'] == $selected;
             }
