@@ -26,8 +26,11 @@
         <section class="search-panel">
             <div class="row">
                 <div class="col-12 text-center">
-                    <input type="text" id="search-input" placeholder="Введите название книги, документа или автора">
-                    <button class="std-btn">Найти</button>
+                    <form action="/search" method="get">
+                        <input type="text" id="search-input" name="q"
+                               placeholder="Введите название книги, документа или автора" value="{{isset($query) ? $query : ''}}">
+                        <button class="std-btn" type="submit">Найти</button>
+                    </form>
                 </div>
             </div>
             <div class="row search-options">

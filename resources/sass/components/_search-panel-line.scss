@@ -2,6 +2,11 @@
     background-color: #fff;
     padding: 31px 60px 5px 60px;
     border-bottom: solid 2px #4e360d47;
+
+    &.settingless{
+        padding: 31px 60px 31px 60px;
+    }
+
     #search-input{
         width: 704px;
         margin-right: 37px;

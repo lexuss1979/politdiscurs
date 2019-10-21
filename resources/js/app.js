@@ -45,7 +45,7 @@ const app = new Vue({
     components:{MainMenu, AdvancedSelect, CheckBox, CheckBoxGroup, RadioButton, RadioButtonGroup, SearchInput, SelectOption, TopicFilters},
     methods:{
         doSearch(searchStr) {
-            alert('go to www for search:'+ searchStr);
+            window.location.href='/search?q='+searchStr;
         }
     }
 });

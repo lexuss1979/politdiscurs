@@ -14,11 +14,14 @@
 
         <div class="content-block">
             <div class="content-block__main">
-                <section class="search-panel">
+                <section class="search-panel settingless">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <input type="text" id="search-input" placeholder="Введите название книги, документа или автора" value="{{$query}}">
-                            <button class="std-btn">Найти</button>
+                            <form action="/search" method="get">
+                                <input type="text" id="search-input" name="q"
+                                       placeholder="Введите название книги, документа или автора" value="{{isset($query) ? $query : ''}}">
+                                <button class="std-btn" type="submit">Найти</button>
+                            </form>
                         </div>
                     </div>
 
