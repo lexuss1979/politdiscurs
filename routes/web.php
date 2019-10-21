@@ -20,6 +20,8 @@ Route::get('/', function () {
 //Route::get('/filters/update','ServiceController@updateFilters');
 //Route::get('/filters/topics','ServiceController@createTopics');
 Route::get('/content/import','ServiceController@importContent');
+Route::get('/content/out','ServiceController@importOut');
+Route::get('/content/tt','ServiceController@tt');
 //Route::get('/magazine/import','ServiceController@importMagazines');
 
 
@@ -49,8 +51,8 @@ Route::get('/books/{book}','BookController@show');
  * /magazines  - журналы
  * /magazines/id  - журнал
  */
-Route::get('/magazines','MagazineController@index');
-Route::get('/magazines/{magazine}','MagazineController@show');
+Route::get('/magazines','MagazineController@index')->name('magazines');
+Route::get('/magazines/{magazine}','MagazineController@show')->name('magazine-item');
 
 /**
  * TopicController
@@ -66,7 +68,7 @@ Route::get('/topics/{topic}','TopicController@show');
  * /article/id - материал из каталога
  */
 
-Route::get('/articles/{article}','ArticleController@show');
+Route::get('/articles/{article}','ArticleController@show')->name('articles');
 
 /**
  * FileController
@@ -93,5 +95,5 @@ Route::get('/search','SearchController@search');
 
 Route::get('/content','StaticContentController@content');
 Route::get('/about','StaticContentController@about');
-Route::get('/authors','StaticContentController@authors');
+Route::get('/contributors','StaticContentController@contributors');
 Route::get('/partners','StaticContentController@partners');

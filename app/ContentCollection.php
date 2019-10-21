@@ -33,4 +33,13 @@ class ContentCollection
     {
         return $this->paging;
     }
+
+    public function asArray(){
+        return [
+            'content' => $this->content,
+            'filters' => $this->filters,
+            'paging' => $this->paging
+
+        ];
+    }
 }

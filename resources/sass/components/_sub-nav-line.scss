@@ -1,0 +1,13 @@
+.sub-nav-line{
+    height: 41px;
+    background-color: #ffffff;
+    padding: 0 43px;
+    border-bottom: solid 1px rgba(78, 54, 13, 0.48);
+    display: flex;
+    .breadcrumbs{
+        flex: 100%;
+    }
+    .pagination{
+        flex: 160px;
+    }
+}

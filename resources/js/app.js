@@ -7,6 +7,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import vClickOutside from 'v-click-outside';
+Vue.use(vClickOutside);
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,6 +22,17 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('input-test', require('./components/InputTest.vue').default);
+
+import AdvancedSelect from './components/AdvancedSelect.vue';
+import SelectOption from './components/SelectOption.vue';
+import CheckBox from './components/CheckBox.vue';
+import CheckBoxGroup from './components/CheckBoxGroup.vue';
+import RadioButton from './components/RadioButton.vue';
+import RadioButtonGroup from './components/RadioButtonGroup.vue';
+import SearchInput from './components/SearchInput.vue';
+import MainMenu from './components/MainMenu.vue';
+import TopicFilters from './components/TopicFilters.vue';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,4 +42,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    components:{MainMenu, AdvancedSelect, CheckBox, CheckBoxGroup, RadioButton, RadioButtonGroup, SearchInput, SelectOption, TopicFilters},
+    methods:{
+        doSearch(searchStr) {
+            alert('go to www for search:'+ searchStr);
+        }
+    }
 });

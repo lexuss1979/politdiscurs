@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="BrsvyJXZ3aT7jJwtluoEavbJEucKN5RBkJS0ilZm">
     <base href="/">
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
     <title>Document</title>
     <link href="/css/app.css" rel="stylesheet">
 

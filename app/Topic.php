@@ -7,8 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Topic extends Model
 {
 
-    protected $fillable = ['title','parent_topic_id','img','bgcolor'];
+    protected $fillable = ['title','parent_topic_id','img','bgcolor','menu_bgcolor','code'];
     protected $guarded = [];
+
+    const INNER_CODE = 100;
+    const OUTER_CODE = 200;
+
+    public function scopeInnerPolitics($query)
+    {
+        $root = self::where('code',self::INNER_CODE)->first();
+        return $query->where('parent_topic_id', $root->id);
+    }
+
+    public function scopeOuterPolitics($query)
+    {
+        $root = self::where('code',self::OUTER_CODE)->first();
+        return $query->where('parent_topic_id', $root->id);
+    }
 
     public static function getOrCreate($topicName, $parentTopic){
         $parenTopicID = self::getTopicId($parentTopic);

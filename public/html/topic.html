@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="BrsvyJXZ3aT7jJwtluoEavbJEucKN5RBkJS0ilZm">
+
+    <base href="/">
+    <!-- Compiled and minified CSS -->
+
+    <title>Document</title>
+    <link href="/css/app.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="main-wrapper topic topic-1" id="app">
+    <div class="bg-wrapper-overlay"></div>
+    <div class="page-wrapper">
+        <header class="content-page">
+            <div class="main-topic">Международная политика</div>
+            <h1>ТЕОРИЯ МЕЖДУНАРОДНЫХ ОТНОШЕНИЙ</h1>
+            <h2>Онлайн библиотека книг, статей, докладов, документов</h2>
+        </header>
+        <main class="content-page">
+            <section>
+                <main-menu></main-menu>
+            </section>
+            <div class="sub-nav-line">
+                <div class="breadcrumbs">
+                    <ul>
+                        <li><a href="#">Главная</a></li>
+                        <li><a href="#">Внутренняя политика</a></li>
+                        <li><a href="#">Теория международных отношений</a></li>
+                    </ul>
+                </div>
+                <div class="pagination">
+                    <div class="btn-prev"></div>
+                    <div class="current">1</div>
+                    <div class="btn-next"></div>
+                    <div class="comment">из 8</div>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="content-block__sidebar">
+                    <section class="search-block">
+                        <search-input @on-do-search="doSearch" placeholder="Введите название"></search-input>
+                        <a href="#" class="search-settings">Настройки поиска</a>
+                    </section>
+                    <topic-filters inline-template :data="function(){ return  {
+                        topics: [
+                            {id: 1, on: true, title: 'Феномен власти'},
+                            {id: 2, on: true, title: 'Какая-то еще рубрика'},
+                            {id: 3, on: true, title: 'Эволюция государства'},
+                            {id: 4, on: false, title: 'Очень длинное название темы, в две строки'}
+                            ],
+                        sorts: [
+                            {id: 1, on: true, title: 'Алфавиту'},
+                            {id: 2, on: false, title: 'Автору'},
+                            {id: 3, on: false, title: 'Году'}
+                        ],
+                        content_types: [
+                            {id: 1, on: true, title: 'Книги'},
+                            {id: 2, on: true, title: 'Статьи'},
+                            {id: 3, on: true, title: 'Документы'},
+                            {id: 4, on: true, title: 'Инфографика'}
+                        ],
+                        authors: [
+                            {id: 1, on: true, title: 'Иванов В.А.'},
+                            {id: 2, on: false, title: 'ХАбибулин В.А.'},
+                            {id: 3, on: false, title: 'Кара-Мурза В.А.'},
+                            {id: 4, on: false, title: 'Мамин-Сибиряк В.А.'}
+                        ],
+                        organisations: [
+                            {id: 1, on: false, title: 'ВНИИ УСПНБ'},
+                            {id: 2, on: false, title: 'РИА СЕГОДНЯ'},
+                            {id: 3, on: false, title: 'Смоленский вестник'},
+                            {id: 4, on: false, title: 'Филиал МАИ в МГУ'}
+                        ],
+                        regions: [
+                            {id: 1, on: false, title: 'Африка'},
+                            {id: 2, on: false, title: 'Росиия и СНГ'},
+                            {id: 3, on: false, title: 'Америка'},
+                            {id: 4, on: false, title: 'Ближний восток'}
+                        ],
+
+                    };
+                    }()">
+
+                        <div class="filters">
+                            <section>
+                                <label>Показывать по:</label>
+                                <advanced-select v-model="sorts" @input="change"></advanced-select>
+
+                                <div class="themes">
+                                    <label  class="bold">Темы:</label>
+                                    <ul>
+                                        <li><check-box v-model="isAllTopicsSelected" @input="selectAllTopics" @input="change"></check-box><span>Все</span></li>
+                                        <li v-for="topic in topics"><check-box  @input="change" v-model="topic.on"></check-box><span>{{topic.title}}</span></li>
+                                    </ul>
+
+                                </div>
+
+
+                            </section>
+                            <section>
+                                <label class="bold">Вид материала:</label>
+                                <ul>
+                                    <li v-for="ctype in content_types"><check-box  v-model="ctype.on" @input="change"></check-box><span>{{ctype.title}}</span></li>
+                                </ul>
+                            </section>
+                            <section>
+                                <label class="bold">Авторы:</label>
+                                <advanced-select resetable v-model="authors" @input="change"></advanced-select>
+                            </section>
+                            <section>
+                                <label class="bold">Организация:</label>
+                                <advanced-select resetable v-model="organisations" @input="change"></advanced-select>
+
+                            </section>
+                            <section>
+                                <label class="bold">Регион мира:</label>
+                                <advanced-select resetable v-model="regions" @input="change"></advanced-select>
+                            </section>
+                        </div>
+                    </topic-filters>
+
+
+                </div>
+                <div class="content-block__main">
+                    <div class="content-block__main-body">
+                        <div class="items-list">
+                            <div class="item folded">
+                                <div class="item__img"><a href=""><img src="../img/layout/item-placeholder.svg"
+                                                                        alt=""></a></div>
+                                <div class="item__text"><a href="" class="item__header">Россия в современном диалоге
+                                    цивилизаций</a>
+                                    <div class="author_year">Автор: Зубов М.Г. Год издания: 2017</div>
+                                    <p class="item__desc">В учебном пособии рассматриваются основные тенденции и
+                                        закономерности в формировании внешней политики стран афро-азиатского мира.
+                                        Авторы задаются целью показать, как в этих странах формируется
+                                        внешнеполитический курс и принимаются ключевые внешнеполитические решения,
+                                        какова роль политического руководства, правительства и отдельных министерств и
+                                        ведомств, деловых кругов, экспертного сообщества и общественного мнения.</p>
+                                </div>
+                                <div class="fold-btn"></div>
+                            </div>
+                            <div class="item folded">
+                                <div class="item__img"><a href=""><img src="../img/layout/item-placeholder.svg"
+                                                                        alt=""></a></div>
+                                <div class="item__text"><a href="" class="item__header">Россия в современном диалоге
+                                    цивилизаций</a>
+                                    <div class="author_year">Автор: Зубов М.Г. Год издания: 2017</div>
+                                    <p class="item__desc">В учебном пособии рассматриваются основные тенденции и
+                                        закономерности в формировании внешней политики стран афро-азиатского мира.
+                                        Авторы задаются целью показать, как в этих странах формируется
+                                        внешнеполитический курс и принимаются ключевые внешнеполитические решения,
+                                        какова роль политического руководства, правительства и отдельных министерств и
+                                        ведомств, деловых кругов, экспертного сообщества и общественного мнения.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item__img"><a href=""><img src="../img/layout/item-placeholder.svg"
+                                                                        alt=""></a></div>
+                                <div class="item__text"><a href="" class="item__header">Россия в современном диалоге
+                                    цивилизаций</a>
+                                    <div class="author_year">Автор: Зубов М.Г. Год издания: 2017</div>
+                                    <p class="item__desc">В учебном пособии рассматриваются основные тенденции и
+                                        закономерности в формировании внешней политики стран афро-азиатского мира.
+                                        Авторы задаются целью показать, как в этих странах формируется
+                                        внешнеполитический курс и принимаются ключевые внешнеполитические решения,
+                                        какова роль политического руководства, правительства и отдельных министерств и
+                                        ведомств, деловых кругов, экспертного сообщества и общественного мнения.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item__img"><a href=""><img src="../img/layout/item-placeholder.svg"
+                                                                        alt=""></a></div>
+                                <div class="item__text"><a href="" class="item__header">Россия в современном диалоге
+                                    цивилизаций</a>
+                                    <div class="author_year">Автор: Зубов М.Г. Год издания: 2017</div>
+                                    <p class="item__desc">В учебном пособии рассматриваются основные тенденции и
+                                        закономерности в формировании внешней политики стран афро-азиатского мира.
+                                        Авторы задаются целью показать, как в этих странах формируется
+                                        внешнеполитический курс и принимаются ключевые внешнеполитические решения,
+                                        какова роль политического руководства, правительства и отдельных министерств и
+                                        ведомств, деловых кругов, экспертного сообщества и общественного мнения.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item__img"><a href=""><img src="../img/layout/item-placeholder.svg"
+                                                                        alt=""></a></div>
+                                <div class="item__text"><a href="" class="item__header">Россия в современном диалоге
+                                    цивилизаций</a>
+                                    <div class="author_year">Автор: Зубов М.Г. Год издания: 2017</div>
+                                    <p class="item__desc">В учебном пособии рассматриваются основные тенденции и
+                                        закономерности в формировании внешней политики стран афро-азиатского мира.
+                                        Авторы задаются целью показать, как в этих странах формируется
+                                        внешнеполитический курс и принимаются ключевые внешнеполитические решения,
+                                        какова роль политического руководства, правительства и отдельных министерств и
+                                        ведомств, деловых кругов, экспертного сообщества и общественного мнения.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item__img"><a href=""><img src="../img/layout/item-placeholder.svg"
+                                                                        alt=""></a></div>
+                                <div class="item__text"><a href="" class="item__header">Россия в современном диалоге
+                                    цивилизаций</a>
+                                    <div class="author_year">Автор: Зубов М.Г. Год издания: 2017</div>
+                                    <p class="item__desc">В учебном пособии рассматриваются основные тенденции и
+                                        закономерности в формировании внешней политики стран афро-азиатского мира.
+                                        Авторы задаются целью показать, как в этих странах формируется
+                                        внешнеполитический курс и принимаются ключевые внешнеполитические решения,
+                                        какова роль политического руководства, правительства и отдельных министерств и
+                                        ведомств, деловых кругов, экспертного сообщества и общественного мнения.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item__img"><a href=""><img src="../img/layout/item-placeholder.svg"
+                                                                        alt=""></a></div>
+                                <div class="item__text"><a href="" class="item__header">Россия в современном диалоге
+                                    цивилизаций</a>
+                                    <div class="author_year">Автор: Зубов М.Г. Год издания: 2017</div>
+                                    <p class="item__desc">В учебном пособии рассматриваются основные тенденции и
+                                        закономерности в формировании внешней политики стран афро-азиатского мира.
+                                        Авторы задаются целью показать, как в этих странах формируется
+                                        внешнеполитический курс и принимаются ключевые внешнеполитические решения,
+                                        какова роль политического руководства, правительства и отдельных министерств и
+                                        ведомств, деловых кругов, экспертного сообщества и общественного мнения.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item__img"><a href=""><img src="../img/layout/item-placeholder.svg"
+                                                                        alt=""></a></div>
+                                <div class="item__text"><a href="" class="item__header">Россия в современном диалоге
+                                    цивилизаций</a>
+                                    <div class="author_year">Автор: Зубов М.Г. Год издания: 2017</div>
+                                    <p class="item__desc">В учебном пособии рассматриваются основные тенденции и
+                                        закономерности в формировании внешней политики стран афро-азиатского мира.
+                                        Авторы задаются целью показать, как в этих странах формируется
+                                        внешнеполитический курс и принимаются ключевые внешнеполитические решения,
+                                        какова роль политического руководства, правительства и отдельных министерств и
+                                        ведомств, деловых кругов, экспертного сообщества и общественного мнения.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item__img"><a href=""><img src="../img/layout/item-placeholder.svg"
+                                                                        alt=""></a></div>
+                                <div class="item__text"><a href="" class="item__header">Россия в современном диалоге
+                                    цивилизаций</a>
+                                    <div class="author_year">Автор: Зубов М.Г. Год издания: 2017</div>
+                                    <p class="item__desc">В учебном пособии рассматриваются основные тенденции и
+                                        закономерности в формировании внешней политики стран афро-азиатского мира.
+                                        Авторы задаются целью показать, как в этих странах формируется
+                                        внешнеполитический курс и принимаются ключевые внешнеполитические решения,
+                                        какова роль политического руководства, правительства и отдельных министерств и
+                                        ведомств, деловых кругов, экспертного сообщества и общественного мнения.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item__img"><a href=""><img src="../img/layout/item-placeholder.svg"
+                                                                        alt=""></a></div>
+                                <div class="item__text"><a href="" class="item__header">Россия в современном диалоге
+                                    цивилизаций</a>
+                                    <div class="author_year">Автор: Зубов М.Г. Год издания: 2017</div>
+                                    <p class="item__desc">В учебном пособии рассматриваются основные тенденции и
+                                        закономерности в формировании внешней политики стран афро-азиатского мира.
+                                        Авторы задаются целью показать, как в этих странах формируется
+                                        внешнеполитический курс и принимаются ключевые внешнеполитические решения,
+                                        какова роль политического руководства, правительства и отдельных министерств и
+                                        ведомств, деловых кругов, экспертного сообщества и общественного мнения.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            </div>
+        </main>
+        <footer>
+            <div class="row">
+                <div class="col-4 footer-menu row">
+                    <div class="col-6">
+                        <ul>
+                            <li><a href="/">Главная</a></li>
+                            <li><a href="/books">Книги</a></li>
+                            <li><a href="/magazines">Журналы</a></li>
+                            <li><a href="/docs">Документы</a></li>
+                            <li><a href="/infografics">Инфографика</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul>
+                            <li><a href="/content">Содержание</a></li>
+                            <li><a href="/about">О проекте</a></li>
+                            <li><a href="/contributors">Авторы и разработчики</a></li>
+                            <li><a href="/partners">Партнеры</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-8 partners row">
+                    <div class="col-3"><a href="#"><img src="img/layout/rapn.png" alt="">
+                        <p>Роccийская ассоциация политической науки</p>
+                    </a></div>
+                    <div class="col-3"><a href="#"><img src="img/layout/cpmi.png" alt="">
+                        <p>Центр политических  и международных исследований</p>
+                    </a></div>
+                    <div class="col-3"><a href="#"><img src="img/layout/imi.png" alt="">
+                        <p>Институт международных исследований МГИМО</p>
+                    </a></div>
+                    <div class="col-3"><a href="#"><img src="img/layout/mgimologo.png" alt="">
+                        <p>Московский государственный институт международных отношений</p>
+                    </a></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 copyrights">
+                    <p>При реализации проекта используются средства государственной поддержки, выделенные в качестве гранта № 19-011-31140/19 ФГБУ «Российский фонд фундаментальных исследований» и АНО «Экспертный институт социальных исследований»</p>
+                    <p>Позиция создателей образовательного ресурса не всегда совпадает с мнениями и оценками авторов отдельных статей и материалов.</p>
+                    <p>© Концепция, составление, оформление «Центр политических и международных исследований»</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</div>
+<script src="/js/app.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.bg-wrapper-overlay').height($(document).height());
+        $(".fold-btn").click(function(e){
+            $(e.target).parent().removeClass('folded');
+        });
+    });
+</script>
+</body>
+</html>

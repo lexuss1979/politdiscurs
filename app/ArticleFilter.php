@@ -6,6 +6,7 @@ namespace App;
 
 use App\Helpers\PaginatedCollection;
 use Illuminate\Database\Eloquent\Collection;
+use mysql_xdevapi\Exception;
 
 class ArticleFilter
 {
@@ -17,7 +18,10 @@ class ArticleFilter
     private $year;
     private $author;
     private $region;
+    private $organisation;
     private $contentTypes = [];
+
+    private $baseUrl = '';
 
     private $sortField = 'id';
     private $sortDirection = 'asc';
@@ -27,7 +31,6 @@ class ArticleFilter
 
     private $itemsPerPage;
     private $currentPage = 1;
-
 
 
     public function __construct()
@@ -43,7 +46,7 @@ class ArticleFilter
     }
 
     protected function content(): PaginatedCollection{
-        return new PaginatedCollection($this->content, $this->itemsPerPage, $this->currentPage);
+        return new PaginatedCollection($this->content, $this->itemsPerPage, $this->currentPage, $this->baseUrl);
     }
 
     protected function applyFilters(){
@@ -52,7 +55,8 @@ class ArticleFilter
             ->attachYearFilter()
             ->attachAuthorFilter()
             ->attachRegionFilter()
-            ->attachContentTypeFilter();
+            ->attachContentTypeFilter()
+            ->attachOrganizationFilter();
         return $this->query;
     }
 
@@ -67,7 +71,42 @@ class ArticleFilter
             'authors' => $this->getAuthorsSet(),
             'regions' => $this->getRegionsSet(),
             'years' => $this->getYearsSet(),
+            'content_types' => $this->getContentTypesSet(),
+            'topics' => $this->getTopicsSet(),
+            'organisations' => $this->getOrganisationsSet(),
         ];
+    }
+
+    protected function getOrganisationsSet(){
+        $organisations = Organisation::join('article_organisation','organisations.id','=','article_organisation.organisation_id')
+            ->whereIn('article_organisation.article_id',$this->getContentIds())
+            ->select(['organisations.id','organisations.name'])
+            ->distinct()
+            ->orderBy('organisations.name')
+            ->get()->toArray();
+        return $organisations ?? [];
+    }
+
+    protected function getRootTopicId(){
+        if (!isset($this->topic)) throw new \Exception('Incorrect topic');
+        $topicsCollection = $this->topic instanceof  Topic ? [$this->topic] : $this->topic;
+        return $topicsCollection[0]->hasChildren() ? $topicsCollection[0]->id : $topicsCollection[0]->parent_topic_id;
+    }
+
+    protected function getTopicsSet()
+    {
+        if (!isset($this->topic)) return [];
+        $topicsID = Topic::where('parent_topic_id', $this->getRootTopicId())->orderBy('title')->get()->pluck('id');;
+
+        return $topicsID;
+    }
+
+    protected function getContentTypesSet()
+    {
+        $ctypes = ContentType::select(['id'])
+            ->orderBy('name')
+            ->get()->toArray();
+        return $ctypes ?? [];
     }
 
     protected function getAuthorsSet(){
@@ -97,6 +136,11 @@ class ArticleFilter
         return $regions ?? [];
     }
 
+    public function withLinks($url){
+        $this->baseUrl = $url;
+        return $this;
+    }
+
     protected function getContentIds(){
         return  $this->content->pluck('id');
     }
@@ -108,8 +152,19 @@ class ArticleFilter
     }
 
     public function forTopic($topic){
-        $this->topic = $topic;
+        if($topic instanceof Topic || $this->isArrayOfTopics($topic)){
+            $this->topic = $topic;
+        } else if (is_int($topic)){
+            $this->topic = Topic::find($topic);
+        } else if(is_array($topic) && is_int($topic[0]) ){
+            $this->topic = Topic::findMany($topic);
+        } else {
+            throw new \InvalidArgumentException('Incorrect type of arg.');
+        }
         return $this;
+    }
+    protected function isArrayOfTopics($item){
+        return is_array($item ) && $item[0] instanceof Topic;
     }
 
     public function forYear($year){
@@ -120,6 +175,12 @@ class ArticleFilter
     public function forAuthor(Author $author)
     {
         $this->author = $author;
+        return $this;
+    }
+
+    public function forOrganisation(Organisation $org)
+    {
+        $this->organisation = $org;
         return $this;
     }
 
@@ -156,6 +217,7 @@ class ArticleFilter
         $this->currentPage = $currentPage;
         return $this;
     }
+
 
 
     protected function execute()
@@ -219,5 +281,16 @@ class ArticleFilter
         }
         return $this;
     }
+
+    protected function attachOrganizationFilter(){
+        if(isset($this->organisation)) {
+            $this->query
+                ->join('article_organisation', 'articles.id', '=' ,'article_organisation.article_id')
+                ->where('organisation_id',$this->organisation->id);
+        }
+        return $this;
+    }
+
+
 
 }

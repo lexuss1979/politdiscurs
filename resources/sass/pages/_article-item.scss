@@ -1,0 +1,35 @@
+.article-item{
+    &__img img{
+        max-width: 100%;
+        width: 270px;
+        box-shadow: 0 2px 11px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    &__link{
+        padding-top: 10px;
+    }
+
+    &__more{
+        padding-top: 10px!important;
+        ul{
+            margin: 0;
+            padding: 10px 0;
+            li{
+                line-height: 16px;
+                list-style-type: none;
+                padding-bottom: 32px;
+            }
+        }
+    }
+
+    .article{
+        font-family: Georgia;
+        font-size: 17px;
+        line-height: 1.5;
+        color: #434343;
+        h1{
+            display:none;
+        }
+    }
+
+}

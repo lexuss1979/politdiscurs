@@ -12,7 +12,7 @@ class PaginatedCollection
     protected $data;
     protected $paging;
 
-    public function __construct($data, $perPage = null, $currentPage = 1)
+    public function __construct($data, $perPage = null, $currentPage = 1, $baseUrl = '')
     {
         $content = $data ?  $data : new Collection([]);
         $itemsCount = $content->count();
@@ -23,8 +23,15 @@ class PaginatedCollection
             'per_page' => $perPage,
             'current' => $currentPage,
             'total' => $total,
+            'links' => [
+              'next' =>   $currentPage < $total ? $this->getUrl($baseUrl, $currentPage + 1) : false,
+              'prev' =>   $currentPage > 1 ? $this->getUrl($baseUrl, $currentPage - 1) : false,
+              'current' =>   $this->getUrl($baseUrl, $currentPage)
+            ],
             'items_count' => $itemsCount
         ];
+
+
         if($perPage < $itemsCount) {
             $chunks = $content->chunk($perPage);
             $content =$chunks[$currentPage-1];
@@ -32,7 +39,6 @@ class PaginatedCollection
         $this->data = $content;
         $this->paging = $paging;
     }
-
 
     public function data()
     {
@@ -42,6 +48,16 @@ class PaginatedCollection
     public function paging()
     {
         return $this->paging;
+    }
+
+    public function getUrl($baseUrl, $page){
+        $hasQueryPart = strpos($baseUrl,'?') > -1;
+        $hasPageParam = strpos($baseUrl,'page=') > -1;
+        if($hasQueryPart) {
+            return $hasPageParam ? preg_replace('/page=(\d*)/','page='.$page,$baseUrl) : $baseUrl . '&page='.$page;
+        } else {
+            return $baseUrl . '?page='.$page;
+        }
     }
 
 }

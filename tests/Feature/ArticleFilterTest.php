@@ -43,10 +43,20 @@ class ArticleFilterTest extends TestCase
     }
 
     /** @test */
+    public function it_can_use_topic_id()
+    {
+        factory(Article::class)->create(['title'=>'article', 'topic_id' => $this->rootTopic->id]);
+        $this->assertCount(1,$this->filter->forTopic($this->rootTopic->id)->get()->content());
+    }
+
+
+    /** @test */
     public function it_get_articles_of_all_children_topics()
     {
+        $topic1 = factory(Topic::class)->create(['title' => 'topic1','parent_topic_id' => null]);
         $topic2 = factory(Topic::class)->create(['title' => 'topic2','parent_topic_id' => $this->rootTopic->id]);
         $topic3 = factory(Topic::class)->create(['title' => 'topic3','parent_topic_id' => $this->rootTopic->id]);
+        factory(Article::class)->create(['title'=>'a0', 'topic_id' => $topic1->id]);
         factory(Article::class)->create(['title'=>'a1', 'topic_id' => $this->rootTopic->id]);
         factory(Article::class)->create(['title'=>'a2', 'topic_id' => $topic2->id]);
         factory(Article::class)->create(['title'=>'a3', 'topic_id' => $topic3->id]);
@@ -56,12 +66,27 @@ class ArticleFilterTest extends TestCase
     /** @test */
     public function it_can_filter_for_several_topic_id()
     {
+        $topic1 = factory(Topic::class)->create(['title' => 'topic1','parent_topic_id' => $this->rootTopic->id]);
         $topic2 = factory(Topic::class)->create(['title' => 'topic2','parent_topic_id' => $this->rootTopic->id]);
         $topic3 = factory(Topic::class)->create(['title' => 'topic3','parent_topic_id' => $this->rootTopic->id]);
+        factory(Article::class)->create(['title'=>'a0', 'topic_id' => $topic1->id]);
         factory(Article::class)->create(['title'=>'a1', 'topic_id' => $topic2->id]);
         factory(Article::class)->create(['title'=>'a2', 'topic_id' => $topic2->id]);
         factory(Article::class)->create(['title'=>'a3', 'topic_id' => $topic3->id]);
         $this->assertCount(3,$this->filter->forTopic([$topic2, $topic3])->get()->content());
+    }
+
+    /** @test */
+    public function it_can_filter_for_several_topic_id_passed_as_array_of_int()
+    {
+        $topic1 = factory(Topic::class)->create(['title' => 'topic1','parent_topic_id' => $this->rootTopic->id]);
+        $topic2 = factory(Topic::class)->create(['title' => 'topic2','parent_topic_id' => $this->rootTopic->id]);
+        $topic3 = factory(Topic::class)->create(['title' => 'topic3','parent_topic_id' => $this->rootTopic->id]);
+        factory(Article::class)->create(['title'=>'a0', 'topic_id' => $topic1->id]);
+        factory(Article::class)->create(['title'=>'a1', 'topic_id' => $topic2->id]);
+        factory(Article::class)->create(['title'=>'a2', 'topic_id' => $topic2->id]);
+        factory(Article::class)->create(['title'=>'a3', 'topic_id' => $topic3->id]);
+        $this->assertCount(3,$this->filter->forTopic([$topic2->id, $topic3->id])->get()->content());
     }
 
     /** @test */
@@ -195,6 +220,9 @@ class ArticleFilterTest extends TestCase
         $this->assertArrayHasKey('authors', $result->filters());
         $this->assertArrayHasKey('years', $result->filters());
         $this->assertArrayHasKey('regions', $result->filters());
+        $this->assertArrayHasKey('content_types', $result->filters());
+        $this->assertArrayHasKey('topics', $result->filters());
+        $this->assertArrayHasKey('organisations', $result->filters());
     }
 
     /** @test */

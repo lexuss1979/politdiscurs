@@ -17,6 +17,7 @@ use App\Topic;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use PhpOffice\PhpWord\Reader\ODText\Content;
+use stdClass;
 
 class ServiceController extends Controller
 {
@@ -58,29 +59,31 @@ class ServiceController extends Controller
     private function createInnerTopics(){
         $inner = Topic::create([
             'title' => "Международные отношения",
-            'parent_topic_id' => null
+            'parent_topic_id' => null,
+            'code' => Topic::INNER_CODE
         ]);
         $this->addTopics($inner->id,[
-            ["Государство","Kollage_007.png","rgba(188, 108, 80, 0.25);"],
-            ["Политика и экономика","Kollage_008.png","rgba(114, 176, 79, 0.25);"],
-            ["Гражданское общество","Kollage_011.png","rgba(159, 145, 139, 0.25);"],
-            ["Демократия и выборы","Kollage_009.png","rgba(176, 157, 79, 0.25);"],
-            ["Федерализм и регионы","Kollage_010.png","rgba(176, 79, 94, 0.25);"],
-            ["Культура и идеология","Kollage_012.png","rgba(176, 123, 79, 0.25);"],
+            ["Государство","Kollage_007.png","#bc6c50","#da7144",7],
+            ["Политика и экономика","Kollage_008.png","#72b04f","#8fac6a",8],
+            ["Гражданское общество","Kollage_011.png","#9f918b","#635441",11],
+            ["Демократия и выборы","Kollage_009.png","#b09d4f","#b3934d",9],
+            ["Федерализм и регионы","Kollage_010.png","#b04f5e","#c68e89",10],
+            ["Культура и идеология","Kollage_012.png","#b07b4f","#b7713a",12],
         ]);
     }
     private function createOuterTopics(){
         $outer = Topic::create([
-            'title' => "Международные отношения",
-            'parent_topic_id' => null
+            'title' => "Внутренняя политика",
+            'parent_topic_id' => null,
+            'code' => Topic::OUTER_CODE
         ]);
         $this->addTopics($outer->id,[
-            ["Миропорядок","Kollage_001.png","rgba(181, 130, 165, 0.25);"],
-            ["Международная безопасность","Kollage_003.png","rgba(79, 176, 153, 0.25);"],
-            ["Внешняя политика России","Kollage_004.png","rgba(107, 79, 176, 0.25);"],
-            ["История международных отношений","Kollage_005.png","rgba(162, 162, 162, 0.25);"],
-            ["Международные организации","Kollage_002.png","rgba(79, 106, 176, 0.25);"],
-            ["Теория межденародных отношений","Kollage_006.png","rgba(79, 156, 176, 0.25);"],
+            ["Миропорядок","Kollage_001.png","#b582a5","#b498a6",1],
+            ["Международная безопасность","Kollage_003.png","#4fb099","#73aba2",3],
+            ["Внешняя политика России","Kollage_004.png","#6b4fb0","#887da7",4],
+            ["История международных отношений","Kollage_005.png","#a2a2a2","#a29f9c",5],
+            ["Международные организации","Kollage_002.png","#4f6ab0","#8ea8c2",2],
+            ["Теория межденародных отношений","Kollage_006.png","#4f9cb0","#71aab9",6],
         ]);
     }
 
@@ -91,6 +94,8 @@ class ServiceController extends Controller
                 'parent_topic_id' => $parentId,
                 'img' => $item[1],
                 'bgcolor' => $item[2],
+                'menu_bgcolor' =>$item[3],
+                'code'=> $item[4]
             ]);
         }
     }
@@ -139,8 +144,15 @@ class ServiceController extends Controller
         $this->log = new Logger('import');
         $this->log->pushHandler(new StreamHandler($path.'/import.log', Logger::ERROR));
         $this->importInnerPolitics();
-        $this->importOuterPolitics();
+//        $this->importOuterPolitics();
 
+    }
+    public function importOut()
+    {
+        $path = "/Users/aleksejafanasev/Documents/Projects/Politics";
+        $this->log = new Logger('import');
+        $this->log->pushHandler(new StreamHandler($path.'/import.log', Logger::ERROR));
+        $this->importOuterPolitics();
     }
 
 
@@ -151,7 +163,28 @@ class ServiceController extends Controller
     }
 
 
+    public function tt()
+    {
+        $data = $this->getTopics(null);
+        return $data;
+    }
+
+    private function getTopics($id){
+        return Topic::orderBy('parent_topic_id')->orderBy('id')->select(['id','title','menu_bgcolor as bgcolor','parent_topic_id as parent'])->get();
 
 
-
+        $data = [];
+        $topics = Topic::where('parent_topic_id',$id)->get();
+        foreach ($topics as $topic){
+            $td = new stdClass();
+            $td->id = $topic->id;
+            $td->title = $topic->title;
+            $td->bgcolor = $topic->menu_bgcolor;
+            if($topic->hasChildren()){
+                $td->children = $this->getTopics($topic->id);
+            }
+            $data[] = $td;
+        }
+        return $data;
+    }
 }

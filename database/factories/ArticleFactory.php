@@ -5,11 +5,8 @@
 use App\Article;
 use App\ContentType;
 use App\File;
-use App\Organisation;
-use App\Region;
 use App\Source;
 use App\Topic;
-use App\Author;
 use Faker\Generator as Faker;
 
 $factory->define(Article::class, function (Faker $faker) {

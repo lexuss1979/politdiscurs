@@ -16,8 +16,6 @@
 </head>
 <body>
 <div class="main-wrapper" id="app">
-    <div class="bg-wrapper-left"></div>
-    <div class="bg-wrapper-right"></div>
     <div class="bg-wrapper-overlay"></div>
     <div class="page-wrapper">
         <header>
@@ -159,5 +157,10 @@
 
 </div>
     <script src="/js/app.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.bg-wrapper-overlay').height($(document).height());
+        });
+    </script>
 </body>
 </html>

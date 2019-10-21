@@ -1,0 +1,31 @@
+.pagination {
+    height: 32px;
+    display: flex;
+    margin: auto;
+    .btn-prev,  .btn-next {
+        background: url('/img/layout/strela-down-list.svg');
+        width: 32px;
+        height: 32px;
+        cursor:pointer;
+
+    }
+    .btn-prev { transform: rotate(90deg);}
+    .btn-next { transform: rotate(-90deg); }
+
+    .current{
+        background-color: rgba(224, 224, 224, 0.63);
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        color: #666666;
+        line-height: 31px;
+    }
+    .comment{
+        height: 37px;
+        font-size: 16px;
+        line-height: 31px;
+        color: rgba(0, 0, 0, 0.54);
+    }
+}

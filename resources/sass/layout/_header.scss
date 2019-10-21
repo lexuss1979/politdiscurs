@@ -14,4 +14,29 @@ header{
         font-size: 24px;
         font-weight: 500;
     }
+
+}
+
+.topic{
+    header{
+        padding: 68px 140px 80px 140px;
+    }
+    h1{
+        padding-top: 23px;
+        font-size: 36px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+    h2{
+        padding-top: 25px;
+        font-size: 19px;
+        font-weight: 500;
+    }
+    .main-topic{
+        height: 37px;
+        object-fit: contain;
+        font-size: 24px;
+        font-weight: 500;
+        color: #ffffff;
+    }
 }

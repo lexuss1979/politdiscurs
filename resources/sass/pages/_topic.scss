@@ -1,0 +1,37 @@
+.topic{
+
+    .content-block__sidebar{
+        section{
+            border-bottom:solid 1px #4e360d47;
+
+        }
+    }
+
+
+    .filters{
+        .themes{
+            padding-top: 20px;
+        }
+
+        .chbox{
+            margin-right: 7px;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            li{
+                list-style: none;
+                padding: 11px 0;
+                span{
+                    display: inline-block;
+                    max-width: 80%;
+                    vertical-align: top;
+                    color: rgba(0, 0, 0, 0.59);
+                }
+            }
+        }
+
+
+
+    }
+}

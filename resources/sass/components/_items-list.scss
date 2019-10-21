@@ -1,0 +1,73 @@
+.items-list{
+
+    .item{
+
+        position: relative;
+        display: flex;
+        padding: 21px;
+        &__img{
+            flex: 132px;
+            padding: 3px;
+        }
+        &__text{
+            flex: 100%;
+            padding: 0 22px;
+
+        }
+        &__header{
+            display: inline-block;
+            width: 649px;
+            min-height: 66px;
+            font-family: Roboto;
+            font-size: 22px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1;
+            letter-spacing: normal;
+            color: rgba(0, 0, 0, 0.78);
+
+            & > a{
+                color: rgba(0, 0, 0, 0.78);
+            }
+        }
+
+        .author_year{
+            font-family: Roboto;
+            height: 27px;
+            font-size: 17px;
+            color: rgba(0, 0, 0, 0.42);
+        }
+        &__desc{
+            font-family: Georgia;
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.06;
+            letter-spacing: normal;
+            color: rgba(0, 0, 0, 0.53);
+
+
+
+        }
+
+
+        &.folded{
+            .item__desc{
+                max-height: 80px;
+                overflow: hidden;
+            }
+
+           .fold-btn{
+                content: url('/img/layout/strela-down-list.svg');
+                width: 32px;
+                height: 32px;
+                position: absolute;
+                bottom: 0;
+                right: 8px;
+                cursor:pointer;
+            }
+        }
+    }
+}

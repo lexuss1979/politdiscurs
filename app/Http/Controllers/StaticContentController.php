@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class StaticContentController extends Controller
+class StaticContentController extends BaseController
 {
 
     /**
@@ -22,16 +22,16 @@ class StaticContentController extends Controller
      */
     public function about()
     {
-        return ['page' => '/about'];
+        return view('pages.about');
     }
 
     /**
      * @route /authors
      * @return array
      */
-    public function authors()
+    public function contributors()
     {
-        return ['page' => '/authors'];
+        return view('pages.contributors');
     }
 
     /**
@@ -40,6 +40,6 @@ class StaticContentController extends Controller
      */
     public function partners()
     {
-        return ['page' => '/partners'];
+        return view('pages.partners');
     }
 }

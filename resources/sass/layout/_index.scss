@@ -1,35 +1,20 @@
 .main-wrapper{
     width:100%;
     display: flex;
-    .bg-wrapper-left{
-        background-image: url('/img/layout/kollage-1600-int.jpg');
-        background-size: 1314px;
-        background-position: -503px 0;
-        width: 50%;
-        height: 2758px;
-        opacity: 0.76;
-    }
-    .bg-wrapper-right{
-        background-image: url('/img/layout/kollage-1600-rus.jpg');
-        background-size: 1400px;
-        background-position: 1400px 0;
-        width: 50%;
-        height: 2758px;
-        opacity: 0.76;
-    }
+
     .bg-wrapper-overlay{
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         opacity: 0.25;
-        height: 2758px;
+        min-height: 1676px;
     }
     .page-wrapper{
         display: block;
         min-width: 1200px;
         max-width: 1200px;
-        min-height: 2758px;
+        //min-height: 2758px;
         box-shadow: 0 2px 11px 0 rgba(0, 0, 0, 0.5);
         background-color: #d8d8d8;
         position: absolute;
@@ -41,3 +26,4 @@
 @import "header";
 @import "footer";
 @import "content";
+@import "topics";

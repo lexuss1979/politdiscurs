@@ -1,0 +1,42 @@
+.search-panel{
+    background-color: #fff;
+    padding: 31px 60px 5px 60px;
+    border-bottom: solid 2px #4e360d47;
+    #search-input{
+        width: 704px;
+        margin-right: 37px;
+    }
+    .std-btn{
+        width: 106px;
+    }
+
+    .options-subheader{
+        font-size: 15px;
+        line-height: 2.27;
+        color: rgba(0, 0, 0, 0.59);
+    }
+    .search-options{
+        padding-top:10px;
+    }
+    .close-btn{
+        display: block;
+        margin: auto;
+        width: 322px;
+        height: 37px;
+        font-size: 14px;
+        line-height: 37px;
+        text-align: center;
+        color: #c6913c;
+
+        &::after{
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            content: url('/img/layout/send-ico-light.svg');
+            transform: rotate(180deg);
+            line-height: 24px;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+    }
+}

@@ -2,3 +2,10 @@ HTML, BODY{
     font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased !important;
 }
+BODY{
+    background-image: url(/img/layout/main-bg.jpg);
+    background-position: bottom;
+    background-repeat: repeat-y;
+}
+
+

@@ -6,6 +6,7 @@ use App\Article;
 use App\Author;
 use App\ContentType;
 use App\File;
+use App\Magazine;
 use App\Organisation;
 use App\Region;
 use App\Source;
@@ -150,4 +151,58 @@ class ArticleTest extends TestCase
         $this->assertEquals($fileName, $file->filename);
         $file->delete();
     }
+
+    /** @test */
+    public function it_returns_correct_route()
+    {
+        $art = factory(Article::class)->create(['file_id' => null]);
+        $this->assertEquals(config('app.url').'/articles/'.$art->id, $art->route());
+
+    }
+
+    /** @test */
+    public function it_return_imgSrc()
+    {
+
+        $artWithImg = factory(Article::class)->create([
+            'img' => 'my-file.jpg'
+         ]);
+        $this->assertEquals(config('app.url').'/storage/img/my-file.jpg', $artWithImg->imgSrc());
+        $artWithoutImg = factory(Article::class)->create([
+            'img' => null
+        ]);
+        $this->assertEquals(config('app.url').'/'.config('content.article-default-img'), $artWithoutImg->imgSrc());
+    }
+
+    /** @test
+     * @dataProvider articleTitles
+     */
+    public function it_can_return_letter($title, $letter)
+    {
+        $art = factory(Article::class)->create(['title' =>  $title]);
+        $this->assertEquals($letter, $art->letter());
+    }
+
+    public function articleTitles(){
+        return [
+            ['Статья о мишке', 'С'],
+            ['"Статья о мишке"', 'С'],
+            ["'Статья о мишке", 'С'],
+            ["'А эта статья начинается на А", 'А'],
+        ];
+    }
+
+
+    /** @test */
+    public function it_can_belongs_to_magazine()
+    {
+        $mag = factory(Magazine::class)->create();
+        $art1 = factory(Article::class)->create(['magazine_id' => $mag->id]);
+        $this->assertInstanceOf(Magazine::class, $art1->magazine);
+        $this->assertTrue($art1->magazine->is($mag));
+    }
+
+
+
+
 }

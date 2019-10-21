@@ -4,7 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -80,5 +82,20 @@ class Article extends Model
         $file = File::add($path, $title);
         $this->file_id = $file->id;
         $this->save();
+    }
+
+    public function route(){
+        return Route('articles',['article' => $this->id]);
+    }
+
+    public function imgSrc()
+    {
+        return isset($this->img) ? config('app.url').'/storage/img/'.$this->img : config('app.url') .'/'.config('content.article-default-img');
+    }
+
+    public function letter()
+    {
+        preg_match('/^\W*?(\w)/mu',$this->title,$matches);
+        return $matches[1];
     }
 }

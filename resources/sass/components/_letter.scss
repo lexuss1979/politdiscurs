@@ -1,0 +1,44 @@
+.letter {
+    display:none;
+    width: 132px;
+    height: 179px;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.5);
+    background: #4a90e2;
+
+    & > span{
+        position: absolute;
+        top: 65px;
+        left: 42px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        line-height: 100px;
+        background: rgba(255, 255, 255, 0.2);
+        font-size: 72px;
+        font-weight: normal;
+        text-align: center;
+        font-family: Roboto;
+        color: white;
+
+    }
+
+    &.style-1{ background-color: #577EB1;}
+    &.style-2{ background-color: #625D7D;}
+    &.style-3{ background-color: #8F7D5F;}
+    &.style-4{ background-color: #356766;}
+    &.style-5{ background-color: #7F807B;}
+    &.style-6{ background-color: #72b04f;}
+    &.style-7{ background-color: #b09d4f;}
+    &.style-8{ background-color: #b07b4f;}
+    &.style-9{ background-color: #b04f5e;}
+}
+
+
+.letters{
+    .letter {
+        display:block;
+    }
+    .item__img img{
+        display: none;
+    }
+}
