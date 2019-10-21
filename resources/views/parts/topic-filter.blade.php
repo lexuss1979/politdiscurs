@@ -28,11 +28,11 @@
         </section>
         <section>
             <label class="bold">Авторы:</label>
-            <advanced-select resetable v-model="authors" @input="change"></advanced-select>
-        </section>
+            <advanced-select resetable v-model="authors" filterable @input="change"></advanced-select>
+        </section>e
         <section>
             <label class="bold">Организация:</label>
-            <advanced-select resetable v-model="organisations" @input="change"></advanced-select>
+            <advanced-select resetable search-type="contains" filterable  v-model="organisations" @input="change"></advanced-select>
 
         </section>
         <section>

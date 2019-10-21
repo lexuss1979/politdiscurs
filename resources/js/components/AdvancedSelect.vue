@@ -4,9 +4,9 @@
         <div class="select-container">
             <div :class="['active-text', { 'has-value': hasSelectedItem , 'resetable':this.resetable !== undefined}]">
                 <span v-text="this.activeText" @click="openDropdown" :title="this.activeText"></span>
-                <input class="filter-input" ref="filterInput" v-model="filter" v-show="isDropdownOpen"></input>
+                <input class="filter-input" ref="filterInput" v-model="filter" v-show="filterInputVisible"></input>
                 <div class="reset-btn" @click="reset"></div>
-                <div :class="['open-btn',{'opened': isDropdownOpen}]"  @click="openDropdown"></div>
+                <div :class="['open-btn',{'opened': isDropdownOpen}]"  @click="toggleDropdown"></div>
             </div>
             <div class="dropdown" ref="dropdown" v-show="isDropdownOpen" v-cloak>
                 <div class="dropdown-list">
@@ -20,15 +20,19 @@
 
 <script>
     let Vue = require('vue');
+    const SEARCH_ANY = 'contains';
+    const SEARCH_START = 'start';
     const NOT_DEFINED = -1;
     export default {
         name: "AdvancedSelect",
-        props: ['placeholder','resetable','value'],
+        props: ['placeholder','resetable','value','searchType','filterable'],
         data(){
             return {
                 placeholderText: 'Выберите',
                 isDropdownOpen: false,
                 filter:'',
+                filterableProp: this.filterable !== undefined,
+                searchTypeProp: this.searchType !== undefined && this.searchType === SEARCH_ANY ? SEARCH_ANY : SEARCH_START,
             }
         },
         mounted(){
@@ -60,6 +64,13 @@
             closeDropdown(){
                 this.isDropdownOpen = false;
             },
+            toggleDropdown(){
+                if(this.isDropdownOpen) {
+                    this.closeDropdown();
+                } else {
+                    this.openDropdown();
+                }
+            }
         },
         computed:{
             hasSelectedItem(){
@@ -79,9 +90,19 @@
             filteredItems(){
                 if(this.filter == '') return this.value;
                 let needle = this.filter.toLowerCase();
-                return this.value.filter((item) => {
-                   return item.title.toLowerCase().search(needle) > -1;
-                });
+                function startBy(item){
+                    return item.title.toLowerCase().search(needle) === 0;
+                }
+                function contains(item){
+                    return item.title.toLowerCase().search(needle) > -1;
+                }
+                return this.value.filter(this.searchTypeProp === SEARCH_ANY ? contains : startBy);
+
+
+            },
+            filterInputVisible(){
+                console.log('1',this.filterableProp,this.isDropdownOpen);
+                return this.filterableProp && this.isDropdownOpen;
             }
         }
     }
