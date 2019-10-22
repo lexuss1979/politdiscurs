@@ -28,10 +28,11 @@
                 </section>
                 <div class="content-block__main-body">
                     <div class="items-list {{ config('content.show-letter-placeholder') ?  'letters' : ''}}">
-                        @empty($results)
+                        @if( count($results) == 0)
                             <p class="nothing-found">По вашему запросу "{{$query}}" ничего не найдено</p>
-                        @endempty
-                        @each('parts.article-list-item', $results, 'article')
+                        @else
+                            @each('parts.article-list-item', $results, 'article')
+                        @endif
                     </div>
                 </div>
             </div>

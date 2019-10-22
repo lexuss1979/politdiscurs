@@ -41,7 +41,7 @@ class Search extends Model
             ->where('search.text','like', "%{$searhStr}%")
             ->select('articles.*')
             ->get();
-        $data = new PaginatedCollection($results,$this->perPage, $this->currentPage);
+        $data = new PaginatedCollection($results,$this->perPage, $this->currentPage, $this->baseUrl);
         return new ContentCollection($data,[]);
     }
 

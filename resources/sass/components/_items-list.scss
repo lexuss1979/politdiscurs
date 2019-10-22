@@ -37,6 +37,43 @@
             }
         }
 
+        .article-topics {
+            display:none;
+            height: 37px;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.13;
+            letter-spacing: normal;
+            color: #8b572a;
+
+            a,span {
+                font-size: 15px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.13;
+                letter-spacing: normal;
+                color: #8b572a;
+                &.root{
+                    text-transform: uppercase;
+                }
+                &:after{
+                    content:'>';
+                    display: inline-block;
+                    padding: 0 10px;
+                }
+            }
+            a:last-child{
+                &:after{
+                    content:'';
+                }
+            }
+
+        }
+
         .author_year{
             font-family: Roboto;
             height: 27px;
@@ -74,5 +111,10 @@
                 cursor:pointer;
             }
         }
+    }
+}
+.search-results{
+    .article-topics{
+        display: block !important;
     }
 }

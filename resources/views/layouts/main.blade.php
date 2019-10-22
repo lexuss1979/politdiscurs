@@ -11,7 +11,7 @@
     <!-- Compiled and minified CSS -->
 
     <title>Document</title>
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
 </head>
 <body>

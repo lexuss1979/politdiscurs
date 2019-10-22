@@ -70,4 +70,27 @@ class TopicTest extends \Tests\TestCase
         $this->assertTrue(in_array($topic2->id, $childrenArr));
         $this->assertTrue(in_array($topic3->id, $childrenArr));
     }
+
+    /** @test */
+    public function it_can_detect_if_its_root()
+    {
+        $rootTopic = factory(Topic::class)->create(['parent_topic_id' => null]);
+        $childrenTopic = factory(Topic::class)->create(['parent_topic_id' => $rootTopic->id]);
+        $this->assertTrue($rootTopic->isRoot());
+        $this->assertFalse($childrenTopic->isRoot());
+    }
+
+    /** @test */
+    public function it_can_return_full_topic_path()
+    {
+        $rootTopic = factory(Topic::class)->create(['parent_topic_id' => null]);
+        $childrenTopic = factory(Topic::class)->create(['parent_topic_id' => $rootTopic->id]);
+        $children2Topic = factory(Topic::class)->create(['parent_topic_id' => $childrenTopic->id]);
+        $path = $children2Topic->path();
+        $this->assertIsArray($path);
+        $this->assertCount(3,$path);
+        $this->assertEquals(['route'=> $rootTopic->route(),'title'=>$rootTopic->title],$path[0]);
+        $this->assertEquals(['route'=> $childrenTopic->route(),'title'=>$childrenTopic->title],$path[1]);
+        $this->assertEquals(['route'=> $children2Topic->route(),'title'=>$children2Topic->title],$path[2]);
+    }
 }

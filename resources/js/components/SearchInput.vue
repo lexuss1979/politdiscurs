@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <div class="container">
-            <input type="text" :placeholder="placeholder" class="search-input" v-model="searchStr">
+            <input type="text" :placeholder="placeholder" class="search-input" v-model="searchStr" @keydown.enter="doSearch">
             <div class="search-btn" @click="doSearch"></div>
         </div>
     </div>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Topic extends Model
 {
@@ -65,5 +66,29 @@ class Topic extends Model
 
     public function getChildrenIdArray(){
         return $this->children()->pluck('id')->toArray();
+    }
+
+    public function route()
+    {
+        if($this->isRoot()) return false;
+        return  $this->hasChildren() ? route('topic',['topic' => $this->id]) : $this->parent()->route().'?topics[]='.$this->id ;
+    }
+
+    public function isRoot(){
+        return is_null($this->parent_topic_id);
+    }
+
+    public function path()
+    {
+        return Cache::rememberForever('topic_path_'.$this->id, function () {
+            if($this->isRoot()){
+                return [[ 'route' => $this->route(), 'title' => $this->title]];
+            } else {
+                $parentPath = $this->parent()->path();
+                return  array_merge($parentPath, [[ 'route' => $this->route(), 'title' => $this->title]]);
+            }
+        });
+
+
     }
 }

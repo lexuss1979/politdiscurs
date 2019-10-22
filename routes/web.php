@@ -59,7 +59,7 @@ Route::get('/magazines/{magazine}','MagazineController@show')->name('magazine-it
  * TopicController
  * /topic/id -рубрика + фильтры и страницы - ?filter&page
  */
-Route::get('/topics/{topic}','TopicController@show');
+Route::get('/topics/{topic}','TopicController@show')->name('topic');
 
 
 
