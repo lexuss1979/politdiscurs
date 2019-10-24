@@ -33,6 +33,7 @@ import RadioButtonGroup from './components/RadioButtonGroup.vue';
 import SearchInput from './components/SearchInput.vue';
 import MainMenu from './components/MainMenu.vue';
 import TopicFilters from './components/TopicFilters.vue';
+import BookFilter from './components/BookFilter.vue';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -42,7 +43,7 @@ import TopicFilters from './components/TopicFilters.vue';
 
 const app = new Vue({
     el: '#app',
-    components:{MainMenu, AdvancedSelect, CheckBox, CheckBoxGroup, RadioButton, RadioButtonGroup, SearchInput, SelectOption, TopicFilters},
+    components:{BookFilter, MainMenu, AdvancedSelect, CheckBox, CheckBoxGroup, RadioButton, RadioButtonGroup, SearchInput, SelectOption, TopicFilters},
     methods:{
         doSearch(searchStr) {
             window.location.href='/search?q='+searchStr;

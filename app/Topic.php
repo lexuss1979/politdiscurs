@@ -91,4 +91,23 @@ class Topic extends Model
 
 
     }
+
+    public static function getAllTopicsList(){
+        return Cache::rememberForever('ALL_TOPICS_LIST', function () {
+            return self::getList();
+        });
+    }
+
+    protected static function getList($parentTopicId = null, $level = 1){
+       $result = [];
+       $topics = Topic::where('parent_topic_id',$parentTopicId)->get();
+       foreach ($topics as $topic){
+           $result[] = ['id' => $topic->id, 'title'=> $topic->title, 'level'=>$level, 'parent' => $topic->parent_topic_id];
+           if($topic->hasChildren()){
+               $childrenList = self::getList($topic->id, $level+1);
+               $result = array_merge($result, $childrenList);
+           }
+       }
+       return $result;
+    }
 }

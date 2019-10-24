@@ -40,8 +40,7 @@ Route::get('/','MainPageController@index');
  * /books - книги  + фильтры и страницы - ?filter&page
  * /books/id - карточка книги
  */
-Route::get('/books','BookController@index');
-Route::get('/books/{book}','BookController@show');
+Route::get('/books/{topic?}','BookController@index');
 
 
 

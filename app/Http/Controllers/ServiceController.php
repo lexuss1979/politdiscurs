@@ -40,15 +40,13 @@ class ServiceController extends Controller
         Region::refreshFilterData($filters['regions']);
         Source::refreshFilterData($filters['sources']);
 
-        ContentType::truncate();
-        ContentType::create(['code' => ContentType::ARTICLE, 'name' => 'Статьи']);
-        ContentType::create(['code' => ContentType::BOOK, 'name' => 'Книги']);
-        ContentType::create(['code' => ContentType::DOCUMENT, 'name' => 'Документы']);
-        ContentType::create(['code' => ContentType::INFOGRAPHICS, 'name' => 'Инфографика']);
+        $this->createContentTypes();
 
 
         return Response(['result' => $filters['authors']]);
     }
+
+
 
 
     public function createTopics(){
@@ -196,5 +194,13 @@ class ServiceController extends Controller
         foreach ($articles as $article){
             $search->addToIndex($article);
         }
+    }
+
+    public function createContentTypes(): void
+    {
+        ContentType::create(['code' => ContentType::ARTICLE, 'name' => 'Статьи']);
+        ContentType::create(['code' => ContentType::BOOK, 'name' => 'Книги']);
+        ContentType::create(['code' => ContentType::DOCUMENT, 'name' => 'Документы']);
+        ContentType::create(['code' => ContentType::INFOGRAPHICS, 'name' => 'Инфографика']);
     }
 }

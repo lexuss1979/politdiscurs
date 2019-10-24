@@ -62,6 +62,11 @@ class TopicController extends BaseController
             $query->forTopic($topics);
         }
 
+        if(request('types') !== null){
+            $types = array_map(function($item){return (int)$item;},request()->input('types'));
+            $query->ofTypes($types);
+        }
+
          $data = $query->get()->asArray();
          $vueDataGenerator = new VueFilterDataGenerator(request(), $data['filters']);
          $data['filters'] = $vueDataGenerator->getJSON();

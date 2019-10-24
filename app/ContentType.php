@@ -19,7 +19,23 @@ class ContentType extends FilterModel
     }
 
     public static function getId($type){
-        $type = self::where('code',$type)->get()->first();
-        return $type ? $type->id : null;
+        $contentType = self::where('code',$type)->get()->first();
+        return $contentType ? $contentType->id : null;
+    }
+
+    public static function bookTypeID(){
+       return self::getId(self::BOOK);
+    }
+
+    public static function articleTypeID(){
+        return self::getId(self::ARTICLE);
+    }
+
+    public static function documentTypeID(){
+        return self::getId(self::DOCUMENT);
+    }
+
+    public static function infographicsTypeID(){
+        return self::getId(self::INFOGRAPHICS);
     }
 }

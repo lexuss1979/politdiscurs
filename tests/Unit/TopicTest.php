@@ -93,4 +93,17 @@ class TopicTest extends \Tests\TestCase
         $this->assertEquals(['route'=> $childrenTopic->route(),'title'=>$childrenTopic->title],$path[1]);
         $this->assertEquals(['route'=> $children2Topic->route(),'title'=>$children2Topic->title],$path[2]);
     }
+
+
+    /** @test */
+    public function it_can_return_full_topics_list_with_levels(){
+        $topic1 = Topic::create(['title' => 'First Topic', 'parent_topic_id' => null]);
+        $topic2 = Topic::create(['title' => 'Second Topic', 'parent_topic_id' => $topic1->id]);
+        $topic3 = Topic::create(['title' => 'Third Topic', 'parent_topic_id' => $topic2->id]);
+        $topics = Topic::getAllTopicsList();
+        $this->assertIsArray($topics);
+        $this->assertEquals(['id'=>$topic1->id,'title'=>$topic1->title, 'level' => 1, 'parent' => null], $topics[0]);
+        $this->assertEquals(['id'=>$topic2->id,'title'=>$topic2->title, 'level' => 2, 'parent' => $topic1->id], $topics[1]);
+        $this->assertEquals(['id'=>$topic3->id,'title'=>$topic3->title, 'level' => 3, 'parent' => $topic2->id], $topics[2]);
+    }
 }
