@@ -32,21 +32,19 @@ class TopicController extends BaseController
         $query = $filter->forTopic($topic->id)
             ->withPaging(config('content.articles-per-page'), $currPage)
             ->withLinks($url);
-        if(request('sort') !== null){
-            switch (request('sort') ){
-                case 2:
-                    $query->orderByAuthor();
-                    break;
+        switch (request('sort') ){
+            case 2:
+                $query->orderByAuthor();
+                break;
 
-                case 3:
-                    $query->orderByYear();
-                    break;
+            case 3:
+                $query->orderByYear();
+                break;
 
-                case 1:
-                    $query->orderByTitle();
-                    break;
+            default:
+                $query->orderByTitle();
+                break;
 
-            }
         }
         if(request('author') !== null){
             $query->forAuthor(Author::find((int)request('author')));

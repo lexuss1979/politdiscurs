@@ -2,11 +2,16 @@
     height: 32px;
     display: flex;
     margin: auto;
+    justify-content: flex-end;
     .btn-prev,  .btn-next {
         background: url('/img/layout/strela-down-list.svg');
         width: 32px;
         height: 32px;
         cursor:pointer;
+        &.disabled{
+            cursor:default;
+            opacity:0.5;
+        }
 
     }
     .btn-prev { transform: rotate(90deg);}
@@ -29,3 +34,4 @@
         color: rgba(0, 0, 0, 0.54);
     }
 }
+

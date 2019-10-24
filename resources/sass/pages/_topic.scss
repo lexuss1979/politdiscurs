@@ -3,7 +3,9 @@
     .content-block__sidebar{
         section{
             border-bottom:solid 1px #4e360d47;
-
+            &:last-child{
+                border-bottom: 0;
+            }
         }
     }
 
@@ -11,6 +13,10 @@
     .filters{
         .themes{
             padding-top: 20px;
+        }
+
+        button.reset{
+            margin-top: 40px;
         }
 
         .chbox{

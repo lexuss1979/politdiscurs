@@ -4,6 +4,7 @@ namespace Tests\Acceptance;
 
 use App\Article;
 use App\Magazine;
+use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MagazinesPageTest extends \Tests\TestCase
@@ -68,6 +69,14 @@ class MagazinesPageTest extends \Tests\TestCase
         $responsePage2->assertSee('<a href="'.$itemFromPage2->route().'">');
 
 
+    }
+
+    /** @test */
+    public function it_can_parse_DOM()
+    {
+        $crawler = new Crawler($this->response->content());
+        $this->assertCount(2,$crawler->filter('h1'));
+        $this->assertCount(config('content.magazines-per-page'),$crawler->filter('div.tile'));
     }
 
 

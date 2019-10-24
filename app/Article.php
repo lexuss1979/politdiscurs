@@ -4,9 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -97,5 +95,16 @@ class Article extends Model
     {
         preg_match('/^\W*?(\w)/mu',$this->title,$matches);
         return $matches[1];
+    }
+
+    public function breadcrumbs()
+    {
+        $breadcrumbs  = [];
+        $path = $this->topic->path();
+        foreach ($path as $topic){
+            $breadcrumbs[] = ['link' => $topic['route'], 'title' => $topic['title']];
+        }
+        $breadcrumbs[] = ['link' => $this->route(), 'title' => $this->title];
+        return $breadcrumbs;
     }
 }

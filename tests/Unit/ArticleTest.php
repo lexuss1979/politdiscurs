@@ -202,7 +202,21 @@ class ArticleTest extends TestCase
         $this->assertTrue($art1->magazine->is($mag));
     }
 
+    /** @test */
+    public function it_can_return_bread_crumbs()
+    {
+        $rootTopic = factory(Topic::class)->create(['parent_topic_id' => null ]);
+        $targetTopic = factory(Topic::class)->create(['parent_topic_id' => $rootTopic->id]);
+        $childTopic = factory(Topic::class)->create([ 'parent_topic_id' => $targetTopic->id]);
 
+        $article = factory(Article::class)->create(['topic_id'=>$childTopic->id]);
+        $bc = $article->breadcrumbs();
+        $this->assertIsArray($bc);
+        foreach ($bc as $bcItem){
+            $this->assertArrayHasKey('link', $bcItem);
+            $this->assertArrayHasKey('title', $bcItem);
+        }
+    }
 
 
 

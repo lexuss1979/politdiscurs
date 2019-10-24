@@ -102,7 +102,7 @@ class ServiceController extends Controller
     }
 
     protected function importInnerPolitics(){
-        $INNER_TOPIC_ID = 1;
+        $INNER_TOPIC_ID = (Topic::where('code',Topic::INNER_CODE)->first())->id;
         $path = "/Users/aleksejafanasev/Documents/Projects/Politics/Inner/";
         $file = "01_Внутренняя политика.xlsx";
         $dispatcher = new ImportDispatcher($path);
@@ -112,7 +112,7 @@ class ServiceController extends Controller
     }
 
     protected function importOuterPolitics(){
-        $OUTER_TOPIC_ID = 2;
+        $OUTER_TOPIC_ID = (Topic::where('code',Topic::OUTER_CODE)->first())->id;
         $path = "/Users/aleksejafanasev/Documents/Projects/Politics/Outer/";
         $file = "02_Международная политика.xlsx";
         $dispatcher = new ImportDispatcher($path);

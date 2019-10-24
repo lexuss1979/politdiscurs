@@ -8,19 +8,13 @@
 
 
 @section('page-wrapper-class')
-    article-item topic-{{$article->topic->code}}
+    article-item topic topic-{{$article->topic->parent()->code}}
 @stop
 
 @section('content')
     <main class="content-page">
         @include('parts.main-menu')
-        @include('parts.sub-nav-line', ['breadcrumbs' => [
-            ['link' => '/', 'title' => 'Главная'],
-            ['link' => null, 'title' => $article->topic->parent()->title],
-            ['link' => 'topics/'.$article->topic->id, 'title' => $article->topic->title],
-            ['link' => 'articles/'.$article->id, 'title' => $article->title],
-
-        ]])
+        @include('parts.sub-nav-line', ['breadcrumbs' => $article->breadcrumbs()])
 
 
         <div class="content-block">

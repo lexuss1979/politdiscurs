@@ -40,6 +40,9 @@
             height: 37px;
             line-height: 37px;
             color: rgba(0, 0, 0, 0.59);
+            &::placeholder {
+                color: rgba(0, 0, 0, 0.18);
+            }
             &:focus{
                 outline: none;
             }

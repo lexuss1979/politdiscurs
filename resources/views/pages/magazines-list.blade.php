@@ -8,7 +8,6 @@
     <main class="content-page">
         @include('parts.main-menu')
         @include('parts.sub-nav-line', [ 'breadcrumbs' => [
-            ['link' => '/', 'title' => 'Главная'],
             ['link' => 'magazines/', 'title' => 'Журналы']
         ]])
 
@@ -32,5 +31,6 @@
                 </div>
             </div>
         </div>
+        @include('parts.sub-nav-line', ['class'=>'bottom'])
     </main>
 @stop

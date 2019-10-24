@@ -8,7 +8,6 @@
     <main class="content-page">
         @include('parts.main-menu')
         @include('parts.sub-nav-line', ['breadcrumbs' => [
-            ['link' => '/', 'title' => 'Главная'],
             ['link' => route('magazines'), 'title' => 'Журналы'],
             ['link' => route('magazine-item',['magazine' => $magazine->id]), 'title' => $magazine->name],
 
@@ -25,12 +24,12 @@
                     <img title="{{$magazine->name}}" src="{{$magazine->imgSrc()}}" alt="">
                 </section>
                 <section  class="magazine-item__link">
-                    <label class="bold">Сайт журнала</label>
+                    <label class="bold">Сайт журнала:</label>
                     <a href="{{$magazine->link}}" class="external-link">{{$magazine->link}}</a>
                 </section>
                 @if( isset($more) && sizeof($more) >0)
                 <section class="magazine-item__more">
-                    <label class="bold">Журналы</label>
+                    <label class="bold">Журналы:</label>
                     <ul>
                         @foreach($more as $item)
                             <li><a href="{{$item->route()}}" class="inner-link" data-count="{{$loop->index+1}}">{{$item->name}}</a></li>

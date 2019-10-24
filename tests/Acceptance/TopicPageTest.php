@@ -41,7 +41,8 @@ class TopicPageTest extends \Tests\TestCase
 
         $this->pageCount = 3;
         $this->articlesCount = (config('content.articles-per-page')* ($this->pageCount-1)) + 1;
-        $this->articles = factory(Article::class,$this->articlesCount)->create(['topic_id'=>$this->childTopics[0]]);
+        factory(Article::class,$this->articlesCount)->create(['topic_id'=>$this->childTopics[0]]);
+        $this->articles = Article::orderBy('title')->get();
 
         $this->url = 'topics/'.$this->targetTopic->id;
         $this->response = $this->get($this->url);
@@ -105,7 +106,7 @@ class TopicPageTest extends \Tests\TestCase
     /** @test */
     public function it_contains_filter_data()
     {
-        $this->response->assertSee('let data = {"authors":');
+        $this->response->assertSee('return {"authors":');
     }
 
 }

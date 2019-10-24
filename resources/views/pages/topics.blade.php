@@ -14,7 +14,6 @@
     <main class="content-page">
         @include('parts.main-menu')
         @include('parts.sub-nav-line', ['paging' => $data['paging'] , 'breadcrumbs' => [
-            ['link' => '/', 'title' => 'Главная'],
             ['link' => null, 'title' => $topic->parent()->title],
             ['link' => 'topics/'.$topic->id, 'title' => $topic->title],
 
@@ -32,7 +31,9 @@
                         @each('parts.article-list-item', $data['content'], 'article')
                     </div>
                 </div>
+                @include('parts.sub-nav-line', ['paging' => $data['paging'],'class' => 'bottom' ])
             </div>
         </div>
+
     </main>
 @stop

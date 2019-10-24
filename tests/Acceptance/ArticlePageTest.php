@@ -43,7 +43,7 @@ class ArticlePageTest extends TestCase
     /** @test */
     public function it_has_correct_header()
     {
-        $this->response->assertSee('article-item topic-'.$this->topic->code);
+        $this->response->assertSee('article-item topic topic-'.$this->topic->code);
         $this->response->assertSee('<h1>'.$this->topic->title .'</h1>');
         $this->response->assertSee('<div class="main-topic">'.$this->topic->parent()->title.'</div>');
         $this->response->assertSee('<h2>'.config('content.default_H2').'</h2>');

@@ -2,7 +2,7 @@
     <div class="main-menu-wrapper" @mouseleave="closeMenu">
         <div class="main-menu">
             <div v-for="rootItem in rootTopics()" class="root-menu">
-                <span @mouseover="showLevel2(rootItem.id)" :class="['main-menu-btn',{'active':rootItem.id==level1activeId}]">{{rootItem.title}}</span>
+                <span @click="showLevel2(rootItem.id)" :class="['main-menu-btn',{'active':rootItem.id==level1activeId}]">{{rootItem.title}}</span>
             </div>
         </div>
         <div class="sub-menu-wrapper">

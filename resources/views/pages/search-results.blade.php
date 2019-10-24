@@ -8,7 +8,6 @@
     <main class="content-page">
         @include('parts.main-menu')
         @include('parts.sub-nav-line', ['breadcrumbs' => [
-            ['link' => '/', 'title' => 'Главная'],
             ['link' => null, 'title' => 'Результаты поиска']
         ]])
 
