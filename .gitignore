@@ -14,3 +14,5 @@ yarn-error.log
 !/notes.txt
 /notes.txt
 !/storage/app/public/img/
+/public/css/app.css
+/public/js/app.js
