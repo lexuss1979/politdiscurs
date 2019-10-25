@@ -113,12 +113,11 @@ class VueFilterDataGenerator
      */
     protected function attachContentTypes(array $data): array
     {
-        $ALL_TYPES = 'ALL_TYPES';
         if (isset($this->filters['content_types'])) {
-            $selected = $this->request->get('types') ?? $ALL_TYPES;
+            $selected = $this->request->get('types') ?? [];
             $ctypes = ContentType::select('id', 'name as title')->find($this->filters['content_types'])->toArray();
             foreach ($ctypes as $key => $ctype) {
-                $ctypes[$key]['on'] = $selected == $ALL_TYPES ||  in_array($ctype['id'],$selected) ;
+                $ctypes[$key]['on'] = in_array($ctype['id'],$selected) ;
             }
             $data['content_types'] = $ctypes;
         }

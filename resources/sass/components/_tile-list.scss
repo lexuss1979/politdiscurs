@@ -2,7 +2,8 @@
     padding: 30px 63px;
     min-height: 800px;
     .tile{
-        padding: 44px 43px;
+        padding: 44px 5px;
+        text-align: center;
         a{
             text-decoration: none !important;
             &:hover{
@@ -11,6 +12,8 @@
         }
         img {
             display: block;
+            margin: auto;
+            width: 160px;
             max-width: 100%;
             box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.5);
         }

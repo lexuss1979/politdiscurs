@@ -16,13 +16,16 @@ abstract class FilterModel extends Model
             static::getOrCreate($item);
         }
     }
-    public static function getOrCreate($value){
+    public static function getOrCreate($value, $params = []){
         $obj = static::where(static::keyField(),$value)->get()->first();
         if($obj) return $obj;
 
-        $obj = static::create([
-            static::keyField() => $value
-        ]);
+        $data = [ static::keyField() => $value ];
+        foreach ($params as $key => $val){
+            $data[$key] = $val;
+        }
+
+        $obj = static::create($data);
         return $obj;
     }
     abstract protected static function keyField();

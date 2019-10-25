@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" d="M8 1h8.328a5 5 0 0 1 3.224 1.178l6.672 5.626A5 5 0 0 1 28 11.627V26a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V6a5 5 0 0 1 5-5z" opacity=".6"/>
+        <path stroke="#666" d="M6.5 27.5h18V11.8l-8.486-7.3H6.5v23z"/>
+        <path stroke="#666" stroke-linecap="round" d="M15.5 5v8.5h8.963"/>
+        <text fill="#666" font-family="Roboto-Bold, Roboto" font-size="8" font-weight="bold">
+            <tspan x="8.5" y="23">PDF</tspan>
+        </text>
+    </g>
+</svg>

@@ -8,4 +8,8 @@
     text-align: center;
     color: rgba(255, 255, 255, 0.88);
     vertical-align: middle;
+
+    &:focus{
+        outline: none !important;
+    }
 }

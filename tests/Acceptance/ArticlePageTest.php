@@ -26,6 +26,7 @@ class ArticlePageTest extends TestCase
         $this->author = factory(Author::class)->create();
         $this->article = factory(Article::class)->create([
             'title' => 'Super article title',
+            'format' => Article::TEXT_TYPE,
             'topic_id' => $this->topic->id,
             'file_id' => null,
             'authors_string' => $this->author->fio
@@ -86,6 +87,16 @@ class ArticlePageTest extends TestCase
     public function it_show_publishing_year()
     {
         $this->response->assertSee('<div class="year">'.$this->article->year.'</div>');
+    }
+
+    /** @test */
+    public function it_has_more_articles_block()
+    {
+        $this->response->assertDontSee('<section class="article-item__more">'); //is hidden bc only one article exists
+
+        factory(Article::class)->create(['topic_id'=>$this->article->topic_id]);
+        $this->response = $this->get($this->article->route());
+        $this->response->assertSee('<section class="article-item__more">'); //visible
     }
 
 

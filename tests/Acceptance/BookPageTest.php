@@ -48,7 +48,11 @@ class BookPageTest extends \Tests\TestCase
         $this->pageCount = 3;
         $this->articlesCount = (config('content.articles-per-page')* ($this->pageCount-1)) + 1;
 
-        factory(Article::class,$this->articlesCount)->create(['topic_id'=>$this->childTopics[0],'content_type_id' => ContentType::bookTypeID()]);
+        factory(Article::class,$this->articlesCount)->create([
+            'topic_id'=>$this->childTopics[0],
+            'format' => Article::PDF_TYPE,
+            'content_type_id' => ContentType::bookTypeID()
+        ]);
         $this->books = Article::orderBy('title')->get();
 
         $this->url = 'books/'.$this->targetTopic->id;

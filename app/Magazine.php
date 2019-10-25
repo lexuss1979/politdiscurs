@@ -10,7 +10,7 @@ class Magazine extends Model
 
     public function articles()
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Article::class)->orderBy('title');
     }
 
     public function route(){

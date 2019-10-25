@@ -19,6 +19,25 @@ use mysql_xdevapi\Exception;
 class ImportItem
 {
     private $data;
+    const NUM_INDEX = 0;
+    const TITLE_INDEX = 1;
+    const FORMAT_INDEX = 2;
+    const TOPIC3_INDEX = 3;
+    const ANNOTATION_INDEX = 4;
+    const AUTHOR_INDEX = 5;
+    const SOURCE_INDEX = 6;
+    const ORG_LINK_INDEX = 7;
+    const ORG_INDEX = 8;
+    const LINK_INDEX = 9;
+    const YEAR_INDEX = 10;
+    const REGION_INDEX = 11;
+    const FILENAME_INDEX = 12;
+    const COVER_FILENAME_INDEX = 13;
+    const MAGAZINE_LINK_INDEX = 14;
+    const IS_BOOK_INDEX = 15;
+    const COMMENT_INDEX = 16;
+    const TOPIC2_INDEX = 17;
+    const TOPIC1_INDEX = 18;
     // 0 - №
     // 1 - Название
     // 2 - Формат произведения
@@ -46,22 +65,22 @@ class ImportItem
 
     public function number()
     {
-        return $this->data[0];
+        return $this->data[self::NUM_INDEX];
     }
 
     public function parent_topic()
     {
-        return $this->data[18];
+        return $this->data[self::TOPIC1_INDEX];
     }
 
     public function name()
     {
-        return $this->data[1];
+        return $this->data[self::TITLE_INDEX];
     }
 
     public function fileType()
     {
-        return $this->data[2];
+        return $this->data[self::FORMAT_INDEX];
     }
 
     public function contentType(){
@@ -71,27 +90,27 @@ class ImportItem
 
     public function topic()
     {
-        return $this->data[3];
+        return $this->data[self::TOPIC3_INDEX];
     }
 
     public function annotation()
     {
-        return $this->data[4] . '';
+        return $this->data[self::ANNOTATION_INDEX] . '';
     }
 
     public function authors()
     {
-        return $this->extractItemFromString($this->data[5]);
+        return $this->extractItemFromString($this->data[self::AUTHOR_INDEX]);
     }
 
     public function source()
     {
-        return $this->data[6];
+        return $this->data[self::SOURCE_INDEX];
     }
 
     public function link()
     {
-        return $this->data[7];
+        return $this->data[self::ORG_LINK_INDEX];
     }
 
     public function organizations()
@@ -99,44 +118,44 @@ class ImportItem
         return $this->extractItemFromString($this->data[8]);
     }
 
-    public function article_link()
+    public function articleLink()
     {
-        return $this->data[9];
+        return $this->data[self::LINK_INDEX];
     }
 
     public function year()
     {
-        return $this->data[10];
+        return $this->data[self::YEAR_INDEX];
     }
 
     public function regions()
     {
-        return $this->extractItemFromString($this->data[11]);
+        return $this->extractItemFromString($this->data[self::REGION_INDEX]);
     }
 
     public function file()
     {
-        return $this->data[12];
+        return $this->data[self::FILENAME_INDEX];
     }
 
     public function cover()
     {
-        return $this->data[13];
+        return $this->data[self::COVER_FILENAME_INDEX];
     }
 
     public function magazineLink()
     {
-        return $this->data[14];
+        return $this->data[self::MAGAZINE_LINK_INDEX];
     }
 
     public function isBook()
     {
-        return $this->data[15];
+        return $this->data[self::IS_BOOK_INDEX];
     }
 
     public function comment()
     {
-        return $this->data[16];
+        return $this->data[self::COMMENT_INDEX];
     }
 
     public function getFullFileName(){
@@ -190,13 +209,13 @@ class ImportItem
             if(isset($magazine->id))  $magazineId = $magazine->id;
         }
 
-        $source = Source::getOrCreate($this->source());
+        $source = Source::getOrCreate($this->source(), ['link'=>$this->link()]);
         $article = Article::create([
             'title' => $this->name(),
             'format' => (int)$this->fileType(),
             'annotation' => $this->annotation(),
             'source_id' => $source->id,
-            'link' => $this->link(),
+            'link' => $this->articleLink(),
             'year' => $this->year(),
             'img' => $this->cover(),
             'authors_string' => implode(', ', $this->authors()),
@@ -242,5 +261,16 @@ class ImportItem
             $arr[$key] = trim($val);
         }
         return $arr;
+    }
+
+    public function format(){
+        $formats = [
+            'pdf' => Article::PDF_TYPE,
+            'doc' => Article::TEXT_TYPE,
+            'link' => Article::LINK_TYPE
+        ];
+        if(!in_array($this->fileType(), array_keys($formats) )) throw  new \Exception('unrecognized item format: '. $this->fileType());
+        return $formats[$this->fileType()];
+
     }
 }

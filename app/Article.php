@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 class Article extends Model
 {
 
+    const TEXT_TYPE = '1';
+    const PDF_TYPE = '2';
+    const LINK_TYPE = '3';
+
     protected $guarded = [];
     public function authors()
     {
@@ -83,7 +87,13 @@ class Article extends Model
     }
 
     public function route(){
+        if($this->format == self::LINK_TYPE ) return $this->externalUrl();
         return Route('articles',['article' => $this->id]);
+    }
+
+    protected function externalUrl(){
+        if(strpos($this->link, 'https://') > -1) return $this->link;
+        return 'http://' . str_replace('http://','',$this->link);
     }
 
     public function imgSrc()
@@ -106,5 +116,32 @@ class Article extends Model
         }
         $breadcrumbs[] = ['link' => $this->route(), 'title' => $this->title];
         return $breadcrumbs;
+    }
+
+    public function formatCode()
+    {
+        $codes = [
+            self::TEXT_TYPE => 'text',
+            self::PDF_TYPE => 'pdf',
+            self::LINK_TYPE => 'link',
+        ];
+        if(!in_array($this->format, array_keys($codes))) return $codes[self::TEXT_TYPE];
+
+        return $codes[$this->format];
+    }
+
+    public function moreArticles()
+    {
+        return self::where('topic_id', $this->topic_id)
+            ->where('id','<>',$this->id)
+            ->orderBy('title')
+            ->limit(config('content.more-article-count'))
+            ->get();
+
+    }
+
+    public function openInNewTab()
+    {
+        return in_array($this->format,[self::LINK_TYPE, self::PDF_TYPE]);
     }
 }

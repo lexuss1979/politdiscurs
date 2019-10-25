@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <g fill="none" fill-rule="evenodd">
+        <g fill="#FFF" opacity=".6">
+            <path d="M8 1h15a5 5 0 0 1 5 5v20a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V6a5 5 0 0 1 5-5z"/>
+            <path d="M12 15h15a5 5 0 0 1 0 10H12a5 5 0 0 1 0-10z"/>
+        </g>
+        <path stroke="#666" d="M6.5 27.5h18v-23h-18v23z"/>
+        <path fill="#666" d="M9.823 8H9v1h1V8h-.184M13.823 8H13v1h1V8h-.184M17.823 8H17v1h1V8h-.184"/>
+        <path fill="#FFF" d="M24 15h1v10h-1z"/>
+        <path stroke="#666" stroke-linecap="square" d="M6.5 12.5h18"/>
+        <text fill="#666" font-family="Roboto-Bold, Roboto" font-size="8" font-weight="bold">
+            <tspan x="8.5" y="23">WWW</tspan>
+        </text>
+    </g>
+</svg>

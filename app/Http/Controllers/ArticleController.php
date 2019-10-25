@@ -24,8 +24,8 @@ class ArticleController extends BaseController
 
             return Response::make($fileContents, 200, array('Content-Type' => 'application/pdf'));
         }
-
-        return view('pages.article',compact('article'));
+        $more = $article->moreArticles();
+        return view('pages.article',compact('article','more'));
     }
 
 

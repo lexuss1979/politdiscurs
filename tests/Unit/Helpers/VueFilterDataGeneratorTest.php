@@ -123,7 +123,7 @@ class VueFilterDataGeneratorTest extends TestCase
             $this->assertArrayHasItem([
                 'id' => $ctype->id,
                 'title' => $ctype->name,
-                'on' => true], $arr['content_types']);
+                'on' => false], $arr['content_types']);
         }
 
         $request = new Request([

@@ -203,4 +203,15 @@ class ServiceController extends Controller
         ContentType::create(['code' => ContentType::DOCUMENT, 'name' => 'Документы']);
         ContentType::create(['code' => ContentType::INFOGRAPHICS, 'name' => 'Инфографика']);
     }
+
+
+    public function updateContentFormat(){
+        $articles = Article::all();
+        foreach ($articles as $article){
+            if($article->file !== null){
+                $article->format = Article::PDF_TYPE;
+                $article->save();
+            }
+        }
+    }
 }

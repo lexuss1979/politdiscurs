@@ -21,13 +21,27 @@
             <div class="content-block__sidebar">
                 <section class="article-item__img"><img src="{{$article->imgSrc()}}"></section>
                 <section>
-                    <label>Авторы:</label>
+                    <label class="bold">Авторы:</label>
                     <div class="authors">{{$article->authors_string}}</div>
                 </section>
                 <section>
-                    <label>Год издания:</label>
+                    <label class="bold">Год издания:</label>
                     <div class="year">{{$article->year}}</div>
                 </section>
+                <section>
+                    <label class="bold">Источник:</label>
+                    <div class="source"><a target="_blank" href="{{$article->source->link}}">{{$article->source->name}}</a></div>
+                </section>
+                @if( isset($more) && sizeof($more) >0)
+                    <section class="article-item__more">
+                        <label class="bold">Смотри также:</label>
+                        <ul>
+                            @foreach($more as $item)
+                                <li><a @if($item->openInNewTab())target="_blank"@endif href="{{$item->route()}}" class="inner-link" data-count="{{$loop->index+1}}">{{$item->title}}</a></li>
+                            @endforeach
+                        </ul>
+                    </section>
+                @endif
             </div>
             <div class="content-block__main">
                 <div class="content-block__main-header">

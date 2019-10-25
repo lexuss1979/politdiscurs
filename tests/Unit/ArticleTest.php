@@ -155,8 +155,26 @@ class ArticleTest extends TestCase
     /** @test */
     public function it_returns_correct_route()
     {
-        $art = factory(Article::class)->create(['file_id' => null]);
+        $art = factory(Article::class)->create(['format' => Article::TEXT_TYPE,'file_id' => null]);
         $this->assertEquals(config('app.url').'/articles/'.$art->id, $art->route());
+
+        $art->format = Article::PDF_TYPE;
+        $art->file_id = 1;
+        $art->save();
+        $this->assertEquals(config('app.url').'/articles/'.$art->id, $art->route());
+
+        $art->format = Article::LINK_TYPE;
+        $art->link = 'www.somedomain.com';
+        $art->save();
+        $this->assertEquals('http://www.somedomain.com', $art->route());
+
+        $art->link = 'http://www.somedomain.com';
+        $art->save();
+        $this->assertEquals('http://www.somedomain.com', $art->route());
+
+        $art->link = 'https://www.somedomain.com';
+        $art->save();
+        $this->assertEquals('https://www.somedomain.com', $art->route());
 
     }
 
@@ -218,6 +236,50 @@ class ArticleTest extends TestCase
         }
     }
 
+
+    /** @test */
+    public function it_can_return_format_code()
+    {
+        $article = factory(Article::class)->create();
+        $article->format = Article::LINK_TYPE;
+        $article->save();
+        $this->assertEquals('link', $article->formatCode());
+    }
+
+    /** @test */
+    public function it_can_return_more_articles()
+    {
+        $topic = factory(Topic::class)->create();
+        $articles = factory(Article::class, 3)->create(['topic_id' => $topic->id]);
+        $more = $articles[0]->moreArticles();
+        $this->assertCount(2,$more);
+
+        $this->assertInstanceOf(Article::class, $more[0]);
+    }
+
+    /** @test */
+    public function it_has_limit_count_of_more_articles()
+    {
+        $maxMoreArticlesCount = config('content.more-article-count');
+        $topic = factory(Topic::class)->create();
+        $articles = factory(Article::class, $maxMoreArticlesCount + 2)->create(['topic_id' => $topic->id]);
+        $more = $articles[0]->moreArticles();
+        $this->assertCount($maxMoreArticlesCount,$more);
+    }
+
+    /** @test */
+    public function it_has_open_in_new_tab_method()
+    {
+        $art = new Article();
+        $art->format = Article::PDF_TYPE;
+        $this->assertTrue($art->openInNewTab());
+
+        $art->format = Article::TEXT_TYPE;
+        $this->assertFalse($art->openInNewTab());
+
+        $art->format = Article::LINK_TYPE;
+        $this->assertTrue($art->openInNewTab());
+    }
 
 
 }

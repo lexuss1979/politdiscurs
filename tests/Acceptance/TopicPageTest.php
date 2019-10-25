@@ -6,6 +6,7 @@ namespace Tests\Acceptance;
 use App\Article;
 use App\Topic;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Symfony\Component\DomCrawler\Crawler;
 
 class TopicPageTest extends \Tests\TestCase
 {
@@ -41,7 +42,7 @@ class TopicPageTest extends \Tests\TestCase
 
         $this->pageCount = 3;
         $this->articlesCount = (config('content.articles-per-page')* ($this->pageCount-1)) + 1;
-        factory(Article::class,$this->articlesCount)->create(['topic_id'=>$this->childTopics[0]]);
+        factory(Article::class,$this->articlesCount)->create(['topic_id'=>$this->childTopics[0], 'format' => Article::PDF_TYPE]);
         $this->articles = Article::orderBy('title')->get();
 
         $this->url = 'topics/'.$this->targetTopic->id;
@@ -109,4 +110,66 @@ class TopicPageTest extends \Tests\TestCase
         $this->response->assertSee('return {"authors":');
     }
 
+    /** @test */
+    public function items_has_all_attributes()
+    {
+
+        $article = $this->articles[0];
+        $article->authors_string = 'Test Authors';
+        $article->img = 'file_name_ABC.jpg';
+        $article->format = Article::TEXT_TYPE;
+        $article->annotation = 'Example annotation for article';
+        $article->save();
+        $this->refreshResponse();
+        $crawler = new Crawler($this->response->content());
+
+        $testingItem = $crawler->filter('.item[data-id="'.$article->id.'"]');
+        $this->assertCount(1,$testingItem);
+
+        $img = $testingItem->filter('.item__img  img');
+        $this->assertCount(1,$img, 'Img was not found in item block');
+        $this->assertStringContainsString($article->img, $img->attr('src'), 'Incorrect img src attribute');
+
+        $headerLink = $testingItem->filter('.item__text > .item__header');
+        $this->assertCount(1,$headerLink, '.item__header  element was not found in item block');
+        $this->assertEquals($article->title, $headerLink->text(), 'Incorrect item header');
+
+        $authors = $testingItem->filter('.item__text > .author');
+        $this->assertCount(1,$authors, '.author  element was not found in item block');
+        $this->assertStringContainsString($article->authors_string, $authors->text(),'Incorrect authors in item block' );
+
+        $year = $testingItem->filter('.item__text > .year');
+        $this->assertCount(1,$year, '.year  element was not found in item block');
+        $this->assertStringContainsString($article->year, $year->text(), 'Incorrect year in item block');
+
+        $annotation = $testingItem->filter('.item__text > .item__desc');
+        $this->assertCount(1,$year,'.item__desc  element was not found in item block');
+        $this->assertStringContainsString($article->annotation, $annotation->text(), 'Incorrect annotation in item block');
+
+
+        $typeIcon = $testingItem->filter('.item__text > .item-type');
+        $this->assertCount(1,$typeIcon,'Type-icon was not found in item block');
+
+        $typeIcon = $testingItem->filter('.item__text > .item-type.type-text');
+        $this->assertCount(1,$typeIcon,'incorrect Type-icon  in item block');
+
+
+    }
+
+
+//    /** @test */
+//    public function items_has_correct_link()
+//    {
+//        $article = $this->articles[0];
+//        $article->format = Article::TEXT_TYPE;
+//        $article->save();
+//        $this->refreshResponse();
+//        $crawler = new Crawler($this->response->content());
+//
+//        $testingItem = $crawler->filter('.item[data-id="'.$article->id.'"]');
+//        $this->assertCount(1,$testingItem);
+//
+//        $headerLink = $testingItem->filter('.item__text > .item__header');
+//        $this->assertEquals($article->title, $headerLink->attr(['']), 'Incorrect item header');
+//    }
 }

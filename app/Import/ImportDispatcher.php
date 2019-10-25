@@ -194,11 +194,11 @@ class ImportDispatcher
     }
 
     private function checkItemLink(ImportItem $item){
-        if($item->article_link() !== ''){
+        if($item->articleLink() !== ''){
             $client = new Client();
             try {
-                var_dump('checking '. $item->article_link());
-                $response = $client->request('GET', $item->article_link());
+                var_dump('checking '. $item->articleLink());
+                $response = $client->request('GET', $item->articleLink());
             } catch (GuzzleException $e) {
                 return false;
             }

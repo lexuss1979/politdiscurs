@@ -13,14 +13,15 @@ return [
     'default_H1' =>'Внутренняя политика России и международная политика',
     'default_H2' =>'Онлайн библиотека книг, статей, докладов, документов',
 
-    'articles-per-page' => 10,
-    'magazines-per-page' => 12,
-    'magazines-in-more-block' => 100,
+    'articles-per-page' => ENV('ARTICLES_PER_PAGE',10),
+    'magazines-per-page' => ENV('MAGAZINES_PER_PAGE',16),
+    'magazines-in-more-block' => ENV('MAGAZINES_IN_MORE_BLOCK',100),
 
-    'search-results-per-page' => 20,
+    'search-results-per-page' => ENV('SEARCH_RESULTS_PER_PAGE',20),
 
-    'article-default-img' => '/img/layout/item-placeholder.svg',
-    'show-letter-placeholder' => ENV('LETTER_PLACEHOLDER',false)
+    'article-default-img' => ENV('ARTICLE_DEFAULT_PLACEHOLDER','/img/layout/item-placeholder.svg'),
+    'show-letter-placeholder' => ENV('LETTER_PLACEHOLDER',false),
+    'more-article-count' => ENV('MORE_ARTICLE_COUNT',10),
 
 
 ];

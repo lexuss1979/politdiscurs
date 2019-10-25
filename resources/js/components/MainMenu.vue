@@ -370,6 +370,7 @@
         width: 1200px;
         left: 0;
         z-index: 100;
+        box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.5);
     }
     .sub-menu{
         position: relative;
@@ -414,6 +415,9 @@
 
             }
         }
+        .level-2{
+            text-transform: uppercase;
+        }
         .level-3{
             position: absolute;
             width: 650px;
@@ -444,6 +448,7 @@
 
         &.left{
             .level-2{
+
                 .arrow:after{
 
                     transition: 0.3s ease-in-out;
