@@ -101,7 +101,6 @@
 
             },
             filterInputVisible(){
-                console.log('1',this.filterableProp,this.isDropdownOpen);
                 return this.filterableProp && this.isDropdownOpen;
             }
         }

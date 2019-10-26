@@ -12,7 +12,7 @@
                 @endif
             @endforeach
            </div>
-        <div class="author">@if(strpos($article->authors_string, ','))Авторы@elseАвтор@endif: {{$article->authors_string}}</div>
+        <div class="author">@php if(strpos($article->authors_string, ',')){echo 'Авторы'; } else {echo 'Автор'; }@endphp: {{$article->authors_string}}</div>
         <div class="year">Год издания: {{$article->year}}</div>
         <p class="item__desc">{{$article->annotation}}</p>
         <div class="item-type type-{{$article->formatCode()}}"></div>

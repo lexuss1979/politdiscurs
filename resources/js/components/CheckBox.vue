@@ -10,10 +10,6 @@
     export default {
         name: "CheckBox",
         props: ['value'],
-        data(){
-            return {
-            }
-        },
         methods:{
             toggle(){
                 this.$emit('input', !this.value);

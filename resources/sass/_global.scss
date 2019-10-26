@@ -6,6 +6,14 @@ BODY{
     background-image: url(/img/layout/main-bg.jpg);
     background-position: bottom;
     background-repeat: repeat-y;
+    &.var1{
+        background-image: url(/img/layout/main-bg.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: top;
+        background-size: 150%;
+        //background-size: cover;
+    }
 }
 
 

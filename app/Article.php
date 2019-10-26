@@ -144,4 +144,12 @@ class Article extends Model
     {
         return in_array($this->format,[self::LINK_TYPE, self::PDF_TYPE]);
     }
+
+
+    public function scopeBooks($query)
+    {
+        return $query->where('content_type_id', ContentType::bookTypeID());
+    }
 }
+
+

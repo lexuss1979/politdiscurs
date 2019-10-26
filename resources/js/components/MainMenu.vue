@@ -38,12 +38,11 @@
                 this.level1activeId = null;
             },
             convertHex: function (color,opacity) {
-                color = color.replace('#', '')
-                let r = parseInt(color.substring(0, 2), 16)
-                let g = parseInt(color.substring(2, 4), 16)
-                let b = parseInt(color.substring(4, 6), 16)
-                let result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity / 100 + ')'
-                return result
+                color = color.replace('#', '');
+                let r = parseInt(color.substring(0, 2), 16);
+                let g = parseInt(color.substring(2, 4), 16);
+                let b = parseInt(color.substring(4, 6), 16);
+                return 'rgba(' + r + ',' + g + ',' + b + ',' + opacity / 100 + ')';
             },
             showLevel2(id){
                 this.subMenuType =  id !== this.leftRootTopicID ?'right':'left';
@@ -57,9 +56,7 @@
                 this.level3bgcolor = bgc;
             },
             rootTopics(){
-              let rt =  this.getChildren(null);
-                console.log(rt);
-                return rt;
+                return this.getChildren(null);
             },
             getChildren(id){
                 return this.items.filter((item) => {
@@ -433,7 +430,6 @@
             }
 
             .line{
-                font-family: Roboto;
                 font-size: 14px;
                 line-height: 2.5;
                 letter-spacing: normal;

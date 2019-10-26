@@ -53,7 +53,6 @@
                 if(url.indexOf('?') > -1){
                     url = url.substr(0,url.indexOf('?'));
                 }
-                // alert(url+this.getQueryString());
                 window.location.href=url+this.getQueryString();
             },
             getFilters(){
@@ -67,7 +66,7 @@
             },
             getQueryString(){
                 let query = this.getSortStr() + this.getTopicsStr() + this.getAuthorsStr() + this.getOrgStr()+this.getContentTypeStr()+this.getRegStr();
-                return  query !='' ? '?' + query.substr(1) : '';
+                return  query !== '' ? '?' + query.substr(1) : '';
             },
             getSortStr(){
               let sort = this.sorts.find((item) => {return item.on});

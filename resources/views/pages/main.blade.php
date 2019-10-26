@@ -58,12 +58,28 @@
         <section class="media-examples magazines">
             <h2>Журналы</h2>
             <img src="../img/layout/temp/carousel1.jpg">
-            <button class="std-btn">Посмотреть все (16)</button>
+            <button class="std-btn">Посмотреть все ({{$magazinesCount}})</button>
+        </section>
+        <section class="media-examples magazines">
+            <h2>Журналы</h2>
+            <div class="carousel-wrapper">
+                <div class="left-btn"></div>
+                <div class="carousel-container">
+                    <div class="carousel">
+                        @foreach($magazines as $mag)
+                            <div class="carousel-item" onclick="enlarge('.magazines',{{$mag->id}});" data-mgid="{{$mag->id}}" data-url="{{$mag->route()}}"><div><img src="{{$mag->imgSrc()}}"><span>{{$mag->name}}</span></div></div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="right-btn"></div>
+            </div>
+
+            <button class="std-btn">Посмотреть все ({{$magazinesCount}})</button>
         </section>
         <section class="media-examples books">
             <h2>Книги</h2>
             <img src="../img/layout/temp/carousel2.jpg">
-            <button class="std-btn">Посмотреть все (156)</button>
+            <button class="std-btn">Посмотреть все ({{$booksCount}})</button>
         </section>
     </main>
 @endsection

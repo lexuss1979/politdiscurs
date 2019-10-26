@@ -12,9 +12,12 @@
 
     <title>Document</title>
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/materialized.css" rel="stylesheet">
+
 
 </head>
 <body>
+<script src="/js/materialize.min.js"></script>
 <div class="main-wrapper" id="app">
     <div class="bg-wrapper-overlay"></div>
     <div class="page-wrapper">
@@ -100,16 +103,22 @@
             </section>
             <section class="media-examples magazines">
 
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
 
 
                 <h2>Журналы</h2>
                 <div class="carousel">
-                    <a class="carousel-item" href="#one!"><img src="../img/layout/temp/j1.png"></a>
-                    <a class="carousel-item" href="#two!"><img src="../img/layout/temp/j1.png"></a>
-                    <a class="carousel-item" href="#three!"><img src="../img/layout/temp/j1.png"></a>
-                    <a class="carousel-item" href="#four!"><img src="../img/layout/temp/j1.png"></a>
-                    <a class="carousel-item" href="#five!"><img src="../img/layout/temp/j1.png"></a>
+                    <div class="carousel-item" onclick="enlarge('url');" data-url="article/1"><div><img src="../img/layout/temp/mag1.jpg"><span>Название</span></div></div>
+                    <div class="carousel-item" onclick="enlarge('url');" data-url="article/1"><div><img src="../img/layout/temp/mag1.jpg"><span>Название</span></div></div>
+                    <div class="carousel-item" onclick="enlarge('url');" data-url="article/1"><div><img src="../img/layout/temp/mag1.jpg"><span>Название</span></div></div>
+                    <div class="carousel-item" onclick="enlarge('url');" data-url="article/1"><div><img src="../img/layout/temp/mag1.jpg"><span>Название</span></div></div>
+                    <div class="carousel-item" onclick="enlarge('url');" data-url="article/1"><div><img src="../img/layout/temp/mag1.jpg"><span>Название</span></div></div>
+                    <div class="carousel-item" onclick="enlarge('url');" data-url="article/1"><div><img src="../img/layout/temp/mag1.jpg"><span>Название</span></div></div>
+                    <div class="carousel-item" onclick="enlarge('url');" data-url="article/1"><div><img src="../img/layout/temp/mag1.jpg"><span>Название</span></div></div>
+                    <div class="carousel-item" onclick="enlarge('url');" data-url="article/1"><div><img src="../img/layout/temp/mag1.jpg"><span>Название</span></div></div>
+
+
+
                 </div>
                 <button class="std-btn">Посмотреть все (16)</button>
             </section>
@@ -172,14 +181,24 @@
 
 
 <!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.carousel');
         var instances = M.Carousel.init(elems, {
-            numVisible:3
+            numVisible:7,
+            dist: -25,
+            padding: -10
         });
     });
+    function enlarge(url){
+        var elem = document.querySelector('.carousel-item.active');
+        if(elem.classList.contains('big')){
+            console.log('goto', elem.dataset.url);
+            window.location.href=elem.dataset.url;
+        }
+        elem.classList.add('big');
+    }
 </script>
 </body>
 </html>

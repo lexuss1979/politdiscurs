@@ -32,7 +32,7 @@ Route::get('/content/format','ServiceController@updateContentFormat');
  *  MainPageController
  * / - главная
  */
-Route::get('/','MainPageController@index');
+Route::get('/','MainPageController@index')->name('main');
 
 
 /**

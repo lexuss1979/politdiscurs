@@ -22,6 +22,8 @@ return [
     'article-default-img' => ENV('ARTICLE_DEFAULT_PLACEHOLDER','/img/layout/item-placeholder.svg'),
     'show-letter-placeholder' => ENV('LETTER_PLACEHOLDER',false),
     'more-article-count' => ENV('MORE_ARTICLE_COUNT',10),
+    'books-on-main-page' => ENV('BOOKS_ON_MAIN_PAGE',10),
+    'magazines-on-main-page' => ENV('MAGAZINES_ON_MAIN_PAGE',10),
 
 
 ];
