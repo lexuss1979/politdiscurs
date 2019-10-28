@@ -16,7 +16,7 @@
 
                 </div>
                 <div class="level-3"  v-if="level3.length>0">
-                    <div class="wrapper" :style="'background-color:' + convertHex(level3bgcolor,71) ">
+                    <div :class="['wrapper', {'sm': level3lowLineHeight}]" :style="'background-color:' + convertHex(level3bgcolor,71) ">
                         <div class="line"  v-for="item in level3" ><a :href="'topics/'+item.parent+'?topics[]='+item.id">{{item.title}}</a></div>
                     </div>
 
@@ -54,6 +54,7 @@
                 this.level2activeId = id;
                 this.level3 =  this.getChildren(id);
                 this.level3bgcolor = bgc;
+                this.level3lowLineHeight = parseInt(id) === 7;
             },
             rootTopics(){
                 return this.getChildren(null);
@@ -72,6 +73,7 @@
                 level2activeId: null,
                 level1activeId: null,
                 level3:[],
+                level3lowLineHeight: false,
                 leftRootTopicID: 8,
                 items: [
 
@@ -423,10 +425,18 @@
             opacity: 1 !important;
             background-color: #fff;
 
+
+
             .wrapper{
                 width: 100%;
                 height: 100%;
                 padding: 0 30px;
+
+                &.sm{
+                    .line{
+                        line-height: 2.25;
+                    }
+                }
             }
 
             .line{
