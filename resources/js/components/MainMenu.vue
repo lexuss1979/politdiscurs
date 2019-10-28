@@ -74,18 +74,19 @@
                 level1activeId: null,
                 level3:[],
                 level3lowLineHeight: false,
-                leftRootTopicID: 8,
+                leftRootTopicID: 1,
                 items: [
 
+
                     {
-                        "id": 8,
-                        "title": "Внутренняя политика",
+                        "id": 1,
+                        "title": "Международные отношения",
                         "bgcolor": null,
                         "parent": null
                     },
                     {
-                        "id": 1,
-                        "title": "Международные отношения",
+                        "id": 8,
+                        "title": "Внутренняя политика",
                         "bgcolor": null,
                         "parent": null
                     },
@@ -309,13 +310,13 @@
                         "id": 45,
                         "title": "Политические культуры",
                         "bgcolor": null,
-                        "parent": 7
+                        "parent":14
                     },
                     {
                         "id": 46,
                         "title": "Проблема политического насилия",
                         "bgcolor": null,
-                        "parent": 7
+                        "parent": 14
                     },
                     {
                         "id": 9,
@@ -391,7 +392,7 @@
 
                 .arrow{
                     display: inline-block;
-                    width: 250px;
+                    width: 270px;
                     height: 37px;
                     position: relative;
 
@@ -419,7 +420,7 @@
         }
         .level-3{
             position: absolute;
-            width: 650px;
+            width: 710px;
             top:0;
             height: 222px;
             opacity: 1 !important;
@@ -455,6 +456,9 @@
         &.left{
             .level-2{
 
+                .arrow{
+                    width: 300px !important;
+                }
                 .arrow:after{
 
                     transition: 0.3s ease-in-out;
@@ -469,7 +473,7 @@
                     right: -10px;
                 }
                 &  .line{
-                    padding-left: 167px;
+                    padding-left: 127px;
 
                     .arrow.active{
                         &:after{
@@ -490,21 +494,25 @@
                 text-align: right;
             }
             .level-2{
-                .arrow:before{
+                .arrow{
+                    width: 270px;
+                    &:before{
 
-                    transition: 0.3s ease-in-out;
-                    content: url("/img/layout/send-ico-light.svg");
-                    width: 16px;
-                    height: 16px;
-                    display: block;
-                    transform: rotate(90deg);
-                    padding: 2px;
-                    position: absolute;
-                    top: 10px;
-                    left: -20px;
+                        transition: 0.3s ease-in-out;
+                        content: url("/img/layout/send-ico-light.svg");
+                        width: 16px;
+                        height: 16px;
+                        display: block;
+                        transform: rotate(90deg);
+                        padding: 2px;
+                        position: absolute;
+                        top: 10px;
+                        left: -20px;
+                    }
                 }
+
                 &  .line{
-                    padding-left: 730px;
+                    padding-left: 770px;
                     text-align: left;
                     .arrow.active{
 

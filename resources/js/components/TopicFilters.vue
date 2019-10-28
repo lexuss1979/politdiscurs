@@ -21,10 +21,10 @@
         methods:{
             reset(){
                 this.topics.map((item,index) => {
-                    this.topics[index].on = true;
+                    this.topics[index].on = false;
                 });
                 this.content_types.map((item,index) => {
-                    this.content_types[index].on = true;
+                    this.content_types[index].on = false;
                 });
                 this.authors.map((item,index) => {
                     this.authors[index].on = false;
