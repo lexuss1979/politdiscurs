@@ -236,7 +236,7 @@ class ArticleFilter
         foreach ($topicsCollection as $topic){
             $topicsID[] = $topic->id;
             if($topic->hasChildren()){
-                $topicsID = array_merge($topicsID, $topic->getChildrenIdArray());
+                $topicsID = array_merge($topicsID, $topic->getChildrenIdArray(true));
             }
         }
         if(sizeof($topicsID) > 1){

@@ -15,6 +15,9 @@
         &__img{
             flex: 132px;
             padding: 3px;
+            img{
+                max-width: 132px;
+            }
         }
         &__text{
             flex: 100%;

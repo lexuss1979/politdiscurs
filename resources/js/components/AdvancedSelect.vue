@@ -1,5 +1,5 @@
 <template>
-    <div class="select-wrapper" ref="wrapper" v-click-outside="closeDropdown">
+    <div :class="['select-wrapper',{'disable':disable}]" ref="wrapper" v-click-outside="closeDropdown">
         <div class="overlay"></div>
         <div class="select-container">
             <div :class="['active-text', { 'has-value': hasSelectedItem , 'resetable':this.resetable !== undefined}]">
@@ -25,7 +25,7 @@
     const NOT_DEFINED = -1;
     export default {
         name: "AdvancedSelect",
-        props: ['placeholder','resetable','value','searchType','filterable'],
+        props: ['placeholder','resetable','value','searchType','filterable','disable'],
         data(){
             return {
                 placeholderText: 'Выберите',
@@ -52,6 +52,7 @@
                 this.closeDropdown();
             },
             openDropdown(){
+                if(this.disabled) return;
                 let width = this.$refs['wrapper'].clientWidth;
                 this.$refs['dropdown'].style.minWidth = width + 'px';
                 this.filter='';
@@ -73,6 +74,9 @@
             }
         },
         computed:{
+            disabled(){
+              return this.disable === true;
+            },
             hasSelectedItem(){
                 return this.selectedItemIndex !== NOT_DEFINED;
             },
@@ -108,6 +112,11 @@
 </script>
 
 <style scoped lang="scss">
+    .disable{
+        .open-btn{
+            opacity: 0.2;
+        }
+    }
     .select-container{
         width: 100%;
         min-width: 125px;

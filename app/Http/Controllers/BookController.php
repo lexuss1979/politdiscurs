@@ -28,6 +28,21 @@ class BookController extends BaseController
             ->withPaging(config('content.articles-per-page'), $currPage)
             ->withLinks($url);
 
+        switch (request('sort') ){
+            case 2:
+                $query->orderByAuthor();
+                break;
+
+            case 3:
+                $query->orderByYear();
+                break;
+
+            default:
+                $query->orderByTitle();
+                break;
+
+        }
+
         if(isset($topic)){
             $query->forTopic($topic->id);
         }

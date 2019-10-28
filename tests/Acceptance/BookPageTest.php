@@ -115,6 +115,6 @@ class BookPageTest extends \Tests\TestCase
     /** @test */
     public function it_contains_filter_data()
     {
-        $this->response->assertSee('<book-filters inline-template :data=\'function(){return [');
+        $this->response->assertSee('<book-filter inline-template :data=\'function(){return [');
     }
 }

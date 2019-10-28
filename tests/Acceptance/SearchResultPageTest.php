@@ -53,12 +53,12 @@ class SearchResultPageTest extends \Tests\TestCase
         $this->search->addToIndex($unwanted);
         $response = $this->get(route('search-results',['q' => $this->query]));
         $response->assertDontSee('<p class="nothing-found">');
-        $response->assertSee('<div class="item" data-id="'.$wanted->id.'">');
-        $response->assertDontSee('<div class="item" data-id="'.$unwanted->id.'">');
+        $response->assertSee('data-id="'.$wanted->id.'">');
+        $response->assertDontSee('data-id="'.$unwanted->id.'">');
         $response = $this->get(route('search-results',['q' => 'UNIQ_MARK']));
 
-        $response->assertSee('<div class="item" data-id="'.$wanted->id.'">');
-        $response->assertSee('<div class="item" data-id="'.$unwanted->id.'">');
+        $response->assertSee('data-id="'.$wanted->id.'">');
+        $response->assertSee('data-id="'.$unwanted->id.'">');
 
 
     }
@@ -71,12 +71,12 @@ class SearchResultPageTest extends \Tests\TestCase
         $this->search->addToIndex($wanted);
         $this->search->addToIndex($unwanted);
         $response = $this->get(route('search-results',['q' => $this->query]));
-        $response->assertSee('<div class="item" data-id="'.$wanted->id.'">');
-        $response->assertDontSee('<div class="item" data-id="'.$unwanted->id.'">');
+        $response->assertSee('data-id="'.$wanted->id.'">');
+        $response->assertDontSee('data-id="'.$unwanted->id.'">');
         $response = $this->get(route('search-results',['q' => 'UNIQ_MARK']));
 
-        $response->assertSee('<div class="item" data-id="'.$wanted->id.'">');
-        $response->assertSee('<div class="item" data-id="'.$unwanted->id.'">');
+        $response->assertSee('data-id="'.$wanted->id.'">');
+        $response->assertSee('data-id="'.$unwanted->id.'">');
 
 
     }

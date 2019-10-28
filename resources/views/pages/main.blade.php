@@ -74,7 +74,7 @@
                 <div class="right-btn"></div>
             </div>
 
-            <button class="std-btn">Посмотреть все ({{$magazinesCount}})</button>
+            <button class="std-btn" onclick="window.location.href='{{route('magazines')}}'">Посмотреть все ({{$magazinesCount}})</button>
         </section>
         <section class="media-examples books">
             <h2>Книги</h2>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="right-btn"></div>
             </div>
-            <button class="std-btn">Посмотреть все ({{$booksCount}})</button>
+            <button class="std-btn"  onclick="window.location.href='{{route('books')}}'">Посмотреть все ({{$booksCount}})</button>
         </section>
     </main>
 @endsection

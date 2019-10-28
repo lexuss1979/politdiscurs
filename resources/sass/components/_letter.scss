@@ -35,10 +35,13 @@
 
 
 .letters{
-    .letter {
-        display:block;
+    .item.no-cover{
+        .letter {
+            display:block;
+        }
+        .item__img img{
+            display: none;
+        }
     }
-    .item__img img{
-        display: none;
-    }
+
 }

@@ -26,4 +26,7 @@ return [
     'magazines-on-main-page' => ENV('MAGAZINES_ON_MAIN_PAGE',10),
 
 
+    'static-bg' => ENV('STATIC_BG',true),
+
+
 ];

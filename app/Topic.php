@@ -64,8 +64,15 @@ class Topic extends Model
         return Topic::where('parent_topic_id',$this->id)->exists();
     }
 
-    public function getChildrenIdArray(){
-        return $this->children()->pluck('id')->toArray();
+    public function getChildrenIdArray($recursive = false){
+        if (!$recursive) return $this->children()->pluck('id')->toArray();
+        $arrId = [$this->id];
+        foreach ($this->children() as $child){
+            $arrId = array_merge($arrId, $child->getChildrenIdArray(true));
+        }
+        return $arrId;
+
+
     }
 
     public function route()

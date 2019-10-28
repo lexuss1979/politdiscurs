@@ -14,7 +14,7 @@
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
 </head>
-<body @php if(isset($_GET['static'])) echo 'class="var1"'  @endphp>
+<body @php echo config('content.static-bg', true) ? 'class="var1"' : ''  @endphp>
 @yield('page-wrapper')
 </body>
 @include('layouts.scripts')
