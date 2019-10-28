@@ -1,5 +1,5 @@
 <book-filter inline-template :data='function(){return {!! $data['topics'] !!};}()'
-              @isset($topic->id) topic-id="{{$topic->id}}" @endisset>
+              @isset($topic->id) topic-id="{{$topic->id}}" @endisset @isset($sort) sort="{{$sort}}" @endisset>
     <div class="filters">
         <section>
             <label class="bold">Показать по:</label>

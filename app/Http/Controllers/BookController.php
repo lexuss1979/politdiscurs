@@ -28,7 +28,8 @@ class BookController extends BaseController
             ->withPaging(config('content.articles-per-page'), $currPage)
             ->withLinks($url);
 
-        switch (request('sort') ){
+        $sort = request('sort') ;
+        switch ($sort){
             case 2:
                 $query->orderByAuthor();
                 break;
@@ -49,7 +50,7 @@ class BookController extends BaseController
 
         $data = $query->get()->asArray();
         $data['topics'] = json_encode(Topic::getAllTopicsList());
-        return view('pages.books',compact('data', 'topic'));
+        return view('pages.books',compact('data', 'topic', 'sort'));
     }
 
 

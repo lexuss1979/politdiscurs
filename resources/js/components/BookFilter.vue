@@ -4,7 +4,7 @@
     import AdvancedSelect from "./AdvancedSelect";
     export default {
         name: "BookFilter",
-        props: ['data','topicId'],
+        props: ['data','topicId','sort'],
         components: {AdvancedSelect},
         data(){
             return {
@@ -18,9 +18,9 @@
 
                 },
                 sorts:[
-                    {id:1, title: 'Названию',on: true},
-                    {id:2, title: 'Автору',on: false},
-                    {id:3, title: 'Году',on: false},
+                    {id:1, title: 'Названию',on: 1 === parseInt(this.sort) || this.sort === undefined},
+                    {id:2, title: 'Автору',on: 2 === parseInt(this.sort)},
+                    {id:3, title: 'Году',on: 3 === parseInt(this.sort)},
                 ]
             }
         },
