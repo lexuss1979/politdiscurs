@@ -150,6 +150,10 @@ class Article extends Model
     {
         return $query->where('content_type_id', ContentType::bookTypeID());
     }
+
+    public function isPdf(){
+        return $this->format == self::PDF_TYPE;
+    }
 }
 
 

@@ -19,9 +19,8 @@ class ArticleController extends BaseController
      */
     public function show(Article $article)
     {
-        if(isset($article->file->id)){
+        if($article->isPdf()){
             $fileContents = File::get(storage_path('app/public/files/') .  $article->file->filename );
-
             return Response::make($fileContents, 200, array('Content-Type' => 'application/pdf'));
         }
         $more = $article->moreArticles();

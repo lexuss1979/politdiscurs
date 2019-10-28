@@ -24,7 +24,10 @@ class Magazine extends Model
 
     public static function getListForMainPage()
     {
-        return self::where('main_page',true)->limit(config('content.magazines-on-main-page',10))->get();
+        return self::where('main_page',true)
+            ->inRandomOrder()
+            ->limit(config('content.magazines-on-main-page',10))
+            ->get();
     }
 
 

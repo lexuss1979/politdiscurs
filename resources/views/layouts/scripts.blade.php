@@ -3,19 +3,8 @@
     <script src="/js/materialize.min.js"></script>
     <script>
         $(document).ready(function(){
-            let magEl = $('.magazines  .carousel');
-            document.magCar = M.Carousel.init(magEl, {
-                numVisible:7,
-                dist: -25,
-                padding: 20,
-                shift: 10
-            })[0];
-            $('.magazines .left-btn').on('click',function(){
-                document.magCar.next();
-            });
-            $('.magazines .right-btn').on('click',function(){
-                document.magCar.prev();
-            });
+           initCarousel('magazines');
+           initCarousel('books');
         });
 
         function enlarge(parent,id){
@@ -24,6 +13,22 @@
                 window.location.href=$elem.data('url');
             }
             $elem.addClass('big');
+        }
+
+        function initCarousel(selector){
+            let magEl = $('.'+selector+'  .carousel');
+            document[selector+'Car'] = M.Carousel.init(magEl, {
+                numVisible:7,
+                dist: -25,
+                padding: 20,
+                shift: 10
+            })[0];
+            $('.'+selector+' .left-btn').on('click',function(){
+                document[selector+'Car'].next();
+            });
+            $('.'+selector+' .right-btn').on('click',function(){
+                document[selector+'Car'].prev();
+            });
         }
     </script>
 @else
