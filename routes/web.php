@@ -17,9 +17,10 @@ Route::get('/', function () {
 
 
 //Route::get('/articles','ArticleController@index');
+Route::get('/import/check','ServiceController@checkFiles');
 //Route::get('/filters/update','ServiceController@updateFilters');
 //Route::get('/filters/topics','ServiceController@createTopics');
-Route::get('/content/import','ServiceController@importContent');
+//Route::get('/content/import','ServiceController@importContent');
 Route::get('/content/out','ServiceController@importOut');
 Route::get('/content/tt','ServiceController@tt');
 Route::get('/content/search','ServiceController@addArticlesToIndex');

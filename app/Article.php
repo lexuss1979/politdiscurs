@@ -14,6 +14,11 @@ class Article extends Model
     const LINK_TYPE = '3';
 
     protected $guarded = [];
+
+    public function isBook(){
+        return $this->content_type_id == ContentType::bookTypeID();
+    }
+
     public function authors()
     {
         return $this->belongsToMany(Author::class);
@@ -87,18 +92,24 @@ class Article extends Model
     }
 
     public function route(){
-        if($this->format == self::LINK_TYPE ) return $this->externalUrl();
+        if($this->format == self::LINK_TYPE && !$this->isBook() ) return $this->externalUrl();
         return Route('articles',['article' => $this->id]);
     }
 
-    protected function externalUrl(){
+    public function externalUrl(){
         if(strpos($this->link, 'https://') > -1) return $this->link;
         return 'http://' . str_replace('http://','',$this->link);
     }
 
     public function imgSrc()
     {
-        return isset($this->img) ? config('app.url').'/storage/img/'.$this->img : config('app.url') .'/'.config('content.article-default-img');
+        if(!isset($this->img))  return $this->defaultImgSrc();
+
+        return config('app.url').'/storage/img/'.str_replace('.jpg','',$this->img) .'.jpg';
+    }
+
+    protected function defaultImgSrc(){
+        return config('app.url') .'/'.config('content.article-default-img');
     }
 
     public function letter()
@@ -142,7 +153,8 @@ class Article extends Model
 
     public function openInNewTab()
     {
-        return in_array($this->format,[self::LINK_TYPE, self::PDF_TYPE]);
+
+        return in_array($this->format,[self::LINK_TYPE, self::PDF_TYPE]) && !$this->isBook();
     }
 
 

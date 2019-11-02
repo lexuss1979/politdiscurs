@@ -1,0 +1,8 @@
+.books{
+    section{
+        border-bottom:solid 1px #4e360d47;
+        &:last-child{
+            border-bottom: 0;
+        }
+    }
+}

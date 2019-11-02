@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organisation extends FilterModel
 {
-    protected $fillable = ['name','link'];
+    protected $fillable = ['name'];
+
+
 
     protected static function keyField()
     {

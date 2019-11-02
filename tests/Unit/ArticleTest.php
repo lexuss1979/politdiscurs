@@ -6,6 +6,7 @@ use App\Article;
 use App\Author;
 use App\ContentType;
 use App\File;
+use App\Http\Controllers\ServiceController;
 use App\Magazine;
 use App\Organisation;
 use App\Region;
@@ -181,14 +182,16 @@ class ArticleTest extends TestCase
     /** @test */
     public function it_return_imgSrc()
     {
+        //without ext
+        $artWithImg = factory(Article::class)->create(['img' => 'my-file-test']);
+        $this->assertEquals(config('app.url').'/storage/img/my-file-test.jpg', $artWithImg->imgSrc());
 
-        $artWithImg = factory(Article::class)->create([
-            'img' => 'my-file.jpg'
-         ]);
+        //with ext
+        $artWithImg = factory(Article::class)->create(['img' => 'my-file.jpg']);
         $this->assertEquals(config('app.url').'/storage/img/my-file.jpg', $artWithImg->imgSrc());
-        $artWithoutImg = factory(Article::class)->create([
-            'img' => null
-        ]);
+
+        //without filename
+        $artWithoutImg = factory(Article::class)->create(['img' => null]);
         $this->assertEquals(config('app.url').'/'.config('content.article-default-img'), $artWithoutImg->imgSrc());
     }
 
@@ -270,6 +273,9 @@ class ArticleTest extends TestCase
     /** @test */
     public function it_has_open_in_new_tab_method()
     {
+        $bookType = factory(ContentType::class)->create(['code' => ContentType::BOOK]);
+        $articleType = factory(ContentType::class)->create(['code' => ContentType::ARTICLE]);
+
         $art = new Article();
         $art->format = Article::PDF_TYPE;
         $this->assertTrue($art->openInNewTab());
@@ -278,7 +284,12 @@ class ArticleTest extends TestCase
         $this->assertFalse($art->openInNewTab());
 
         $art->format = Article::LINK_TYPE;
+        $art->content_type_id = $articleType->id;
         $this->assertTrue($art->openInNewTab());
+
+        $art->format = Article::LINK_TYPE;
+        $art->content_type_id = $bookType->id;
+        $this->assertFalse($art->openInNewTab());
     }
 
 

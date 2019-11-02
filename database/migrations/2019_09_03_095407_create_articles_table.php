@@ -20,9 +20,9 @@ class CreateArticlesTable extends Migration
             $table->integer('topic_id');
             $table->text('annotation');
             $table->integer('source_id');
-            $table->string('link')->default('');
+            $table->string('link',500)->default('');
             $table->string('authors_string')->default('');
-            $table->year('year');
+            $table->year('year')->nullable();
             $table->integer('file_id')->nullable()->default(null);
             $table->string('img')->nullable();
             $table->mediumText('html')->nullable();

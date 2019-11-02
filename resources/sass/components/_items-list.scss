@@ -17,6 +17,7 @@
             padding: 3px;
             img{
                 max-width: 132px;
+                box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.5);
             }
         }
         &__text{
@@ -45,7 +46,7 @@
             font-weight: 500;
             font-style: normal;
             font-stretch: normal;
-            line-height: 1;
+            line-height: 1.2;
             letter-spacing: normal;
             color: rgba(0, 0, 0, 0.78);
             &:hover{
@@ -98,7 +99,7 @@
 
         .author,.year{
             font-family: Roboto;
-            height: 27px;
+            padding: 0 0 7px 0;
             font-size: 17px;
             color: rgba(0, 0, 0, 0.42);
         }

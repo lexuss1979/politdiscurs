@@ -21,8 +21,16 @@
                 content: '>';
                 padding: 0 5px;
             }
-            &:last-child:after{
-                display: none;
+            &:last-child {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: 250px;
+                max-height: 24px;
+                overflow: hidden;
+                &:after{
+                    display: none;
+                }
+
             }
         }
     }

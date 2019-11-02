@@ -7,8 +7,11 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Author;
 use App\ContentType;
+use App\Helpers\SpreadsheetReader;
+use App\Import\ContentImporter;
 use App\Import\ImportDispatcher;
 use App\Import\ImportItem;
+use App\Import\ImportObjectIterator;
 use App\Import\MagazineImporter;
 use App\Organisation;
 use App\Region;
@@ -28,15 +31,11 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateFilters()
+    public function updateFilters($filters)
     {
-        $path = "/Users/aleksejafanasev/Documents/Projects/Politics";
-        $file = "serialized-data.txt";
-        $dispatcher = new ImportDispatcher($path);
-        $dispatcher->loadFromSerializedData($file);
-        $filters = $dispatcher->generateFilters();
+
         Author::refreshFilterData($filters['authors']);
-        Organisation::refreshFilterData($filters['organizations']);
+        Organisation::refreshFilterData($filters['orgs']);
         Region::refreshFilterData($filters['regions']);
         Source::refreshFilterData($filters['sources']);
 
@@ -57,7 +56,7 @@ class ServiceController extends Controller
 
     private function createInnerTopics(){
         $inner = Topic::create([
-            'title' => "Международные отношения",
+            'title' => "Внутренняя политика",
             'parent_topic_id' => null,
             'code' => Topic::INNER_CODE
         ]);
@@ -72,17 +71,17 @@ class ServiceController extends Controller
     }
     private function createOuterTopics(){
         $outer = Topic::create([
-            'title' => "Внутренняя политика",
+            'title' => "Международные отношения",
             'parent_topic_id' => null,
             'code' => Topic::OUTER_CODE
         ]);
         $this->addTopics($outer->id,[
-            ["Миропорядок","Kollage_001.png","#b582a5","#b498a6",1],
+            ["Миропорядок и мировая политика","Kollage_001.png","#b582a5","#b498a6",1],
             ["Международная безопасность","Kollage_003.png","#4fb099","#73aba2",3],
             ["Внешняя политика России","Kollage_004.png","#6b4fb0","#887da7",4],
             ["История международных отношений","Kollage_005.png","#a2a2a2","#a29f9c",5],
             ["Международные организации","Kollage_002.png","#4f6ab0","#8ea8c2",2],
-            ["Теория межденародных отношений","Kollage_006.png","#4f9cb0","#71aab9",6],
+            ["Теория международных отношений","Kollage_006.png","#4f9cb0","#71aab9",6],
         ]);
     }
 
@@ -124,7 +123,7 @@ class ServiceController extends Controller
         foreach ($items as $item){
             $counter ++;
             try{
-                $item->storeToDB($rootTopicId,$path.'/files');
+                $item->storeToDB($rootTopicId,$path.'files');
                 $this->log->info('['.$counter.'] Import success [title='.$item->name().']');
             } catch (\Exception $e) {
                 $this->log->error('[' . $counter . '] Import failed [title=' . $item->name() . ']', ['error' => substr($e->getMessage(), 0, 500) . '...']);
@@ -135,17 +134,37 @@ class ServiceController extends Controller
 
     public function importContent()
     {
-        $path = "/Users/aleksejafanasev/Documents/Projects/Politics";
-        $this->importMagazines();
-        $this->updateFilters();
-        $this->createTopics();
+        $basePath = '/Users/aleksejafanasev/Documents/Projects/Politics/final';
+        $importer = new ContentImporter($basePath);
+
+        $importer->checkData();
+        $data = $importer->data();
+
+//        $filters = $importer->getFilters();
+//        $this->importMagazines();
+//        $this->updateFilters($filters);
+//        $this->createTopics();
+//        dd('ok');
 
         $this->log = new Logger('import');
-        $this->log->pushHandler(new StreamHandler($path.'/import.log', Logger::ERROR));
-        $this->importInnerPolitics();
-//        $this->importOuterPolitics();
+        $this->log->pushHandler(new StreamHandler($basePath.'/import.log', Logger::ERROR));
+
+//        $OUTER_TOPIC_ID = (Topic::where('code',Topic::OUTER_CODE)->first())->id;
+//        $this->importPart($data['outer'], $basePath.ContentImporter::OUTER_PATH,$OUTER_TOPIC_ID);
+
+        $INNER_TOPIC_ID = (Topic::where('code',Topic::INNER_CODE)->first())->id;
+        $this->importPart($data['inner'], $basePath.ContentImporter::INNER_PATH,$INNER_TOPIC_ID);
+        dd('ok');
+
 
     }
+
+    protected function importPart ($items, $path, $rootTopicID)
+    {
+        $this->processItems(new ImportObjectIterator($items),$rootTopicID, $path);
+    }
+
+
     public function importOut()
     {
         $path = "/Users/aleksejafanasev/Documents/Projects/Politics";
@@ -157,7 +176,7 @@ class ServiceController extends Controller
 
     public function importMagazines()
     {
-        $importer = new MagazineImporter("/Users/aleksejafanasev/Documents/Projects/Politics/Журналы","Список журналов.xlsx");
+        $importer = new MagazineImporter("/Users/aleksejafanasev/Documents/Projects/Politics/final/magazines","Список журналов.xlsx");
         $importer->do();
     }
 
@@ -214,4 +233,18 @@ class ServiceController extends Controller
             }
         }
     }
+
+    public function checkFiles(){
+        $basePath = '/Users/aleksejafanasev/Documents/Projects/Politics/final';
+
+        $importer = new ContentImporter($basePath);
+        $importer->checkData();
+    }
+
+
+
+
+
+
+
 }

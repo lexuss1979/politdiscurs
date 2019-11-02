@@ -9,16 +9,16 @@
 
 
             <div class="themes">
-                <label class="bold">Темы:</label>
-                <label>Части:</label>
+                <label class="bold">Части:</label>
                 <advanced-select :value="level1" @input="change"></advanced-select>
-
-                <label>Разделы:</label>
+            </div>
+            <div class="themes mt-3">
+                <label class="bold">Разделы:</label>
                 <advanced-select :value="level2" @input="change" :disable="topics.level1 === null"></advanced-select>
-
-                <label>Темы:</label>
+            </div>
+            <div class="themes mt-3">
+                <label class="bold">Темы:</label>
                 <advanced-select :value="level3" @input="change"  :disable="topics.level2 === null"></advanced-select>
-
             </div>
         </section>
     </div>

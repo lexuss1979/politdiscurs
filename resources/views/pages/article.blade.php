@@ -25,7 +25,7 @@
                     <div class="authors">{{$article->authors_string}}</div>
                 </section>
                 <section>
-                    <label class="bold">Год издания:</label>
+                    <label class="bold">@if($article->isBook())Год издания:@elseГод публикации:@endif </label>
                     <div class="year">{{$article->year}}</div>
                 </section>
                 <section>
@@ -51,6 +51,11 @@
                     <section class="article">
                         <div>
                             {!! $article->html !!}
+                        </div>
+                        <div>
+                            @if($article->isBook())
+                                <a target="_blank" href="{{$article->externalUrl()}}">{{$article->externalUrl()}}</a>
+                            @endif
                         </div>
                     </section>
                 </div>

@@ -54,7 +54,7 @@
                 this.level2activeId = id;
                 this.level3 =  this.getChildren(id);
                 this.level3bgcolor = bgc;
-                this.level3lowLineHeight = parseInt(id) === 7;
+                this.level3lowLineHeight = parseInt(id) === 12;
             },
             rootTopics(){
                 return this.getChildren(null);
@@ -74,18 +74,17 @@
                 level1activeId: null,
                 level3:[],
                 level3lowLineHeight: false,
-                leftRootTopicID: 1,
+                leftRootTopicID: 8,
                 items: [
 
-
                     {
-                        "id": 1,
+                        "id": 8,
                         "title": "Международные отношения",
                         "bgcolor": null,
                         "parent": null
                     },
                     {
-                        "id": 8,
+                        "id": 1,
                         "title": "Внутренняя политика",
                         "bgcolor": null,
                         "parent": null
@@ -94,265 +93,427 @@
                         "id": 2,
                         "title": "Государство",
                         "bgcolor": "#da7144",
-                        "parent": 8
+                        "parent": 1
                     },
                     {
                         "id": 3,
                         "title": "Политика и экономика",
                         "bgcolor": "#8fac6a",
-                        "parent": 8
+                        "parent": 1
                     },
                     {
                         "id": 4,
                         "title": "Гражданское общество",
                         "bgcolor": "#635441",
-                        "parent": 8
+                        "parent": 1
                     },
                     {
                         "id": 5,
                         "title": "Демократия и выборы",
                         "bgcolor": "#b3934d",
-                        "parent": 8
+                        "parent": 1
                     },
                     {
                         "id": 6,
                         "title": "Федерализм и регионы",
                         "bgcolor": "#c68e89",
-                        "parent": 8
+                        "parent": 1
                     },
                     {
                         "id": 7,
                         "title": "Культура и идеология",
                         "bgcolor": "#b7713a",
-                        "parent": 8
+                        "parent": 1
                     },
                     {
-                        "id": 15,
+                        "id": 43,
                         "title": "Эволюция государственности",
                         "bgcolor": null,
                         "parent": 2
                     },
                     {
-                        "id": 16,
+                        "id": 44,
                         "title": "Политические системы и режимы",
                         "bgcolor": null,
                         "parent": 2
                     },
                     {
-                        "id": 17,
+                        "id": 45,
                         "title": "Феномен власти",
                         "bgcolor": null,
                         "parent": 2
                     },
                     {
-                        "id": 18,
+                        "id": 46,
                         "title": "Президентство",
                         "bgcolor": null,
                         "parent": 2
                     },
                     {
-                        "id": 19,
+                        "id": 47,
                         "title": "Парламентаризм",
                         "bgcolor": null,
                         "parent": 2
                     },
                     {
-                        "id": 20,
+                        "id": 48,
                         "title": "Суверенитет",
                         "bgcolor": null,
                         "parent": 2
                     },
                     {
-                        "id": 21,
-                        "title": "Государство и бизнес",
-                        "bgcolor": null,
-                        "parent": 3
-                    },
-                    {
-                        "id": 22,
+                        "id": 49,
                         "title": "Политическая экономия",
                         "bgcolor": null,
                         "parent": 3
                     },
                     {
-                        "id": 23,
+                        "id": 50,
                         "title": "Социальные группы. Равенство и неравенство",
                         "bgcolor": null,
                         "parent": 3
                     },
                     {
-                        "id": 24,
+                        "id": 51,
+                        "title": "Государство и бизнес",
+                        "bgcolor": null,
+                        "parent": 3
+                    },
+                    {
+                        "id": 52,
                         "title": "Экономическая политика центра и регионов",
                         "bgcolor": null,
                         "parent": 3
                     },
                     {
-                        "id": 25,
+                        "id": 53,
                         "title": "Права человека и гуманитарные проблемы",
                         "bgcolor": null,
                         "parent": 4
                     },
                     {
-                        "id": 26,
+                        "id": 54,
                         "title": "Элиты и общество",
                         "bgcolor": null,
                         "parent": 4
                     },
                     {
-                        "id": 27,
+                        "id": 55,
                         "title": "Институты гражданского общества",
                         "bgcolor": null,
                         "parent": 4
                     },
                     {
-                        "id": 28,
+                        "id": 56,
                         "title": "Группы интересов и лоббизм",
                         "bgcolor": null,
                         "parent": 4
                     },
                     {
-                        "id": 29,
+                        "id": 57,
                         "title": "Политические аспекты СМИ",
                         "bgcolor": null,
                         "parent": 4
                     },
                     {
-                        "id": 30,
-                        "title": "Политические процессы",
-                        "bgcolor": null,
-                        "parent": 5
-                    },
-                    {
-                        "id": 31,
+                        "id": 58,
                         "title": "Транзитные общества-революции и реформы",
                         "bgcolor": null,
                         "parent": 5
                     },
                     {
-                        "id": 32,
+                        "id": 59,
                         "title": "Политические партии",
                         "bgcolor": null,
                         "parent": 5
                     },
                     {
-                        "id": 33,
+                        "id": 60,
                         "title": "Выборы и электоральные процессы",
                         "bgcolor": null,
                         "parent": 5
                     },
                     {
-                        "id": 34,
+                        "id": 61,
                         "title": "Политические технологии",
                         "bgcolor": null,
                         "parent": 5
                     },
                     {
-                        "id": 35,
+                        "id": 62,
+                        "title": "Политические процессы",
+                        "bgcolor": null,
+                        "parent": 5
+                    },
+                    {
+                        "id": 63,
                         "title": "Политические конфликты",
                         "bgcolor": null,
                         "parent": 5
                     },
                     {
-                        "id": 36,
-                        "title": "Федерализм и унитаризм",
-                        "bgcolor": null,
-                        "parent": 6
-                    },
-                    {
-                        "id": 37,
+                        "id": 64,
                         "title": "Регионы России",
                         "bgcolor": null,
                         "parent": 6
                     },
                     {
-                        "id": 38,
+                        "id": 65,
                         "title": "Централизация-децентрализация-сепаратизм",
                         "bgcolor": null,
                         "parent": 6
                     },
                     {
-                        "id": 39,
+                        "id": 66,
                         "title": "Этнокультурное разнообразие",
                         "bgcolor": null,
                         "parent": 6
                     },
                     {
-                        "id": 40,
-                        "title": "Мораль и политика",
+                        "id": 67,
+                        "title": "Федерализм и унитаризм",
                         "bgcolor": null,
-                        "parent": 7
+                        "parent": 6
                     },
                     {
-                        "id": 41,
+                        "id": 68,
                         "title": "Идеологии",
                         "bgcolor": null,
                         "parent": 7
                     },
                     {
-                        "id": 42,
+                        "id": 69,
                         "title": "Идентичность социальная и политическая",
                         "bgcolor": null,
                         "parent": 7
                     },
                     {
-                        "id": 43,
+                        "id": 70,
                         "title": "Политическая психология",
                         "bgcolor": null,
                         "parent": 7
                     },
                     {
-                        "id": 44,
+                        "id": 71,
                         "title": "Политическая коммуникация",
                         "bgcolor": null,
                         "parent": 7
                     },
                     {
-                        "id": 45,
+                        "id": 72,
                         "title": "Политические культуры",
                         "bgcolor": null,
-                        "parent":14
+                        "parent": 7
                     },
                     {
-                        "id": 46,
+                        "id": 73,
+                        "title": "Мораль и политика",
+                        "bgcolor": null,
+                        "parent": 7
+                    },
+                    {
+                        "id": 74,
                         "title": "Проблема политического насилия",
                         "bgcolor": null,
-                        "parent": 14
+                        "parent": 7
                     },
                     {
                         "id": 9,
-                        "title": "Миропорядок",
+                        "title": "Миропорядок и мировая политика",
                         "bgcolor": "#b498a6",
-                        "parent": 1
+                        "parent": 8
                     },
                     {
                         "id": 10,
                         "title": "Международная безопасность",
                         "bgcolor": "#73aba2",
-                        "parent": 1
+                        "parent": 8
                     },
                     {
                         "id": 11,
                         "title": "Внешняя политика России",
                         "bgcolor": "#887da7",
-                        "parent": 1
+                        "parent": 8
                     },
                     {
                         "id": 12,
                         "title": "История международных отношений",
                         "bgcolor": "#a29f9c",
-                        "parent": 1
+                        "parent": 8
                     },
                     {
                         "id": 13,
                         "title": "Международные организации",
                         "bgcolor": "#8ea8c2",
-                        "parent": 1
+                        "parent": 8
                     },
                     {
                         "id": 14,
-                        "title": "Теория межденародных отношений",
+                        "title": "Теория международных отношений",
                         "bgcolor": "#71aab9",
-                        "parent": 1
+                        "parent": 8
+                    },
+                    {
+                        "id": 15,
+                        "title": "Глобальные мегатренды. Эволюция миропорядка",
+                        "bgcolor": null,
+                        "parent": 9
+                    },
+                    {
+                        "id": 16,
+                        "title": "Глобальные проблемы и вызовы",
+                        "bgcolor": null,
+                        "parent": 9
+                    },
+                    {
+                        "id": 17,
+                        "title": "Север-Юг",
+                        "bgcolor": null,
+                        "parent": 9
+                    },
+                    {
+                        "id": 18,
+                        "title": "Негосударственные акторы международных отношений",
+                        "bgcolor": null,
+                        "parent": 9
+                    },
+                    {
+                        "id": 19,
+                        "title": "Новые независимые государства и постсоветское пространство",
+                        "bgcolor": null,
+                        "parent": 9
+                    },
+                    {
+                        "id": 20,
+                        "title": "Восток-Запад",
+                        "bgcolor": null,
+                        "parent": 9
+                    },
+                    {
+                        "id": 21,
+                        "title": "Международные конфликты и миротворчество",
+                        "bgcolor": null,
+                        "parent": 10
+                    },
+                    {
+                        "id": 22,
+                        "title": "Международный терроризм",
+                        "bgcolor": null,
+                        "parent": 10
+                    },
+                    {
+                        "id": 23,
+                        "title": "Распространение оружия массового уничтожения",
+                        "bgcolor": null,
+                        "parent": 10
+                    },
+                    {
+                        "id": 24,
+                        "title": "Контроль над вооружениями",
+                        "bgcolor": null,
+                        "parent": 10
+                    },
+                    {
+                        "id": 25,
+                        "title": "Невоенные аспекты международной безопасности",
+                        "bgcolor": null,
+                        "parent": 10
+                    },
+                    {
+                        "id": 26,
+                        "title": "Политика России в дальнем зарубежье",
+                        "bgcolor": null,
+                        "parent": 11
+                    },
+                    {
+                        "id": 27,
+                        "title": "Политика России в международных организациях",
+                        "bgcolor": null,
+                        "parent": 11
+                    },
+                    {
+                        "id": 28,
+                        "title": "Политика России на постсоветском пространстве",
+                        "bgcolor": null,
+                        "parent": 11
+                    },
+                    {
+                        "id": 29,
+                        "title": "Доктринальные документы",
+                        "bgcolor": null,
+                        "parent": 11
+                    },
+                    {
+                        "id": 30,
+                        "title": "Постсоветское пространство",
+                        "bgcolor": null,
+                        "parent": 12
+                    },
+                    {
+                        "id": 31,
+                        "title": "Ближний Восток",
+                        "bgcolor": null,
+                        "parent": 12
+                    },
+                    {
+                        "id": 32,
+                        "title": "Восточная Азия- Южная Азия и АТР",
+                        "bgcolor": null,
+                        "parent": 12
+                    },
+                    {
+                        "id": 33,
+                        "title": "Европа",
+                        "bgcolor": null,
+                        "parent": 12
+                    },
+                    {
+                        "id": 34,
+                        "title": "Центральная Азия",
+                        "bgcolor": null,
+                        "parent": 12
+                    },
+                    {
+                        "id": 35,
+                        "title": "Африка",
+                        "bgcolor": null,
+                        "parent": 12
+                    },
+                    {
+                        "id": 36,
+                        "title": "Америка",
+                        "bgcolor": null,
+                        "parent": 12
+                    },
+                    {
+                        "id": 38,
+                        "title": "Европа-Америка",
+                        "bgcolor": null,
+                        "parent": 12
+                    },
+                    {
+                        "id": 41,
+                        "title": "ООН и глобальное управление",
+                        "bgcolor": null,
+                        "parent": 13
+                    },
+                    {
+                        "id": 42,
+                        "title": "Международные организации и интеграционные объединения",
+                        "bgcolor": null,
+                        "parent": 13
+                    },
+                    {
+                        "id": 39,
+                        "title": "Методы изучения международных отношений",
+                        "bgcolor": null,
+                        "parent": 14
+                    },
+                    {
+                        "id": 40,
+                        "title": "Школы и направления в международных исследованиях",
+                        "bgcolor": null,
+                        "parent": 14
                     }
                 ]
             }
@@ -435,14 +596,14 @@
 
                 &.sm{
                     .line{
-                        line-height: 2.25;
+                        line-height: 1.7;
                     }
                 }
             }
 
             .line{
-                font-size: 14px;
-                line-height: 2.5;
+                font-size: 16px;
+                line-height: 1.95;
                 letter-spacing: normal;
                 color: #ffffff;
 

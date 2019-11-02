@@ -35,6 +35,7 @@ class ImportItem
     const COVER_FILENAME_INDEX = 13;
     const MAGAZINE_LINK_INDEX = 14;
     const IS_BOOK_INDEX = 15;
+    const IS_DOCUMENT_INDEX = 19;
     const COMMENT_INDEX = 16;
     const TOPIC2_INDEX = 17;
     const TOPIC1_INDEX = 18;
@@ -70,7 +71,7 @@ class ImportItem
 
     public function parent_topic()
     {
-        return $this->data[self::TOPIC1_INDEX];
+        return $this->data[self::TOPIC2_INDEX];
     }
 
     public function name()
@@ -83,8 +84,13 @@ class ImportItem
         return $this->data[self::FORMAT_INDEX];
     }
 
+
+
     public function contentType(){
-        return $this->isBook() ? ContentType::BOOK : ContentType::ARTICLE;
+        if($this->isBook() ) return ContentType::BOOK;
+        if($this->isDocument()) return ContentType::DOCUMENT;
+
+        return  ContentType::ARTICLE;
     }
 
 
@@ -120,7 +126,7 @@ class ImportItem
 
     public function articleLink()
     {
-        return $this->data[self::LINK_INDEX];
+        return $this->data[self::LINK_INDEX] ?? '';
     }
 
     public function year()
@@ -135,7 +141,7 @@ class ImportItem
 
     public function file()
     {
-        return $this->data[self::FILENAME_INDEX];
+        return $this->data[self::FILENAME_INDEX] ?? '';
     }
 
     public function cover()
@@ -153,6 +159,11 @@ class ImportItem
         return $this->data[self::IS_BOOK_INDEX];
     }
 
+    public function isDocument()
+    {
+        return $this->data[self::IS_DOCUMENT_INDEX];
+    }
+
     public function comment()
     {
         return $this->data[self::COMMENT_INDEX];
@@ -160,10 +171,11 @@ class ImportItem
 
     public function getFullFileName(){
         $filename = $this->file();
-        if(strpos('.',$filename) <1){
+        if(strpos($filename,'.docx') <1 && strpos($filename,'.pdf') <1 ){
             $filename = $filename . '.' . $this->fileExtension();
         }
-        return $this->parent_topic() .'/'.$filename;
+//        return $this->parent_topic() .'/'.$filename;
+        return $filename;
     }
 
 
@@ -177,21 +189,22 @@ class ImportItem
         return  !$fileFound;
     }
 
+
+
     public function hasFile(){
         return $this->file() != '';
     }
     protected function fileExtension(){
-        return $this->fileType() == 'doc' ? 'docx': $this->fileType();
+        return $this->fileType() == 'pdf' ? 'pdf': 'docx';
     }
 
     public function storeToDB($rootTopicId, $contentPath, WordReader $reader = null){
-
         $parentTopic = Topic::getOrCreate($this->parent_topic(), $rootTopicId);
         $articleTopic = Topic::getOrCreate($this->topic(), $parentTopic->id);
         $html = '';
         $fileID = null;
         $fullFilePath = $contentPath . '/'. $this->getFullFileName();
-        if($this->fileType() == 'doc'){
+        if($this->fileType() == 'doc' || ( $this->fileType() == 'link' &&  $this->file() != '' ) ){
             $reader = $reader ??  new WordReader();
             try {
                 $html = $reader->read($fullFilePath);
@@ -212,7 +225,7 @@ class ImportItem
         $source = Source::getOrCreate($this->source(), ['link'=>$this->link()]);
         $article = Article::create([
             'title' => $this->name(),
-            'format' => (int)$this->fileType(),
+            'format' => $this->format(),
             'annotation' => $this->annotation(),
             'source_id' => $source->id,
             'link' => $this->articleLink(),

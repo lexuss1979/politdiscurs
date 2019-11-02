@@ -87,8 +87,8 @@ class BookPageTest extends \Tests\TestCase
             $this->response->assertSee('<div class="items-list">');
         }
 
-        $this->response->assertSee('<a target="_blank" href="'.$this->books[0]->route().'" class="item__header">'.$this->books[0]->title.'</a>');
-        $this->response->assertSee('<a target="_blank" href="'.$this->books[0]->route().'"><img src="'.$this->books[0]->imgSrc().'" alt="'.$this->books[0]->title.'"><span class="letter');
+        $this->response->assertSee('href="'.$this->books[0]->route().'" class="item__header">'.$this->books[0]->title.'</a>');
+        $this->response->assertSee('href="'.$this->books[0]->route().'"><img src="'.$this->books[0]->imgSrc().'" alt="'.$this->books[0]->title.'"><span class="letter');
 
     }
 
@@ -105,11 +105,11 @@ class BookPageTest extends \Tests\TestCase
     /** @test */
     public function it_ca_show_concrete_page()
     {
-        $this->response->assertSee('<a target="_blank" href="'.$this->books[0]->route().'" class="item__header">'.$this->books[0]->title.'</a>');
-        $this->response->assertDontSee('<a target="_blank" href="'.$this->books[config('content.articles-per-page')]->route().'" class="item__header">'.$this->books[config('content.articles-per-page')]->title.'</a>');
+        $this->response->assertSee($this->books[0]->title);
+        $this->response->assertDontSee($this->books[config('content.articles-per-page')]->title);
         $responsePage2  = $this->get($this->url.'?page=2');
-        $responsePage2->assertDontSee('<a target="_blank" href="'.$this->books[0]->route().'" class="item__header">'.$this->books[0]->title.'</a>');
-        $responsePage2->assertSee('<a target="_blank" href="'.$this->books[config('content.articles-per-page')]->route().'" class="item__header">'.$this->books[config('content.articles-per-page')]->title.'</a>');
+        $responsePage2->assertDontSee($this->books[0]->title);
+        $responsePage2->assertSee($this->books[config('content.articles-per-page')]->title);
     }
 
     /** @test */

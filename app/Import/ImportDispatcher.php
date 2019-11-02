@@ -26,6 +26,10 @@ class ImportDispatcher
 
     }
 
+    public function setData($data){
+        $this->data = $data;
+    }
+
     public function loadDataFromFile($filename){
         $this->indexFile = $filename;
         $spreadsheet = $this->getReader()->load($this->basePath . "/" . $this->indexFile);
