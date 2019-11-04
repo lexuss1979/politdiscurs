@@ -154,7 +154,7 @@ class Article extends Model
     public function openInNewTab()
     {
 
-        return in_array($this->format,[self::LINK_TYPE, self::PDF_TYPE]) && !$this->isBook();
+        return $this->format == self::PDF_TYPE || ($this->format == self::LINK_TYPE && !$this->isBook());
     }
 
 

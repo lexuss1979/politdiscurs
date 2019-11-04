@@ -9,8 +9,9 @@
     <meta name="csrf-token" content="BrsvyJXZ3aT7jJwtluoEavbJEucKN5RBkJS0ilZm">
     <base href="/">
     <!-- Compiled and minified CSS -->
-
-    <title>Document</title>
+    <meta name="viewport" content="width=1200">
+    <title>@yield("page-title",config('app.name'))</title>
+    <meta name="description" content="@yield("page-description",config('app.description'))">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
 </head>

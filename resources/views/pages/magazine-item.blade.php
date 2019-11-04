@@ -50,11 +50,14 @@
                         @if(count($magazine->articles) > 0)
                             <div class="linked-articles">
                                 <h2>Избранные статьи</h2>
-                                <ul>
-                                    @foreach($magazine->articles as $article)
-                                        <li><a href="{{$article->route()}}">{{$article->title}}</a></li>
-                                    @endforeach
-                                </ul>
+                                <foldable>
+                                    <ul>
+                                        @foreach($magazine->articles as $article)
+                                            <li><a href="{{$article->route()}}">{{$article->title}}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </foldable>
+
                             </div>
                         @endif
 

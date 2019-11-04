@@ -27,6 +27,7 @@ import SearchInput from './components/SearchInput.vue';
 import MainMenu from './components/MainMenu.vue';
 import TopicFilters from './components/TopicFilters.vue';
 import BookFilter from './components/BookFilter.vue';
+import Foldable from './components/Foldable.vue';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -36,7 +37,7 @@ import BookFilter from './components/BookFilter.vue';
 
 const app = new Vue({
     el: '#app',
-    components:{BookFilter, MainMenu, AdvancedSelect, CheckBox, SearchInput, TopicFilters},
+    components:{Foldable, BookFilter, MainMenu, AdvancedSelect, CheckBox, SearchInput, TopicFilters},
     methods:{
         doSearch(searchStr) {
             window.location.href='/search?q='+searchStr;

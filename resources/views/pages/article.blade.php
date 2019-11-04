@@ -1,4 +1,6 @@
 @extends('parts.page-wrapper')
+@section('page-title'){{$article->title}}@stop
+@section('page-description'){{$article->annotation}}@stop
 
 @section('headers')
     <div class="main-topic">{{$article->topic->parent()->title}}</div>
