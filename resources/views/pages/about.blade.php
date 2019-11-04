@@ -1,5 +1,7 @@
 @extends('parts.page-wrapper')
-
+@section('page-wrapper-class')
+    static
+@stop
 
 @section('content')
 <main class="content-page">

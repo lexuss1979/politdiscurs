@@ -18,9 +18,10 @@ Route::get('/', function () {
 
 //Route::get('/articles','ArticleController@index');
 Route::get('/import/check','ServiceController@checkFiles');
-//Route::get('/filters/update','ServiceController@updateFilters');
+Route::get('/search/update','ServiceController@updateTitleForSort');
 //Route::get('/filters/topics','ServiceController@createTopics');
 //Route::get('/content/import','ServiceController@importContent');
+
 Route::get('/content/out','ServiceController@importOut');
 Route::get('/content/tt','ServiceController@tt');
 Route::get('/content/search','ServiceController@addArticlesToIndex');
@@ -71,14 +72,6 @@ Route::get('/topics/{topic}','TopicController@show')->name('topic');
  */
 
 Route::get('/articles/{article}','ArticleController@show')->name('articles');
-
-/**
- * FileController
- * /file/id - для pdf
- */
-
-Route::get('/files/{file}','FileController@show');
-
 
 /**
  * SearchController

@@ -10,6 +10,8 @@ use mysql_xdevapi\Exception;
 
 class ArticleFilter
 {
+
+    const FIELD_FOR_TITLE_SORTING = 'title_for_sort';
     private $content;
     private $filters;
     private $pagination;
@@ -206,7 +208,7 @@ class ArticleFilter
 
     public function orderByTitle()
     {
-        $this->sortField = 'title';
+        $this->sortField = self::FIELD_FOR_TITLE_SORTING;
         $this->sortDirection = 'asc';
         return $this;
     }

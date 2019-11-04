@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Topic;
 use Illuminate\Http\Request;
 
 class StaticContentController extends BaseController
@@ -13,7 +14,8 @@ class StaticContentController extends BaseController
      */
     public function content()
     {
-        return ['page' => '/content'];
+        $topics = Topic::getHierarchy();
+        return view('pages.content',compact('topics'));
     }
 
     /**

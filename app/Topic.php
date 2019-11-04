@@ -117,4 +117,19 @@ class Topic extends Model
        }
        return $result;
     }
+
+    public static function getHierarchy()
+    {
+       return static::getChildrenTopics();
+
+    }
+
+    public static function getChildrenTopics($parentID = null, $level = 0){
+        $children = static::where('parent_topic_id',$parentID)->get();
+        foreach($children as $key=>$topic){
+            $children[$key]->level = $level;
+            $children[$key]->children = static::getChildrenTopics($topic->id,$level+1);
+        }
+        return $children;
+    }
 }

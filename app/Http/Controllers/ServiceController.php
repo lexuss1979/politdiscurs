@@ -242,6 +242,16 @@ class ServiceController extends Controller
     }
 
 
+    public function updateTitleForSort()
+    {
+        $articles = Article::all();
+        foreach ($articles as $article){
+//            $article->title_for_sort = preg_replace("/^[\"'«]/","",mb_substr($article->title, 0, 10));
+            $article->title_for_sort = str_replace(["\"","'","«"],"",mb_substr($article->title, 0, 10));
+            $article->save();
+        }
+    }
+
 
 
 

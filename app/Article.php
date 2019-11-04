@@ -166,6 +166,14 @@ class Article extends Model
     public function isPdf(){
         return $this->format == self::PDF_TYPE;
     }
+
+    protected static function boot() {
+        parent::boot();
+
+        static::saving(function ($article) {
+            $article->title_for_sort = str_replace(["\"","'","«"],"",mb_substr($article->title, 0, 20));
+        });
+    }
 }
 
 

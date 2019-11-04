@@ -140,6 +140,14 @@
     top: 0;
     left: 0;
     width: 177px;
+
+    & > div >span{
+        padding-top: 6px;
+        display: block;
+        &:hover{
+            color: #4A90E2;
+        }
+    }
 }
 .carousel .carousel-item div{
 
@@ -164,6 +172,7 @@
     }
     &>span  {
         width: 260px;
+
     }
 }
 

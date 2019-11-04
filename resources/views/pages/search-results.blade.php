@@ -34,6 +34,7 @@
                         @endif
                     </div>
                 </div>
+                @include('parts.sub-nav-line', ['class' => 'bottom' ])
             </div>
         </div>
     </main>

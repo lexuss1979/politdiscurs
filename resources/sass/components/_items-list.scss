@@ -26,6 +26,7 @@
             position: relative;
 
             & .item-type{
+                z-index: 10;
                 width: 32px;
                 height: 32px;
                 position: absolute;
@@ -34,6 +35,18 @@
                 &.type-text{background: url('/img/layout/text-type.svg')}
                 &.type-pdf{background: url('/img/layout/pdf-type.svg')}
                 &.type-link{background: url('/img/layout/link-type.svg')}
+            }
+
+            &:after{
+                z-index: 1;
+                position: absolute;
+                bottom: 15px;
+                left: 0;
+                content: "";
+                display: block;
+                width: 100%;
+                height: 40px;
+                background: linear-gradient(to top, white, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
             }
 
         }
@@ -71,6 +84,10 @@
             line-height: 1.13;
             letter-spacing: normal;
             color: #8b572a;
+            max-width: 920px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
 
             a,span {
                 font-size: 15px;
@@ -104,6 +121,7 @@
             color: rgba(0, 0, 0, 0.42);
         }
         &__desc{
+            position: relative;
             font-family: Georgia;
             font-size: 16px;
             font-weight: normal;
@@ -112,6 +130,8 @@
             line-height: 1.3;
             letter-spacing: normal;
             color: #434343;
+            max-height: 95px;
+            overflow: hidden;
 
 
 

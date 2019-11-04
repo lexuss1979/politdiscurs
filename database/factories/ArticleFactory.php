@@ -10,8 +10,10 @@ use App\Topic;
 use Faker\Generator as Faker;
 
 $factory->define(Article::class, function (Faker $faker) {
+    $title = $faker->sentence(8);
     return [
-        'title' => $faker->sentence(8),
+        'title' => $title,
+        'title_for_sort' => $title,
         'format' => rand(1,3),
         'topic_id' => function () {
             return factory(Topic::class)->create()->id;
@@ -29,6 +31,7 @@ $factory->define(Article::class, function (Faker $faker) {
         'content_type_id' => function () {
             return factory(ContentType::class)->create()->id;
         }
+
 
 
     ];

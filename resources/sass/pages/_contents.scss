@@ -1,0 +1,13 @@
+.topic{
+    line-height: 1.5;
+    &.level-0{padding-left: 10px;}
+    &.level-1{padding-left: 30px;}
+    &.level-2{padding-left: 50px;}
+
+    a{
+        color: rgba(0, 0, 0, 0.59);
+        &:hover{
+            color: #4A90E2;
+        }
+    }
+}
