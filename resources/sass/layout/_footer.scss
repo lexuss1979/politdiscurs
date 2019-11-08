@@ -15,6 +15,10 @@ footer{
             list-style: none;
             a {
                 color: rgba(0, 0, 0, 0.88);
+                &:hover{
+                    color: #4A90E2 !important;
+                    text-decoration: none !important;
+                }
             }
         }
     }

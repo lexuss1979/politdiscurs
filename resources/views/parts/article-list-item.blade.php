@@ -13,9 +13,14 @@
             @endforeach
            </div>
         <div class="author">
-            @if(strpos($article->authors_string, ','))Авторы:
-                @elseАвтор:
-            @endif {{$article->authors_string}}</div>
+            @if($article->authors_string == '')
+                Группа авторов
+                @else
+                    @if(strpos($article->authors_string, ','))Авторы:
+                    @elseАвтор:
+                    @endif {{$article->authors_string}}
+            @endif</div>
+
         <div class="year">@if($article->isBook())Год издания:@elseГод публикации:@endif {{$article->year}}</div>
         <p class="item__desc">{{$article->annotation}}</p>
         <div class="item-type type-{{$article->formatCode()}}"></div>

@@ -54,9 +54,12 @@
                         <div>
                             {!! $article->html !!}
                         </div>
-                        <div>
+                        <div class="book-link">
                             @if($article->isBook())
-                                <a target="_blank" href="{{$article->externalUrl()}}">{{$article->externalUrl()}}</a>
+                                <p><strong>Читать, заказать или приобрести:</strong>
+                                <br><a target="_blank" href="{{$article->externalUrl()}}">{{$article->externalUrl()}}</a>
+                                </p>
+
                             @endif
                         </div>
                     </section>

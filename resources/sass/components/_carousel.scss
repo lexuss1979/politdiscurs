@@ -166,12 +166,17 @@
 }
 
 .carousel .carousel-item.active.big div {
+
     &> img{
+        padding: 2px;
+        background-color: #fff;
+        box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.5);
         transition: 0.3s  ease-in-out;
         width: 260px;
     }
     &>span  {
         width: 260px;
+        display:none;
 
     }
 }

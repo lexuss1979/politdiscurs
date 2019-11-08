@@ -7,12 +7,11 @@
                     <li><a href="/books">Книги</a></li>
                     <li><a href="/magazines">Журналы</a></li>
                     <li><a href="/docs">Документы</a></li>
-                    <li><a href="/infografics">Инфографика</a></li>
+                    <li><a href="/content">Содержание</a></li>
                 </ul>
             </div>
             <div class="col-6">
                 <ul>
-                    <li><a href="/content">Содержание</a></li>
                     <li><a href="/about">О проекте</a></li>
                     <li><a href="/contributors">Авторы и разработчики</a></li>
                     <li><a href="/partners">Партнеры</a></li>
@@ -24,7 +23,7 @@
                     <p>Роccийская ассоциация политической науки</p>
                 </a></div>
             <div class="col-3"><a href="#"><img src="img/layout/cpmi.png" alt="">
-                    <p>Центр политических  и международных исследований</p>
+                    <p>Центр политических и международных исследований</p>
                 </a></div>
             <div class="col-3"><a href="#"><img src="img/layout/imi.png" alt="">
                     <p>Институт международных исследований МГИМО</p>

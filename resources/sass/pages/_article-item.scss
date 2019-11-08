@@ -37,6 +37,15 @@
         .italic{
             font-style: italic;
         }
+        .book-link {
+            a{
+                color: #4A90E2 !important;
+                text-decoration: underline !important;
+                &:hover{
+                    text-decoration: none !important;
+                }
+            }
+        }
     }
 
 }

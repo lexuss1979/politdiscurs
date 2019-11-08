@@ -16,10 +16,7 @@
 
         <div class="content-block">
             <div class="content-block__sidebar">
-                <section class="search-block">
-                    <search-input @on-do-search="doSearch" placeholder="Введите название"></search-input>
-                    <a href="#" class="search-settings">Настройки поиска</a>
-                </section>
+                @include('parts.search-block')
                 <section class="magazine-item__img">
                     <img title="{{$magazine->name}}" src="{{$magazine->imgSrc()}}" alt="">
                 </section>

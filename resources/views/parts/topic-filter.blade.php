@@ -36,7 +36,7 @@
 
         </section>
         <section>
-            <label class="bold">Регион мира:</label>
+            <label class="bold">Регионы мира:</label>
             <advanced-select resetable v-model="regions" @input="change"></advanced-select>
 
             <button class="std-btn reset" @click="reset">Сбросить</button>

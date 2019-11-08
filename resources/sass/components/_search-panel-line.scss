@@ -1,6 +1,6 @@
 .search-panel{
     background-color: #fff;
-    padding: 31px 60px 5px 60px;
+    padding: 35px 60px 31px 60px;
     border-bottom: solid 2px #4e360d47;
 
     &.settingless{
@@ -16,12 +16,14 @@
     }
 
     .options-subheader{
-        font-size: 15px;
-        line-height: 2.27;
+        margin-left: 114px;
+        width: 65%;
+        font-size: 14px;
+        line-height: 1.2;
         color: rgba(0, 0, 0, 0.59);
     }
     .search-options{
-        padding-top:10px;
+        padding-top:5px;
     }
     .close-btn{
         display: block;

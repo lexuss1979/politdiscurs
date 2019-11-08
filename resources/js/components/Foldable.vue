@@ -56,9 +56,10 @@
     .btn-fold{
         text-align: right;
         padding-top:20px;
+        color: #c6913c;
+        cursor:pointer;
         &:hover{
-            color: #4a90e2;
-            cursor:pointer;
+
         }
     }
 

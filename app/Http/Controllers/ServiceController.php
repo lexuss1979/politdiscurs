@@ -220,7 +220,6 @@ class ServiceController extends Controller
         ContentType::create(['code' => ContentType::ARTICLE, 'name' => 'Статьи']);
         ContentType::create(['code' => ContentType::BOOK, 'name' => 'Книги']);
         ContentType::create(['code' => ContentType::DOCUMENT, 'name' => 'Документы']);
-        ContentType::create(['code' => ContentType::INFOGRAPHICS, 'name' => 'Инфографика']);
     }
 
 
