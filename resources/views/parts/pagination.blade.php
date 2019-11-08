@@ -5,7 +5,7 @@
     @else
         <div class="btn-prev disabled"></div>
     @endif
-    <div class="current">{{$paging['current']}}</div>
+    <div class="current"><input type="text" value="{{$paging['current']}}" data-route="{{$paging['links']['current']}}" data-current="{{$paging['current']}}" data-total="{{$paging['total']}}" ></div>
     @if($paging['current'] < $paging['total'] )
         <a href="{{$paging['links']['next']}}"><div class="btn-next"></div></a>
     @else

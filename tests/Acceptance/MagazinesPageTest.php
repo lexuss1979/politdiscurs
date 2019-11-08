@@ -51,7 +51,7 @@ class MagazinesPageTest extends \Tests\TestCase
     public function it_has_paging()
     {
         $this->response->assertSee('<div class="pagination">');
-        $this->response->assertSee('<div class="current">1</div>');
+        $this->response->assertSee('<div class="current"><input type="text" value="1"');
         $this->response->assertSee('<div class="comment">из 3</div>');
         $this->response->assertSee('href="'.route('magazines').'?page=2"');
     }

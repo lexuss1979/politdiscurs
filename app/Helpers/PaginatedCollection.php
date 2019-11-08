@@ -26,7 +26,7 @@ class PaginatedCollection
             'links' => [
               'next' =>   $currentPage < $total ? $this->getUrl($baseUrl, $currentPage + 1) : false,
               'prev' =>   $currentPage > 1 ? $this->getUrl($baseUrl, $currentPage - 1) : false,
-              'current' =>   $this->getUrl($baseUrl, $currentPage)
+              'current' =>   $this->getUrl($baseUrl, $currentPage),
             ],
             'items_count' => $itemsCount
         ];

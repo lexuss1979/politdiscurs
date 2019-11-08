@@ -96,7 +96,7 @@ class BookPageTest extends \Tests\TestCase
     public function it_display_paging()
     {
 
-        $this->response->assertSee('<div class="current">1</div>');
+        $this->response->assertSee('<div class="current"><input type="text" value="1"');
         $this->response->assertSee('<div class="comment">из '.$this->pageCount.'</div>');
         $this->response->assertSee('<div class="btn-prev disabled"></div>');
         $this->response->assertSee('<a href="'.$this->url.'?page=2"><div class="btn-next"></div></a>');

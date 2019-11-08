@@ -52,7 +52,7 @@
                 <div class="carousel-container">
                     <div class="carousel">
                         @foreach($magazines as $mag)
-                            <div class="carousel-item" onclick="enlarge('.magazines',{{$mag->id}});" data-mgid="{{$mag->id}}" data-url="{{$mag->route()}}"><div><img src="{{$mag->imgSrc()}}"><span>{{$mag->name}}</span></div></div>
+                            <div class="carousel-item"  data-url="{{$mag->route()}}"  data-mgid="{{$mag->id}}"><div><img src="{{$mag->imgSrc()}}" onclick="enlarge('.magazines',{{$mag->id}});"><span onclick="goto('.magazines',{{$mag->id}});">{{$mag->name}}</span></div></div>
                         @endforeach
                     </div>
                 </div>
@@ -68,10 +68,10 @@
                 <div class="carousel-container">
                     <div class="carousel">
                         @foreach($books as $book)
-                            <div class="carousel-item" onclick="enlarge('.books',{{$book->id}});" data-mgid="{{$book->id}}" data-url="{{$book->route()}}">
+                            <div class="carousel-item"  data-mgid="{{$book->id}}" data-url="{{$book->route()}}">
                                 <div>
-                                    <img src="{{$book->imgSrc()}}">
-                                    <span>{{$book->title}}</span>
+                                    <img src="{{$book->imgSrc()}}" onclick="enlarge('.books',{{$book->id}});">
+                                    <span onclick="goto('.books',{{$book->id}});">{{$book->title}}</span>
                                 </div>
                             </div>
                         @endforeach
