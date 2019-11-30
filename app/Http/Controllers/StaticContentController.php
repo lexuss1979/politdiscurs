@@ -44,4 +44,32 @@ class StaticContentController extends BaseController
     {
         return view('pages.partners');
     }
+
+
+    /**
+     * @route /partners/imi
+     * @return array
+     */
+    public function imi()
+    {
+        return view('pages.partners.imi');
+    }
+
+    /**
+     * @route /partners/rapn
+     * @return array
+     */
+    public function rapn()
+    {
+        return view('pages.partners.rapn');
+    }
+
+    /**
+     * @route /partners/cpimi
+     * @return array
+     */
+    public function cpimi()
+    {
+        return view('pages.partners.cpimi');
+    }
 }

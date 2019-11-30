@@ -19,16 +19,16 @@
             </div>
         </div>
         <div class="col-8 partners row">
-            <div class="col-3"><a href="#"><img src="img/layout/rapn.png" alt="">
+            <div class="col-3"><a href="{{ route('partners.rapn') }}"><img src="img/layout/rapn.png" alt="">
                     <p>Роccийская ассоциация политической науки</p>
                 </a></div>
-            <div class="col-3"><a href="#"><img src="img/layout/cpmi.png" alt="">
+            <div class="col-3"><a href="{{ route('partners.cpimi') }}"><img src="img/layout/cpmi.png" alt="">
                     <p>Центр политических и международных исследований</p>
                 </a></div>
-            <div class="col-3"><a href="#"><img src="img/layout/imi.png" alt="">
+            <div class="col-3"><a href="{{ route('partners.imi') }}"><img src="img/layout/imi.png" alt="">
                     <p>Институт международных исследований МГИМО</p>
                 </a></div>
-            <div class="col-3"><a href="#"><img src="img/layout/mgimologo.png" alt="">
+            <div class="col-3"><a href="https://mgimo.ru/" target="_blank"><img src="img/layout/mgimologo.png" alt="">
                     <p>Московский государственный институт международных отношений</p>
                 </a></div>
         </div>

@@ -79,7 +79,7 @@
 
         function updateBackground(AForceUpdate)
         {
-            var lBGHeigt = 2416;
+            var lBGHeigt = 1600;
             var lWinH = $(window).height();
             var lPos, lAttachment;
             var lNeedFixBG = $(window).scrollTop() + lWinH > lBGHeigt;
@@ -90,7 +90,9 @@
             {
                 if (lNeedFixBG)
                 {
-                    lPos = '50% ' + (lWinH - lBGHeigt) + 'px';
+                    console.log('123');
+                    // lPos = '50% ' + (lWinH - lBGHeigt) + 'px';
+                    lPos = '50% bottom';
                     lAttachment = 'fixed';
                 }
                 else

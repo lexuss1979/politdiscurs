@@ -106,6 +106,7 @@ class ArticleFilter
     protected function getContentTypesSet()
     {
         $ctypes = ContentType::select(['id'])
+            ->where('code','<>',ContentType::DOCUMENT) //исключили документы
             ->orderBy('name')
             ->get()->toArray();
         return $ctypes ?? [];

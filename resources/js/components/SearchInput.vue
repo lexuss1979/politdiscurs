@@ -31,7 +31,7 @@
         position: relative;
         &>input.search-input{
             width: 100%;
-            padding: 0 45px 0 5px;
+            padding: 0 40px 0 0;
             background-color: transparent;
             border: 0 !important;
             display: inline-block;

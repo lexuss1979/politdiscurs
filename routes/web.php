@@ -46,6 +46,21 @@ Route::get('/','MainPageController@index')->name('main');
 Route::get('/books/{topic?}','BookController@index')->name('books');
 
 
+/**
+ *
+ *  DocumentController
+ * /docs - список документов
+ */
+Route::get('/docs','DocsController@index')->name('docs');
+
+/**
+ *
+ *  DocumentController
+ * /docs/id - страница документа
+ */
+Route::get('/docs/{article}','DocsController@show')->name('docs_item');
+
+
 
 
 
@@ -92,3 +107,11 @@ Route::get('/content','StaticContentController@content');
 Route::get('/about','StaticContentController@about');
 Route::get('/contributors','StaticContentController@contributors');
 Route::get('/partners','StaticContentController@partners');
+
+//партнеры
+
+Route::get('/partners/imi','StaticContentController@imi')->name('partners.imi');
+Route::get('/partners/rapn','StaticContentController@rapn')->name('partners.rapn');
+Route::get('/partners/cpimi','StaticContentController@cpimi')->name('partners.cpimi');
+
+
