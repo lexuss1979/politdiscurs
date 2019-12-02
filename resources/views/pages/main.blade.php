@@ -8,7 +8,7 @@
             <div class="section-cards clearfix">
                 @foreach($outerTopics as $topic)
                     <div class="tile topic-{{$topic->code}}">
-                        <a href="topics/{{$topic->id}}"><span class="box"><span>{{$topic->title}}</span></span></a>
+                        <a href="topics/{{$topic->id}}"><span class="box"><span>{!! $topic->title  !!}</span></span></a>
                     </div>
                 @endforeach
             </div>
@@ -18,7 +18,7 @@
             <div class="  section-cards clearfix">
                 @foreach($innerTopics as $topic)
                     <div class="tile topic-{{$topic->code}}">
-                        <a href="topics/{{$topic->id}}"><span class="box"><span>{{$topic->title}}</span></span></a>
+                        <a href="topics/{{$topic->id}}"><span class="box"><span>{!! $topic->title  !!}</span></span></a>
                     </div>
                 @endforeach
             </div>

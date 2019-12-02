@@ -9,14 +9,14 @@
             <div :class="['sub-menu',subMenuType]">
                 <div class="level-2"  v-if="level2.length>0">
                     <div class="wrapper">
-                        <div class="line" v-for="item in level2" @mouseover="showLevel3(item.id, item.bgcolor)" :style="'background-color:' +  convertHex(item.bgcolor,71)">
+                        <div class="line" v-for="item in level2" @mouseover="showLevel3(item.id, item.bgcolor)" :style="'background-color:' +  convertHex(item.bgcolor,opacity)">
                             <div :class="['arrow',{'active':item.id==level2activeId}]"><a :href="'topics/'+item.id">{{item.title}}</a></div>
                         </div>
                     </div>
 
                 </div>
                 <div class="level-3"  v-if="level3.length>0">
-                    <div :class="['wrapper', {'sm': level3lowLineHeight}]" :style="'background-color:' + convertHex(level3bgcolor,71) ">
+                    <div :class="['wrapper', {'sm': level3lowLineHeight}]" :style="'background-color:' + convertHex(level3bgcolor,opacity) ">
                         <div class="line"  v-for="item in level3" ><a :href="'topics/'+item.parent+'?topics[]='+item.id">{{item.title}}</a></div>
                     </div>
 
@@ -68,6 +68,7 @@
         data: function () {
             return {
                 subMenuType: 'left',
+                opacity: 100,
                 level2:[],
                 level3bgcolor:null,
                 level2activeId: null,
@@ -92,37 +93,37 @@
                     {
                         "id": 2,
                         "title": "Государство",
-                        "bgcolor": "#da7144",
+                        "bgcolor": "#DC9C6A",
                         "parent": 1
                     },
                     {
                         "id": 3,
                         "title": "Политика и экономика",
-                        "bgcolor": "#8fac6a",
+                        "bgcolor": "#B67DAE",
                         "parent": 1
                     },
                     {
                         "id": 4,
                         "title": "Гражданское общество",
-                        "bgcolor": "#635441",
+                        "bgcolor": "#719368", //719368
                         "parent": 1
                     },
                     {
                         "id": 5,
                         "title": "Демократия и выборы",
-                        "bgcolor": "#b3934d",
+                        "bgcolor": "#4cc4a8",
                         "parent": 1
                     },
                     {
                         "id": 6,
                         "title": "Федерализм и регионы",
-                        "bgcolor": "#c68e89",
+                        "bgcolor": "#CD7794",
                         "parent": 1
                     },
                     {
                         "id": 7,
                         "title": "Культура и идеология",
-                        "bgcolor": "#b7713a",
+                        "bgcolor": "#63A689",
                         "parent": 1
                     },
                     {
@@ -320,37 +321,38 @@
                     {
                         "id": 9,
                         "title": "Миропорядок и мировая политика",
-                        "bgcolor": "#b498a6",
+                        "bgcolor": "#5aa4d3",
                         "parent": 8
                     },
                     {
                         "id": 10,
                         "title": "Международная безопасность",
-                        "bgcolor": "#73aba2",
+                        "bgcolor": "#e9ba50",//e9ba50
                         "parent": 8
                     },
+
                     {
                         "id": 11,
                         "title": "Внешняя политика России",
-                        "bgcolor": "#887da7",
+                        "bgcolor": "#84bd32",//84bd32
                         "parent": 8
                     },
                     {
                         "id": 12,
                         "title": "История международных отношений",
-                        "bgcolor": "#a29f9c",
+                        "bgcolor": "#a29f9c",//a29f9c
                         "parent": 8
                     },
                     {
                         "id": 13,
                         "title": "Международные организации",
-                        "bgcolor": "#8ea8c2",
+                        "bgcolor": "#7677c5", //7677c5
                         "parent": 8
                     },
                     {
                         "id": 14,
                         "title": "Теория международных отношений",
-                        "bgcolor": "#71aab9",
+                        "bgcolor": "#c77c49",
                         "parent": 8
                     },
                     {

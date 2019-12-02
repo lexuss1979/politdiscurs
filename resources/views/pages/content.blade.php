@@ -18,7 +18,14 @@
                 <div class="content-block__main-body">
                     <section class="article">
                         @each('parts.topic-hierarchy-item',$topics,'topic')
+                        <div class="topic level-0">
+                            <div><a href="{{route('docs')}}">Документы</a></div>
+                        </div>
+                        <div class="topic level-0">
+                            <div><a href="{{route('magazines')}}">Журналы</a></div>
+                        </div>
                     </section>
+
                 </div>
             </div>
 

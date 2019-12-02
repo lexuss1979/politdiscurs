@@ -2,7 +2,7 @@
 
 @section('headers')
     <div class="main-topic">{{$topic->parent()->title}}</div>
-    <h1>{{$topic->title}}</h1>
+    <h1>{!! $topic->title !!}</h1>
     <h2>Онлайн библиотека книг, статей, докладов, документов</h2>
 @stop
 
