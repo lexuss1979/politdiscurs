@@ -23,7 +23,7 @@ class VueFilterDataGeneratorTest extends TestCase
         $authors = factory(Author::class, 3)->create();
         $request = new Request(['author' => $authors[2]->id], [], []);
         $filters = [
-            'authors' => [$authors[0]->id, $authors[2]->id]
+            'authors' => [['id' => $authors[0]->id],['id'=> $authors[2]->id]]
         ];
         $instance = new VueFilterDataGenerator($request, $filters);
         $vueData = $instance->getJSON();
@@ -86,7 +86,10 @@ class VueFilterDataGeneratorTest extends TestCase
             'reg' => $regions[1]->id
         ], [], []);
         $filters = [
-            'regions' => [$regions[1]->id, $regions[2]->id]
+            'regions' => [
+                ['id' => $regions[1]->id],
+                ['id' => $regions[2]->id]
+            ]
         ];
         $instance = new VueFilterDataGenerator($request, $filters);
         $arr = json_decode($instance->getJSON(), true);
@@ -146,7 +149,10 @@ class VueFilterDataGeneratorTest extends TestCase
         $orgs = factory(Organisation::class,3)->create();
         $request = new Request(['org' => $orgs[2]->id],[],[]);
         $filters = [
-            'organisations' => [$orgs[0]->id, $orgs[2]->id]
+            'organisations' => [
+                ['id' => $orgs[0]->id],
+                ['id' => $orgs[2]->id]
+            ]
         ];
         $instance = new VueFilterDataGenerator($request, $filters);
         $arr = json_decode($instance->getJSON(), true);

@@ -14,6 +14,9 @@
 
         <div class="content-block">
             <div class="content-block__main">
+                <div class="content-block__main-header">
+                    <h1>Документы</h1>
+                </div>
                 <div class="content-block__main-body">
                     <div class="items-list {{ config('content.show-letter-placeholder') ?  'letters' : ''}}">
                         @if( count($data) == 0)

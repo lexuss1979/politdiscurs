@@ -22,7 +22,7 @@
                 </section>
                 <section  class="magazine-item__link">
                     <label class="bold">Сайт журнала:</label>
-                    <a href="{{$magazine->link}}" class="external-link">{{$magazine->link}}</a>
+                    <a href="{{$magazine->link}}" class="external-link" target="_blank">{{$magazine->link}}</a>
                 </section>
                 @if( isset($more) && sizeof($more) >0)
                 <section class="magazine-item__more">

@@ -50,7 +50,7 @@ class MagazineItemPageTest extends TestCase
     {
         $this->response->assertSee('magazine-item__img');
         $this->response->assertSee($this->magazine->imgSrc());
-        $this->response->assertSee('<a href="'.$this->magazine->link.'" class="external-link">'.$this->magazine->link.'</a>');
+        $this->response->assertSee('<a href="'.$this->magazine->link.'" class="external-link" target="_blank">'.$this->magazine->link.'</a>');
     }
 
     /** @test */
